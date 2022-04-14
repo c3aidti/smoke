@@ -1,6 +1,0 @@
-{
-  "name": "c3dti-application-template",
-  "version": "0.0.0",
-  "description": "Training Repository",
-  "dependencies": { "server" : "7.19.1" }
-}
