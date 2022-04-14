@@ -1,0 +1,51 @@
+name: DTI Resources Problem Report
+description: File a report for problem encountered while using DTI awarded resources.
+#title: "[Bug]: "
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this problem report!
+  - type: input
+    id: vanityurl
+    attributes:
+      label: Affected URL
+      description: Please enter the relevant url associated with this issue. 
+      placeholder: https://mytag-mytenant.c3dti.ai
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: 'Provide details on what is happening and what did you expect to happen?  
+      This field supports drag-n-drop of images.  
+      Please provide as much detail as possible.' 
+      placeholder: Tell us what you see!
+      value: "A bug happened!"
+    validations:
+      required: true
+  - type: checkboxes
+    id: resources
+    attributes:
+      label: Affected Resources
+      description: Select one or more affected resources.
+      options:
+        - label: C3 Static Console
+        - label: C3 Jupyter
+        - label: C3 Ex Machina
+        - label: C3 Developer Portal
+        - label: C3 Okta Authentication
+          label: Azure subscription
+          label: HPC allocation
+    validations:
+      required: False
+  
+  - type: textarea
+    id: logs
+    attributes:
+      label: Additional logs or code snippets
+      description: Please copy and paste any log output or code segments you feel are relevant. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  
