@@ -1,0 +1,18 @@
+{
+    "language": "Python",
+    "runtimeVersion": "3.6",
+    "modules": {
+      "conda.scikit-learn":"=0.23.1",
+      "conda.pandas":"=1.0.1",
+      "conda.numpy":"=1.18.1",
+      "conda.scipy":"=1.4.1",
+      "conda.dill":"=0.2.8.2"
+    },
+    "repositories": [
+      "https://repo.continuum.io/pkgs/main",
+      "conda-forge"
+    ],
+    "runtime": "CPython",
+    "name": "py-gordon-ML_1_0_0",
+    "id": "py-gordon-ML_1_0_0"
+}

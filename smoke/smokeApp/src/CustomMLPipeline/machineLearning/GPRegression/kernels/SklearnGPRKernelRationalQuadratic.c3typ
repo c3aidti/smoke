@@ -1,0 +1,17 @@
+/**
+* SklearnGPRKernelRationalQuadratic.c3typ
+* Scikit-Learn Gaussian Process Rational Quadratic Kernel.
+* See: https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.kernels.RationalQuadratic.html#sklearn.gaussian_process.kernels.RationalQuadratic
+*/
+type SklearnGPRKernelRationalQuadratic {
+    // Constant that defines the kernel length scale
+    lengthScale: !double
+    // Scale mixture parameter > 0
+    alpha: !double
+    // the SklearnGPRKernel for this object
+    kernel: SklearnGPRKernel
+
+    // constructs the SklearnGPRKernel internal object
+    @py(env='gordon-ML_1_0_0')
+    build: member function(): SklearnGPRKernelRationalQuadratic
+}

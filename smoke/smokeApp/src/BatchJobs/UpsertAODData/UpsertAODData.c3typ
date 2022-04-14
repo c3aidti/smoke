@@ -1,0 +1,10 @@
+/**
+* UpsertAODData.c3typ
+* Batch job to upsert data from files in {@link SimulationOutputFile}with container=monthly-mean in parallel
+*/
+type UpsertAODData extends BatchJob<UpsertAODData, UpsertAODDataOptions, UpsertAODDataBatch> type key 'PSRT_MNTHMNDT' {
+
+    doStart:        ~ js server
+    processBatch:   ~ js server
+    // allComplete: ~ js server
+}

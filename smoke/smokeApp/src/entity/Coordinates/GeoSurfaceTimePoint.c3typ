@@ -1,0 +1,13 @@
+/**
+* GeoSurfaceTime.c3typ
+* A space-time point where space is the Earth's surface.
+*/
+
+entity type GeoSurfaceTimePoint schema name 'GSRFCTMPT' {
+    // the latitude
+    latitude: !float
+    // the longitude
+    longitude: !float
+    // the timestamp
+    time: !datetime
+}

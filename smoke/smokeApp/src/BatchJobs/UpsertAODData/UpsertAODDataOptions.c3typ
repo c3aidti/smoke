@@ -1,0 +1,14 @@
+/**
+* UpsertAODDataOptions.c3typ
+* Represents customization options for a {@link UpsertAODData} batch job
+*/
+type UpsertAODDataOptions {
+    // the number of files that will be processed in each batch
+    batchSize: int = 1
+    // a limit to the number of files that will be processed overall
+    limit: int = -1
+    // offset in the fetch to SimulationOutputFile
+    offset: int = 0
+    // any additional filters
+    filter: Filter
+}

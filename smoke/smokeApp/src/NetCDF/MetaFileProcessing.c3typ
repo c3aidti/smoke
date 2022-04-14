@@ -1,0 +1,10 @@
+/**
+* Contains meta data about attempts to process files. 
+*/
+
+type MetaFileProcessing {
+    // the timestamp for the last attempt to process the file
+    lastProcessAttempt: datetime
+    // did the attempt succeed?
+    lastAttemptFailed: boolean  
+}
