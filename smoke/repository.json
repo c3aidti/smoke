@@ -1,0 +1,6 @@
+{
+  "name": "smoke",
+  "version": "1.0.0",
+  "description": "Smoke Repository",
+  "dependencies": { "server" : "7.30.0" }
+}
