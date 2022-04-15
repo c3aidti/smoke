@@ -19,4 +19,5 @@ The typical development workflow then goes as follows:
 4. Open a pull request **from** `username-dev` **to** `dev01`
 5. Github Actions that DTI DevOps have running will then trigger the provisioning of the package to the `dev01` tag
 
-As long as the pull request is open, pushing code to GitHub will always trigger the provisioning workflow.
+As long as the pull request is open, pushing code to GitHub will always trigger the provisioning workflow. 
+For that reason, if you have multiple developers in your team, we recommend that you consider more ephemeral pull requests to tackle simple tasks at a time. You are welcome to use GitHub Projects to give them tags and other details, as well as using GitHub Issues to describe the steps of more complex development efforts that can then be broken into several small tasks, each one with its own PR (open, close, next). 
