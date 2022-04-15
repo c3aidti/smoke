@@ -14,7 +14,7 @@ This GitHub repository always contains at least three branches:
 The typical development workflow then goes as follows:
 
 1. Clone the repository to your local environment (we highly encourage using VS Code)
-2. Create a new branch **from** `dev01` and give it a meaningful name, e.g. username-dev
+2. Create a new branch **from** `dev01` and give it a meaningful name, e.g. `username-dev`
 3. Develop code, regularly commit, and push back to GitHub when you want the code provisioned to the tag
 4. Open a pull request **from** `username-dev` **to** `dev01`
 5. Github Actions that DTI DevOps have running will then trigger the provisioning of the packaged to the `dev01` tag
