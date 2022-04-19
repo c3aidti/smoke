@@ -1,0 +1,31 @@
+on:
+  pull_request:
+    branches:
+    - dev01
+  workflow_dispatch:
+    inputs:
+      options:
+        description: "Additional options to pass to provisioner (eg: -E, -r)"
+        required: false
+        default: ""
+        
+########################################################################        
+# Settings for this workflow:
+# Modify the settings under the "with" list to match target C3 tag 
+# and local c3repo and package names. 
+#######################################################################
+jobs:
+  call-provisioner:
+    uses: c3aidti/dti-workflows/.github/workflows/provision.yml@main
+    with:
+      tenant: 'smokeapp'
+      tag: 'dev01'
+      branch: 'dev01'
+      domain: 'devrc01.c3aids.cloud'
+      package: 'smokeapp'
+      c3repo: 'smoke'
+      options: ${{ github.event.inputs.options }}
+      version: 'main'
+    secrets:
+      token: ${{ secrets.DTI_DEVOPS_TOKEN }}
+      gpg: ${{ secrets.DTI_DEVOPS_GPG }}

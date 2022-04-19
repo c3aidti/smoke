@@ -1,0 +1,6 @@
+{
+  "name" : "smokeApp",
+  "description" : "Main development branch for smokeApp.",
+  "author" : "dadams@illinois.edu",
+  "dependencies" : [ "standardDependencies" ]
+}
