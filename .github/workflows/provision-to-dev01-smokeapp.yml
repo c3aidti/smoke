@@ -18,7 +18,7 @@ jobs:
   call-provisioner:
     uses: c3aidti/dti-workflows/.github/workflows/provision.yml@main
     with:
-      tenant: 'smokeApp'
+      tenant: 'smokeapp'
       tag: 'dev01'
       branch: 'dev01'
       domain: 'devrc01.c3aids.cloud'
