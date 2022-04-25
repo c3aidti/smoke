@@ -1,0 +1,15 @@
+{
+    "id": "py-stressPlainCompute_1_0_0" ,
+    "name": "py-stressPlainCompute_1_0_0",
+    "connector": "remote",
+    "language": "Python",
+    "runtime": "CPython",
+    "runtimeVersion": "3.9",
+    "modules": {
+        "conda.decimal": "=2.3"
+    },
+    "repositories": [
+        "defaults",
+        "conda-forge"
+    ]
+}
