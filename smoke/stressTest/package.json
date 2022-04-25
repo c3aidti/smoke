@@ -3,4 +3,4 @@
     "description" : "Stress test suite prototype",
     "author" : "babreu@illinois.edu",
     "dependencies" : [ "standardDependencies" ]
-  }
+}
