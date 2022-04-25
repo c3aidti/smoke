@@ -7,5 +7,5 @@ type StressTestPlainCompute {
     @py(env="stressPlainCompute_1_0_0")
     run: function(): string
     // send multiple computations to the {@link BatchQueue}
-    runBatch: function(int nBatches, int batchSize): any js server
+    runBatch: function(nBatches: int, batchSize: int): any js server
 }
