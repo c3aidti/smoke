@@ -26,10 +26,10 @@ def run():
 
     # create c3 datasets
     datasets = train_test_split(features, response, test_size=0.1, random_state=42)
-    X_train = c3.Dataset.fromPython(datasets[0])
-    X_test = c3.Dataset.fromPython(datasets[1])
-    y_train = c3.Dataset.fromPython(datasets[2])
-    y_test = c3.Dataset.fromPython(datasets[3])
+    X_train = c3.Dataset.fromPython(pythonData=datasets[0])
+    X_test = c3.Dataset.fromPython(pythonData=datasets[1])
+    y_train = c3.Dataset.fromPython(pythonData=datasets[2])
+    y_test = c3.Dataset.fromPython(pythonData=datasets[3])
 
     # build ML pipeline
     linearRegression = c3.SklearnPipe(
