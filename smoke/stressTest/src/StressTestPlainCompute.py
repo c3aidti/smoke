@@ -5,7 +5,7 @@ def run():
     import cdecimal
 
     n = 4000
-    decimal.getcontext().prec = n + 1
+    cdecimal.getcontext().prec = n + 1
     C = 426880 * cdecimal.Decimal(10005).sqrt()
     K = 6.
     M = 1.
