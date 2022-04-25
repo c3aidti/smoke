@@ -1,0 +1,17 @@
+/**
+* SklearnGPRKernelExpSineSquared.c3typ
+* Scikit-Learn Gaussian Process Exponential Sine Squared Kernel.
+* See: https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.kernels.ExpSineSquared.html#sklearn.gaussian_process.kernels.ExpSineSquared
+*/
+type SklearnGPRKernelExpSineSquared {
+    // Constant that defines the kernel length scale
+    lengthScale: !double
+    // Constant that defines the kernel periodicity
+    periodicity: !double
+    // the SklearnGPRKernel for this object
+    kernel: SklearnGPRKernel
+
+    // constructs the SklearnGPRKernel internal object
+    @py(env='gordon-ML_1_0_0')
+    build: member function(): SklearnGPRKernelExpSineSquared
+}

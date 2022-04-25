@@ -1,0 +1,10 @@
+/**
+* UpsertObsData.c3typ
+* Batch job to upsert data from every {@link ObservationSet} in parallel
+*/
+type UpsertObsData extends BatchJob<UpsertObsData, UpsertDataOptions, UpsertObsDataBatch> type key 'UPSERTOBSDATA' {
+
+    doStart:        ~ js server
+    processBatch:   ~ js server
+    // allComplete: ~ js server
+}

@@ -1,0 +1,8 @@
+/**
+* SimulationModelOutputSeries.c3typ
+* A series of simulation results taken from a single [SimulationSample](type:SimulationSample)
+*/
+entity type SimulationModelOutputSeries mixes TimedDataHeader<SimulationModelOutput> schema name "SMLTN_MDL_TPT_SRS" {
+    // The [SimulationSample](type:SimulationSample) from which values were taken.
+    simulationSample: SimulationSample
+}

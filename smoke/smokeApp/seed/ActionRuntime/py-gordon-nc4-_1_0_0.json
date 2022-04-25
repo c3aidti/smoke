@@ -1,0 +1,15 @@
+{
+    "language": "Python",
+    "runtimeVersion": "3.6",
+    "modules": {
+      "conda.netcdf4": "=1.5.7",
+      "conda.dill":"=0.2.8.2"
+    },
+    "repositories": [
+      "https://repo.continuum.io/pkgs/main",
+      "conda-forge"
+    ],
+    "runtime": "CPython",
+    "name": "py-gordon-nc4_1_0_0",
+    "id": "py-gordon-nc4_1_0_0"
+}

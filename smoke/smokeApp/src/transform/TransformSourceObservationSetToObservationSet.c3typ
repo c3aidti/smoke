@@ -1,0 +1,14 @@
+/**
+* TransformSourceObservationSetToObservationSet.c3typ
+* Yes, it does exactly what you are thinking
+*/
+type TransformSourceObservationSetToObservationSet mixes ObservationSet transforms SourceObservationSet {
+    // The id of this set
+    id: ~ expression "observation_set_id"
+    // The name of this set
+    name: ~ expression "observation_set_name"
+    // The version of this set
+    versionTag: ~ expression "observation_set_version"
+    // The path to files on this set
+    prePathToFiles: ~ expression "key_to_files"
+}

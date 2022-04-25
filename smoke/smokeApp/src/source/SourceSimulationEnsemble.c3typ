@@ -1,0 +1,9 @@
+/**
+* SourceSimulationEnsemble.c3typ
+* The source for {@link SimulationEnsemble} data
+*/
+type SourceSimulationEnsemble mixes Source {
+    ensemble_name: string
+    ensemble_id: int
+    key_to_files: string
+}

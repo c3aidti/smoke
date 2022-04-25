@@ -1,0 +1,7 @@
+/**
+* UpsertAODDataBatch.c3typ
+* Represents a unit of work (batch) in a {@link UpsertAODData} batch job.
+*/
+type UpsertAODDataBatch {
+    values: [SimulationOutputFile]
+}

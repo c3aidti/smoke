@@ -1,0 +1,76 @@
+/**
+* SimulationModelOutput.c3typ
+* A single output taken from a single [SimulationSample](type:SimulationSample)
+*/
+@db(datastore='cassandra',
+    partitionKeyField='parent',
+    persistenceOrder='start, dataVersion',
+    persistDuplicates=false,
+    compactType=true,
+    unique=['parent, start'])
+entity type SimulationModelOutput mixes TimedDataPoint<SimulationModelOutputSeries> schema name 'SMLTN_MDL_TPT' {
+    // The Latitude of this output
+    @ts(treatment='avg')
+    latitude: double
+    // The Longitude of this output
+    @ts(treatment='avg')
+    longitude: double
+    @ts(treatment='avg')
+    altitude: double
+    @ts(treatment='avg')
+    model_level_number: int
+
+    // Simulated atmosphere properties comment another commetn
+    @ts(treatment='avg', unitPath="parent.simulationSample.temperatureUOM")
+    air_potential_temperature: double
+    @ts(treatment='avg')
+    air_pressure: double
+    @ts(treatment='avg')
+    cloud_flag: double
+    @ts(treatment='avg')
+    cdnc_x_cloud_flag: double
+    @ts(treatment='avg')
+    ambient_extinction_550: double
+    @ts(treatment='avg')
+    ambient_scattering_550: double
+    
+    // Simulated aerosol number concentrations
+    @ts(treatment='avg')
+    num_nuc: double
+    @ts(treatment='avg')
+    num_Ait: double
+    @ts(treatment='avg')
+    num_acc: double
+     @ts(treatment='avg')
+    num_cor: double
+     @ts(treatment='avg')
+    num_Aitins: double
+
+    // The simulated aerosol mass properties
+    @ts(treatment='avg')
+    mass_SU_acc: double
+    @ts(treatment='avg')
+    mass_SU_Ait: double
+    @ts(treatment='avg')
+    mass_SU_cor: double
+    @ts(treatment='avg')
+    mass_BC_Ait: double
+    @ts(treatment='avg')
+    mass_BC_acc: double
+    @ts(treatment='avg')
+    mass_BC_cor: double
+    @ts(treatment='avg')
+    mass_BC_Aitins: double
+    @ts(treatment='avg')
+    mass_OC_Ait: double
+    @ts(treatment='avg')
+    mass_OC_acc: double
+    @ts(treatment='avg')
+    mass_OC_cor: double
+    @ts(treatment='avg')
+    mass_OC_Aitins: double
+    @ts(treatment='avg')
+    mass_SS_acc: double
+    @ts(treatment='avg')
+    mass_SS_cor: double
+}
