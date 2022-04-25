@@ -24,3 +24,42 @@ function doStart(job, options) {
         StressTestPlainCompute.run();
     });
 }
+
+
+/**
+ * @param {StressTestJob} job
+ * @param {StressTestJobOptions} options
+ */
+function allComplete(job, options) {
+    var goodJob = StressTestBatchRecord.make({
+        testType: "plainCompute",
+        dateStarted: job.status().started,
+        dateComplete: job.status().completed,
+        nBatches: options.nBatches,
+        batchSize: options.batchSize,
+        jobObject: job,
+        testFailed: false,
+        failedBatches: 0
+    });
+    goodJob.upsert();
+}
+
+
+/**
+ * @param {StressTestJob} job
+ * @param {BatchJobStatus} jobStatus
+ * @param {StressTestJobOptions} options
+ */
+ function failed(job, status, options) {
+    var badJob = StressTestBatchRecord.make({
+        testType: "plainCompute",
+        dateStarted: job.status().started,
+        dateComplete: job.status().completed,
+        nBatches: options.nBatches,
+        batchSize: options.batchSize,
+        jobObject: job,
+        testFailed: true,
+        failedBatches: status.errors.count
+    });
+    badJob.upsert();
+}
