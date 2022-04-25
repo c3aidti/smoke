@@ -17,8 +17,8 @@ def run():
         M = M * (K ** 3 - 16 * K) / ((i + 1) ** 3)
         L += 545140134
         X *= -262537412640768000
-        S += decimal.Decimal(M * L) / X
+        S += cdecimal.Decimal(M * L) / X
 
         pi = C / S
-        
+
     return pi
