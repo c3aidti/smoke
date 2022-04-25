@@ -5,5 +5,5 @@ type StressTestJobOptions {
     // the number calls in each batch
     batchSize: int = 1
     // the number of batches
-    nbatches: int = 1
+    nBatches: int = 1
 }
