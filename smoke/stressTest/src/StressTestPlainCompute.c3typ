@@ -1,0 +1,8 @@
+/**
+* Plain computation using basic Python libraries
+*/
+
+type StressTestPlainCompute {
+    @py(env="stressPlainCompute_1_0_0")
+    run: function(): double
+}
