@@ -2,11 +2,11 @@ def run():
     """
     Starts a single instance of StressTestPlainCompute
     """
-    import cdecimal
+    import decimal
 
     n = 4000
-    cdecimal.getcontext().prec = n + 1
-    C = 426880 * cdecimal.Decimal(10005).sqrt()
+    decimal.getcontext().prec = n + 1
+    C = 426880 * decimal.Decimal(10005).sqrt()
     K = 6.
     M = 1.
     X = 1
@@ -17,7 +17,7 @@ def run():
         M = M * (K ** 3 - 16 * K) / ((i + 1) ** 3)
         L += 545140134
         X *= -262537412640768000
-        S += cdecimal.Decimal(M * L) / X
+        S += decimal.Decimal(M * L) / X
 
         pi = C / S
 
