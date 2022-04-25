@@ -6,7 +6,7 @@
     "runtime": "CPython",
     "runtimeVersion": "3.9",
     "modules": {
-        "conda.decimal": "=2.3"
+        "conda.cdecimal": "=2.3"
     },
     "repositories": [
         "defaults",
