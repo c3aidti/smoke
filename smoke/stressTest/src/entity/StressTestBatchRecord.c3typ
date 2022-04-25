@@ -1,0 +1,15 @@
+/**
+* Table to record {@link BatchQueue} stress tests
+*/
+entity type StressTestBatchRecord schema name 'STRSS_TST_BTCH' {
+    // the type of test that was run
+    testType: string enum('plainCompute')
+    // when it completed
+    dateComplete: datetime
+    // number of batches sent
+    nBatches: int
+    // batch job id
+    jobId: string
+    // result of batch job
+    testFailed: boolean
+}
