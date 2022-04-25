@@ -6,9 +6,12 @@
     "runtime": "CPython",
     "runtimeVersion": "3.9",
     "modules": {
+        "conda.numpy": "=1.21.5",
+        "conda.scikit-learn": "=1.0.2"
     },
     "repositories": [
         "defaults",
-        "conda-forge"
+        "conda-forge",
+        "anaconda"
     ]
 }
