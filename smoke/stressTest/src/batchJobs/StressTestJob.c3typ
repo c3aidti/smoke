@@ -1,0 +1,7 @@
+/**
+* Batch job to stress-test the {@link BatchQueue}
+*/
+type StressTestJob extends BatchJob<StressTestJob, StressTestJobOptions, StressTestJobBatch> type key 'CRT_SMLTN_FL_TBL' {
+    doStart:        ~ js server
+    processBatch:   ~ js server
+}
