@@ -6,6 +6,7 @@ def run():
     import pandas as pd
     import string
     import datetime
+    import random
 
     nrows = 10000
 
