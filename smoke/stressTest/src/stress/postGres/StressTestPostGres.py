@@ -43,6 +43,6 @@ def run():
 
     output_records = df.to_dict(orient="records")
     c3.PostGresType.upsertBatch(objs=output_records)
-    c3.PostGresType.removeAll(disableAsynProcessing=True)
+    c3.PostGresType.removeAll(disableAsyncProcessing=True)
 
     return 0
