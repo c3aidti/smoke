@@ -26,7 +26,7 @@ def run():
     end = start + datetime.timedelta(days=365 * 100)
     for i in range(nParts):
         subdf = pd.DataFrame()
-        partition = c3.CassandraKeyType({
+        partition = c3.CassandraKeyType(**{
             "id": key_strings[i] + str(round(key_doubles[i], 3)),
             "keyString": key_strings[i],
             "keyDouble": key_doubles[i]
