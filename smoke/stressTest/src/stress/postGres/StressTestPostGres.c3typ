@@ -6,5 +6,5 @@ type StressTestPostGres {
     @py(env="stressPostGres_1_0_0")
     run: function(): int
     // send multiple computations to the {@link BatchQueue}
-    // runBatch: function(nBatches: int, batchSize: int): any js server
+    runBatch: function(nBatches: int, batchSize: int): any js server
 }
