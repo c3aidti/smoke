@@ -45,6 +45,6 @@ def run():
     # batch upsert this and clean
     output_records = df.to_dict(orient="records")
     batch = c3.CassandraType.upsertBatch(objs=output_records)
-    c3.CassandraType.removeBatch(objs=batch)
+    c3.CassandraType.removeBatch(objs=batch.objs)
 
     return 0

@@ -43,6 +43,6 @@ def run():
 
     output_records = df.to_dict(orient="records")
     batch = c3.PostGresType.upsertBatch(objs=output_records)
-    c3.PostGresType.removeBatch(objs=batch)
+    c3.PostGresType.removeBatch(objs=batch.objs)
 
     return 0
