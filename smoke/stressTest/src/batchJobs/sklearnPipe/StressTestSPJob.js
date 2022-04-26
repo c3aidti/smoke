@@ -1,37 +1,37 @@
 /**
- * @param {StressTestPCJob} jobtype
- * @param {StressTestPCJobOptions} joboptions
+ * @param {StressTestSPJob} jobtype
+ * @param {StressTestSPJobOptions} joboptions
  */
-function doStart(job, options) {
+ function doStart(job, options) {
     for (var i = 0; i < options.nBatches; i++) {
         var batch = [];
         for (var j = 0; j < options.batchSize; j++) {
             batch.push(j);
         }
-        var batchSpec = StressTestPCJobBatch.make({values: batch});
+        var batchSpec = StressTestSPJobBatch.make({values: batch});
         job.scheduleBatch(batchSpec);
     };
 }
 
 /**
- * @param {StressTestPCJobBatch} batch
- * @param {StressTestPCJob} job
- * @param {StressTestPCJobOptions} options
+ * @param {StressTestSPJobBatch} batch
+ * @param {StressTestSPJob} job
+ * @param {StressTestSPJobOptions} options
  */
  function processBatch(batch, job, options) {
     batch.values.forEach(function() {
-        StressTestPlainCompute.run();
+        StressTestSklearnPipe.run();
     });
 }
 
 
 /**
- * @param {StressTestPCJob} job
- * @param {StressTestJobPCOptions} options
+ * @param {StressTestSPJob} job
+ * @param {StressTestJobSPOptions} options
  */
 function allComplete(job, options) {
     var goodJob = StressTestBatchRecord.make({
-        testType: "plainCompute",
+        testType: "sklearnPipe",
         dateStarted: job.status().started,
         dateComplete: job.status().completed,
         nBatches: options.nBatches,
@@ -45,13 +45,13 @@ function allComplete(job, options) {
 
 
 /**
- * @param {StressTestPCJob} job
+ * @param {StressTestSPJob} job
  * @param {BatchJobStatus} jobStatus
- * @param {StressTestPCJobOptions} options
+ * @param {StressTestSPJobOptions} options
  */
  function failed(job, status, options) {
     var badJob = StressTestBatchRecord.make({
-        testType: "plainCompute",
+        testType: "sklearnPipe",
         dateStarted: job.status().started,
         dateComplete: job.status().completed,
         nBatches: options.nBatches,
