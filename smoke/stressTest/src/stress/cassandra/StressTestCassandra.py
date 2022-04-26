@@ -26,10 +26,10 @@ def run():
     end = start + datetime.timedelta(days=365 * 100)
     for i in range(nParts):
         subdf = pd.DataFrame()
-        partition = c3.CassandraKeyType.make({
-            "keyString": key_strings[i],
-            "keyDouble": key_doubles[i]
-        })
+        partition = c3.CassandraKeyType(
+            keyString=key_strings[i],
+            keyDouble=key_doubles[i]
+        )
         ints = np.random.randint(0, n, n, dtype=int)
         doubles = n*np.random.rand(n)
         x = np.random.rand(n)
