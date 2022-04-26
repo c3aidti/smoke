@@ -13,7 +13,7 @@ entity type StressTestBatchRecord schema name 'STRSS_TST_BTCH' {
     // number of operations in each batch
     batchSize: int
     // batch job id
-    jobReference: map<string, string>
+    jobReference: map<string, string> schema suffix 'JBRF'
     // result of batch job
     testFailed: boolean
     // number of failed batches
