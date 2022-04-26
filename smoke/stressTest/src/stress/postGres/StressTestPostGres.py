@@ -8,7 +8,7 @@ def run():
     import datetime
     import random
 
-    nrows = 10000
+    nrows = 2**20
 
     np.random.seed(1)
     bools = np.random.randint(0, 2, nrows, dtype=bool)
