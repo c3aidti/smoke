@@ -36,7 +36,9 @@ function allComplete(job, options) {
         dateComplete: job.status().completed,
         nBatches: options.nBatches,
         batchSize: options.batchSize,
-        jobObject: job,
+        jobReference: c3Make("map<string, string>",
+        {"jobType": "StressTestSPJob",
+            "id": job.id}),
         testFailed: false,
         failedBatches: 0
     });
@@ -56,7 +58,9 @@ function allComplete(job, options) {
         dateComplete: job.status().completed,
         nBatches: options.nBatches,
         batchSize: options.batchSize,
-        jobObject: job,
+        jobReference: c3Make("map<string, string>",
+        {"jobType": "StressTestSPJob",
+            "id": job.id}),
         testFailed: true,
         failedBatches: status.errors.count
     });

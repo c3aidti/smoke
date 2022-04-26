@@ -3,7 +3,7 @@
 */
 entity type StressTestBatchRecord schema name 'STRSS_TST_BTCH' {
     // the type of test that was run
-    testType: string enum('plainCompute')
+    testType: string enum('plainCompute', 'sklearnPipe')
     // date started
     dateStarted: datetime
     // when it completed
@@ -13,7 +13,7 @@ entity type StressTestBatchRecord schema name 'STRSS_TST_BTCH' {
     // number of operations in each batch
     batchSize: int
     // batch job id
-    jobObject: StressTestJob
+    jobReference: map<string, string>
     // result of batch job
     testFailed: boolean
     // number of failed batches
