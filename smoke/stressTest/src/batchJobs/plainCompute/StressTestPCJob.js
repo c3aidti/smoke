@@ -1,7 +1,7 @@
 /**
  * Implementation of CreateSimulationFileTable.c3typ
- * @param {StressTestJob} jobtype
- * @param {StressTestJobOptions} joboptions
+ * @param {StressTestPCJob} jobtype
+ * @param {StressTestPCJobOptions} joboptions
  */
 function doStart(job, options) {
     for (var i = 0; i < options.nBatches; i++) {
@@ -9,15 +9,15 @@ function doStart(job, options) {
         for (var j = 0; j < options.batchSize; j++) {
             batch.push(j);
         }
-        var batchSpec = StressTestJobBatch.make({values: batch});
+        var batchSpec = StressTestPCJobBatch.make({values: batch});
         job.scheduleBatch(batchSpec);
     };
 }
 
 /**
- * @param {StressTestJobBatch} batch
- * @param {StressTestJob} job
- * @param {StressTestJobOptions} options
+ * @param {StressTestPCJobBatch} batch
+ * @param {StressTestPCJob} job
+ * @param {StressTestPCJobOptions} options
  */
  function processBatch(batch, job, options) {
     batch.values.forEach(function() {
@@ -27,8 +27,8 @@ function doStart(job, options) {
 
 
 /**
- * @param {StressTestJob} job
- * @param {StressTestJobOptions} options
+ * @param {StressTestPCJob} job
+ * @param {StressTestJobPCOptions} options
  */
 function allComplete(job, options) {
     var goodJob = StressTestBatchRecord.make({
@@ -46,9 +46,9 @@ function allComplete(job, options) {
 
 
 /**
- * @param {StressTestJob} job
+ * @param {StressTestPCJob} job
  * @param {BatchJobStatus} jobStatus
- * @param {StressTestJobOptions} options
+ * @param {StressTestPCJobOptions} options
  */
  function failed(job, status, options) {
     var badJob = StressTestBatchRecord.make({

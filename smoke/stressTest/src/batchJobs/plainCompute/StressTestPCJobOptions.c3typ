@@ -1,7 +1,7 @@
 /**
-* Represents customization options for a {@link StressTestJob} batch job
+* Represents customization options for a {@link StressTestPCJob} batch job
 */
-type StressTestJobOptions {
+type StressTestPCJobOptions {
     // the number calls in each batch
     batchSize: int = 1
     // the number of batches
