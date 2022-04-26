@@ -1,7 +1,6 @@
 {
     "id": "py-stressSklearnPipe_1_0_0" ,
     "name": "py-stressSklearnPipe_1_0_0",
-    "connector": "remote",
     "language": "Python",
     "runtime": "CPython",
     "runtimeVersion": "3.8.12",
