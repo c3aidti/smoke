@@ -1,0 +1,7 @@
+/**
+* Bogus type to hold Cassandra partition keys
+*/
+entity type CassandraKeyType schema name 'CSSNDR_KTP' {
+    keyString: !string
+    keyDouble: !double
+}

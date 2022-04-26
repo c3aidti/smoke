@@ -1,0 +1,10 @@
+/**
+* Cassandra upsert test
+*/
+type StressTestCassandra {
+    // run a single Cassandra upsert
+    @py(env="stressCassandra_1_0_0")
+    run: function(): int
+    // send multiple computations to the {@link BatchQueue}
+    // runBatch: function(nBatches: int, batchSize: int): any js server
+}
