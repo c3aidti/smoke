@@ -42,7 +42,7 @@ def run():
     df['field5'] = strings
 
     output_records = df.to_dict(orient="records")
-    c3.PostGresType.upsertBatch(objs=output_records)
-    c3.PostGresType.removeAll(disableAsyncProcessing=True)
+    batch = c3.PostGresType.upsertBatch(objs=output_records)
+    c3.PostGresType.removeBatch(objs=batch)
 
     return 0
