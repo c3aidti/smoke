@@ -1,0 +1,9 @@
+/**
+* Batch job to stress-test the {@link BatchQueue} with Sklearn Pipe
+*/
+type StressTestSPJob extends BatchJob<StressTestSPJob, StressTestSPJobOptions, StressTestSPJobBatch> type key 'STRSS_TST_SPJB' {
+    doStart:        ~ js server
+    processBatch:   ~ js server
+    allComplete:    ~ js server
+    failed:         ~ js server
+}

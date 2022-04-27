@@ -1,0 +1,6 @@
+/**
+* Represents a unit of work (batch) in a {@link StressTestCSJob} batch job.
+*/
+type StressTestCSJobBatch {
+    values: [int]
+}

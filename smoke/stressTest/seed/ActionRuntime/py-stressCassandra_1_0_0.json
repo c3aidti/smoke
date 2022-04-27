@@ -1,0 +1,15 @@
+{
+    "id": "py-stressCassandra_1_0_0" ,
+    "name": "py-stressCassandra_1_0_0",
+    "language": "Python",
+    "runtime": "CPython",
+    "runtimeVersion": "3.8.12",
+    "modules": {
+        "conda.numpy": "=1.22.2",
+        "conda.pandas": "=1.4.1"
+    },
+    "repositories": [
+        "defaults",
+        "conda-forge"
+    ]
+}
