@@ -1,0 +1,9 @@
+/**
+* Batch job to stress-test the {@link BatchQueue} with Cassandra
+*/
+type StressTestCSJob extends BatchJob<StressTestCSJob, StressTestCSJobOptions, StressTestCSJobBatch> type key 'STRSS_TST_CSJB' {
+    doStart:        ~ js server
+    processBatch:   ~ js server
+    allComplete:    ~ js server
+    failed:         ~ js server
+}
