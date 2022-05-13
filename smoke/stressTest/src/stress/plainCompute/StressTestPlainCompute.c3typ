@@ -1,5 +1,5 @@
 /**
-* Plain computation using basic Python libraries
+* Plain computation using basic Python libraries.
 */
 
 type StressTestPlainCompute {
