@@ -1,0 +1,6 @@
+/**
+* Represents a unit of work (batch) in a {@link InfiniteLoopJob} batch job.
+*/
+type InfiniteLoopJobBatch {
+    values: [int]
+}

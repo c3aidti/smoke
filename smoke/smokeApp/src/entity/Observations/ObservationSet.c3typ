@@ -1,0 +1,26 @@
+/**
+* ObservationSet.c3typ
+* A set of obervations that corresponds to many {@link ObservationOutputFile}s
+*/
+entity type ObservationSet mixes MetricEvaluatable schema name "OBS_ST" {
+    // The name of this set
+    name: !string
+    // The base path to find the corresponding {@link ObservationOutputFile}s
+    prePathToFiles: !string
+    // The version for this set
+    versionTag: !string
+    // The Timeseries output for these observations, ie a collection of {@link ObservationOutputSeries}
+    output: [ObservationOutputSeries](observationSet,id)
+    // the collection of {@link ObservationFile}s for these observations
+    outputFiles: [ObservationOutputFile](observationSet, id)
+
+    // METHODS
+    // Callback to create the {@link ObservationOutputFile}s whenever a {@link ObservationSet} is upserted. 
+    @dependency(include = "this")
+    afterCreate: ~ js server
+    // Upsert data into {@link ObservationOutput} for all {@link ObservationOutputFile}s corresponding to this {@link ObservationSet}
+    @dependency(include = "this, outputFiles")
+    upsertObservationData: member function(): int js server
+    // Cleans all seeded data
+    removeAllSeededData: function() : int js server
+}

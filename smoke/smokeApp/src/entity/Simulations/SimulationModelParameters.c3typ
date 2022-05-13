@@ -1,0 +1,66 @@
+/**
+* SimulationModelParameters.c3typ
+* A set of parameters that are model-input for a {@link Simulation}
+*/
+entity type SimulationModelParameters schema name "SMLTN_MDL_PRMTRS" {
+    ensemble: SimulationEnsemble
+    acure_bl_nuc: !double
+    acure_ait_width: !double
+    acure_cloud_ph: !double
+    acure_carb_ff_ems: !double
+    acure_carb_ff_ems_eur: !double
+    acure_carb_ff_ems_nam: !double
+    acure_carb_ff_ems_chi: !double
+    acure_carb_ff_ems_asi: !double
+    acure_carb_ff_ems_mar: !double
+    acure_carb_ff_ems_r: !double
+    acure_carb_bb_ems: !double
+    acure_carb_bb_ems_sam: !double
+    acure_carb_bb_ems_naf: !double
+    acure_carb_bb_ems_saf: !double
+    acure_carb_bb_ems_bnh: !double
+    acure_carb_bb_ems_rnh: !double
+    acure_carb_bb_ems_rsh: !double
+    acure_carb_res_ems: !double
+    acure_carb_res_ems_chi: !double
+    acure_carb_res_ems_asi: !double
+    acure_carb_res_ems_afr: !double
+    acure_carb_res_ems_lat: !double
+    acure_carb_res_ems_r: !double
+    acure_carb_ff_diam: !double
+    acure_carb_bb_diam: !double
+    acure_carb_res_diam: !double
+    acure_prim_so4_diam: !double
+    acure_sea_spray: !double
+    acure_anth_so2: !double
+    acure_anth_so2_chi: !double
+    acure_anth_so2_asi: !double
+    acure_anth_so2_eur: !double
+    acure_anth_so2_nam: !double
+    acure_anth_so2_r: !double
+    acure_volc_so2: !double
+    acure_bvoc_soa: !double
+    acure_dms: !double
+    acure_prim_moc: !double
+    acure_dry_dep_ait: !double
+    acure_dry_dep_acc: !double
+    acure_dry_dep_so2: !double
+    acure_kappa_oc: !double
+    acure_sig_w: !double
+    acure_rain_frac: !double
+    acure_cloud_ice_thresh: !double
+    acure_convective_plume_scavenging: !double
+    acure_scav_diam: !double
+    acure_bc_ri: !double
+    acure_oxidants_oh: !double
+    acure_oxidants_o3: !double
+    bparam: !double
+    two_d_fsd_factor: !double
+    c_r_correl: !double
+    acure_autoconv_exp_lwp: !double
+    acure_autoconv_exp_nd: !double
+    dbsdtbs_turb_0: !double
+    ai: !double
+    m_ci: !double
+    a_ent_1_rp: !double
+}

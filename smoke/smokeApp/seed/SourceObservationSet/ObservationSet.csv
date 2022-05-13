@@ -1,0 +1,3 @@
+observation_set_name,observation_set_id,observation_set_version,key_to_files
+mrg1_P3,1,R26,aircraft-observations
+min_mrg1_P3,2,R18,aircraft-observations

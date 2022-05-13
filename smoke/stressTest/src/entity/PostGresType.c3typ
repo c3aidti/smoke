@@ -1,0 +1,11 @@
+/**
+* A bogus type to host data in PostGres
+*/
+entity type PostGresType schema name 'PSTGRS_TP' {
+    field0: !boolean
+    field1: !int
+    field2: !float
+    field3: !double
+    field4: !datetime
+    field5: !string
+}

@@ -1,0 +1,20 @@
+{
+    "language": "Python",
+    "runtimeVersion": "3.6",
+    "modules": {
+      "conda.pip": "=21.2.2",
+      "conda.netcdf4": "=1.5.7",
+      "conda.numpy": "=1.17.0",
+      "conda.pandas": "=1.1.5",
+      "conda.cartopy":"=0.18.0",
+      "conda.basemap":"=1.2.2",
+      "conda.iris":"=3.1.0"
+    },
+    "repositories": [
+      "https://repo.continuum.io/pkgs/main",
+      "conda-forge"
+    ],
+    "runtime": "CPython",
+    "name": "py-gordon_1_0_0",
+    "id": "py-gordon_1_0_0"
+}

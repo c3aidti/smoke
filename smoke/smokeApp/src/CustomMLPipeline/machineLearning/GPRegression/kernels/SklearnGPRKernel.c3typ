@@ -1,0 +1,13 @@
+/**
+* SklearnGPRKernel.c3typ
+* Stepping stone for Scikit-Learn Gaussian Process kernels.
+* See: https://scikit-learn.org/stable/modules/classes.html#module-sklearn.gaussian_process
+*/
+type SklearnGPRKernel {
+    // the name of the kernel
+    name: string enum('Constant', 'DotProduct', 'ExpSineSquared', 'Matern', 'RBF', 'RationalQuadratic', 'White')
+    // the kernel hyper parameters 
+    hyperParameters: map<string, double> 
+    // the pickled kernel
+    pickledKernel: string
+}
