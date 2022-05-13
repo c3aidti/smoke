@@ -1,0 +1,18 @@
+/**
+ObservationOutputFile.c3typ
+*/
+entity type ObservationOutputFile schema name 'OBS_OTPT_FL' {
+    // The {@link ObservationSet} to which this file belongs
+    observationSet: !ObservationSet
+    // The date for this file (comes with the file name)
+    dateTag: datetime
+    // The observation output file
+    file: !File
+    // processed
+    processed: boolean post default "false"
+
+    // METHODS
+    // Load data from this file into {@link ObservationOutput}
+    @py(env='gordon_1_0_0')
+    upsertORACLESData: member function(): boolean
+}

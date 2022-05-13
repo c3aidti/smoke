@@ -1,0 +1,13 @@
+/**
+* Stress test suite: runs all stress tests
+* Level 0: Plain Compute
+* Level 1: Sklearn Pipe
+* Level 2: PostGres
+* Level 3: Cassandra
+*/
+type StressTestSuite {
+    // run a single test
+    run: function(): any js server
+    // send multiple computations to the {@link BatchQueue}
+    runBatch: function(nBatches: int, batchSize: int): any js server
+}

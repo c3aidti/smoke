@@ -1,0 +1,10 @@
+/**
+* TransformSourceSimulationModelParametersMapToSimulationModelOutputSeries.c3typ
+* Transforms {@link SourceSimulationModelParameters} to {@link SimulationModelOutputSeries}
+*/
+type TransformSourceSimulationModelParametersMapToSimulationModelOutputSeries mixes SimulationModelOutputSeries transforms SourceSimulationModelParametersMap {
+    // The id of this timeseries
+    id: ~ expression "concat('SMOS_EnsNo_', ensemble_id, '_SimNo_', acure_pcalc_index)"
+    // The {@link SimulationSample} this timeseries belongs to
+    simulationSample: ~ expression {id: "concat('EnsNo_',ensemble_id,'_SimNo_',acure_pcalc_index)"}
+}

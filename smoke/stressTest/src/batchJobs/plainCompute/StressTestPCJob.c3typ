@@ -1,0 +1,9 @@
+/**
+* Batch job to stress-test the {@link BatchQueue} with plain compute
+*/
+type StressTestPCJob extends BatchJob<StressTestPCJob, StressTestPCJobOptions, StressTestPCJobBatch> type key 'STRSS_TST_PCJB' {
+    doStart:        ~ js server
+    processBatch:   ~ js server
+    allComplete:    ~ js server
+    failed:         ~ js server
+}

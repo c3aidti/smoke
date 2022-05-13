@@ -1,0 +1,7 @@
+/**
+* A job the never ends...
+*/
+type InfiniteLoopJob extends BatchJob<InfiniteLoopJob, InfiniteLoopJobOptions, InfiniteLoopJobBatch> type key 'NFNT_LP_JB' {
+    doStart:        ~ js server
+    processBatch:   ~ js server
+}
