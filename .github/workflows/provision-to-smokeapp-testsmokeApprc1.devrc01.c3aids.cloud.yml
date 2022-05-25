@@ -1,0 +1,33 @@
+on:
+  pull_request:
+    branches:
+    - test/smokeApp/rc1
+  workflow_dispatch:
+    inputs:
+      options:
+        description: "Additional options to pass to provisioner (eg: -E, -r)"
+        required: false
+        default: ""
+        
+########################################################################        
+# Settings for this workflow:
+# Modify the settings under the "with" list to match target C3 tag 
+# and local c3repo and package names. 
+#######################################################################
+concurrency:
+  group: smokeapp-testsmokeApprc1
+jobs:
+  call-provisioner:
+    uses: c3aidti/dti-workflows/.github/workflows/provision.yml@main
+    with:
+      tenant: 'smokeApp'
+      tag: 'test/smokeApp/rc1'
+      branch: 'test/smokeApp/rc1'
+      domain: 'devrc01.c3aids.cloud'
+      package: 'smokeApp'
+      c3repo: 'smoke'
+      options: ${{ github.event.inputs.options }}
+      version: 'main'
+    secrets:
+      token: ${{ secrets.DTI_DEVOPS_TOKEN }}
+      gpg: ${{ secrets.DTI_DEVOPS_GPG }}
