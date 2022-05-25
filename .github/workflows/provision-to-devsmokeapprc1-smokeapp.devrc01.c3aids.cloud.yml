@@ -21,7 +21,7 @@ jobs:
     uses: c3aidti/dti-workflows/.github/workflows/provision.yml@main
     with:
       tenant: 'smokeApp'
-      tag: 'dev/smokeApp/rc1'
+      tag: 'devsmokeApprc1'
       branch: 'dev/smokeApp/rc1'
       domain: 'devrc01.c3aids.cloud'
       package: 'smokeApp'
