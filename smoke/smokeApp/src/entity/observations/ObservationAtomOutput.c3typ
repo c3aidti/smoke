@@ -11,7 +11,7 @@
     persistDuplicates=false,
     compactType=true,
     unique=['parent, start'])
-entity type ObservationAtomOutput mixes TimedDataPoint<ObservationOutputSeries> schema name 'OBS_ATM_TPT' {
+entity type ObservationAtomOutput mixes TimedDataPoint<ObservationAtomOutputSeries> schema name 'OBS_ATM_TPT' {
     @ts(treatment='avg')
     latitude: double
     @ts(treatment='avg')
