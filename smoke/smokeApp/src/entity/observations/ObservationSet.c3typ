@@ -1,0 +1,31 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* A set of obervations that corresponds to many {@link ObservationOutputFile}s
+*/
+entity type ObservationSet mixes MetricEvaluatable schema name "OBS_ST" {
+    // The name of this set
+    name: !string
+    // The base path to find the corresponding {@link ObservationOutputFile}s
+    prePathToFiles: !string
+    // The version for this set
+    versionTag: !string
+    // The timeseries output for these observations, ie a collection of {@link ObservationAtomOutputSeries}
+    atomOutput: [ObservationAtomOutputSeries](observationSet,id)
+    // The timeseries output for these observations, ie a collection of {@link ObservationOraclesOutputSeries}
+    oraclesOutput: [ObservationOraclesOutputSeries](observationSet,id)
+    // the collection of {@link ObservationFile}s for these observations
+    outputFiles: [ObservationOutputFile](observationSet, id)
+
+    // METHODS
+    // Create the {@link ObservationOutputFile}s when a {@link ObservationSet} is upserted. 
+    @dependency(include = "this")
+    upsertFileTable: member function(): int js server
+    // Upsert data into {@link ObservationOutput} for all {@link ObservationOutputFile}s corresponding to this {@link ObservationSet}
+    @dependency(include = "this, outputFiles")
+    upsertObservationData: member function(): int js server
+    // Cleans all seeded data
+    removeAllSeededData: function() : int js server
+}
