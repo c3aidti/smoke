@@ -1,0 +1,11 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* A series of simulation results taken from a single [SimulationSample](type:SimulationSample) for Acure Aircraft data
+*/
+entity type SimulationAcureAircraftOutputSeries mixes TimedDataHeader<SimulationAcureAircraftOutput> schema name "SMLTN_ACRACRFT_TPT_SRS" {
+    // The [SimulationSample](type:SimulationSample) from which values were taken.
+    simulationSample: SimulationSample
+}
