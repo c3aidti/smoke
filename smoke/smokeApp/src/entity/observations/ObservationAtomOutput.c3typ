@@ -1,0 +1,249 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* A single ATom output taken from a single [ObservationSet](type:ObservationSet)
+*/
+@db(datastore='cassandra',
+    partitionKeyField='parent',
+    persistenceOrder='start, dataVersion',
+    persistDuplicates=false,
+    compactType=true,
+    unique=['parent, start'])
+entity type ObservationAtomOutput mixes TimedDataPoint<ObservationOutputSeries> schema name 'OBS_ATM_TPT' {
+    @ts(treatment='avg')
+    latitude: double
+    @ts(treatment='avg')
+    longitude: double
+    @ts(treatment='avg')
+    altitude: double
+    @ts(treatment='avg')
+    ambientPressure: double
+    @ts(treatment='avg')
+    ambientTemperature: double
+    @ts(treatment='avg')
+    RHwDLH: double
+    @ts(treatment='avg')
+    theta: double
+    @ts(treatment='avg')
+    ozone: double
+    @ts(treatment='avg')
+    CO: double
+    @ts(treatment='avg')
+    numFine: double
+    @ts(treatment='avg')
+    sfcFine: double
+    @ts(treatment='avg')
+    volFine: double
+    @ts(treatment='avg')
+    numCoarse: double
+    @ts(treatment='avg')
+    sfcCoarse: double
+    @ts(treatment='avg')
+    volCoarse: double
+    @ts(treatment='avg')
+    numNucl: double
+    @ts(treatment='avg')
+    sfcNucl: double
+    @ts(treatment='avg')
+    volNucl: double
+    numAitken: double
+    @ts(treatment='avg')
+    sfcAitken: double
+    @ts(treatment='avg')
+    volAitken: double
+    @ts(treatment='avg')
+    numAccum: double
+    @ts(treatment='avg')
+    sfcAccum: double
+    @ts(treatment='avg')
+    volAccum: double
+    @ts(treatment='avg')
+    sulfateCalc: double
+    @ts(treatment='avg')
+    nitrateCalc: double
+    @ts(treatment='avg')
+    ammoniumCalc: double
+    @ts(treatment='avg')
+    chlCalc: double
+    @ts(treatment='avg')
+    oaCalc: double
+    @ts(treatment='avg')
+    extAngstromDry: double
+    @ts(treatment='avg')
+    extAngstromAmbRH: double
+    @ts(treatment='avg')
+    extAngstromDryUVVis: double
+    @ts(treatment='avg')
+    extAngstromAmbRHUVVis: double
+    @ts(treatment='avg')
+    extAngstromDryVisIR: double
+    @ts(treatment='avg')
+    extAngstromAmbRHVisIR: double
+    @ts(treatment='avg')
+    absAngstromUVVis: double
+    @ts(treatment='avg')
+    absAngstromVisIR: double
+    @ts(treatment='avg')
+    CCN005: double
+    @ts(treatment='avg')
+    CCN010: double
+    @ts(treatment='avg')
+    CCN020: double
+    @ts(treatment='avg')
+    CCN050: double
+    @ts(treatment='avg')
+    CCN100: double
+    @ts(treatment='avg')
+    fRh85: double
+    @ts(treatment='avg')
+    fRh85Fit: double
+    @ts(treatment='avg')
+    kappaExt: double
+    @ts(treatment='avg')
+    kappaAms: double
+
+
+    // dndlogd variables: 70 bins
+    @ts(treatment='avg')
+    dndlogd_bin0: double
+    @ts(treatment='avg')
+    dndlogd_bin1: double
+    @ts(treatment='avg')
+    dndlogd_bin2: double
+    @ts(treatment='avg')
+    dndlogd_bin3: double
+    @ts(treatment='avg')
+    dndlogd_bin4: double
+    @ts(treatment='avg')
+    dndlogd_bin5: double
+    @ts(treatment='avg')
+    dndlogd_bin6: double
+    @ts(treatment='avg')
+    dndlogd_bin7: double
+    @ts(treatment='avg')
+    dndlogd_bin8: double
+    @ts(treatment='avg')
+    dndlogd_bin9: double
+    @ts(treatment='avg')
+    dndlogd_bin10: double
+    @ts(treatment='avg')
+    dndlogd_bin11: double
+    @ts(treatment='avg')
+    dndlogd_bin12: double
+    @ts(treatment='avg')
+    dndlogd_bin13: double
+    @ts(treatment='avg')
+    dndlogd_bin14: double
+    @ts(treatment='avg')
+    dndlogd_bin15: double
+    @ts(treatment='avg')
+    dndlogd_bin16: double
+    @ts(treatment='avg')
+    dndlogd_bin17: double
+    @ts(treatment='avg')
+    dndlogd_bin18: double
+    @ts(treatment='avg')
+    dndlogd_bin19: double
+    @ts(treatment='avg')
+    dndlogd_bin20: double
+    @ts(treatment='avg')
+    dndlogd_bin21: double
+    @ts(treatment='avg')
+    dndlogd_bin22: double
+    @ts(treatment='avg')
+    dndlogd_bin23: double
+    @ts(treatment='avg')
+    dndlogd_bin24: double
+    @ts(treatment='avg')
+    dndlogd_bin25: double
+    @ts(treatment='avg')
+    dndlogd_bin26: double
+    @ts(treatment='avg')
+    dndlogd_bin27: double
+    @ts(treatment='avg')
+    dndlogd_bin28: double
+    @ts(treatment='avg')
+    dndlogd_bin29: double
+    @ts(treatment='avg')
+    dndlogd_bin30: double
+    @ts(treatment='avg')
+    dndlogd_bin31: double
+    @ts(treatment='avg')
+    dndlogd_bin32: double
+    @ts(treatment='avg')
+    dndlogd_bin33: double
+    @ts(treatment='avg')
+    dndlogd_bin34: double
+    @ts(treatment='avg')
+    dndlogd_bin35: double
+    @ts(treatment='avg')
+    dndlogd_bin36: double
+    @ts(treatment='avg')
+    dndlogd_bin37: double
+    @ts(treatment='avg')
+    dndlogd_bin38: double
+    @ts(treatment='avg')
+    dndlogd_bin39: double
+    @ts(treatment='avg')
+    dndlogd_bin40: double
+    @ts(treatment='avg')
+    dndlogd_bin41: double
+    @ts(treatment='avg')
+    dndlogd_bin42: double
+    @ts(treatment='avg')
+    dndlogd_bin43: double
+    @ts(treatment='avg')
+    dndlogd_bin44: double
+    @ts(treatment='avg')
+    dndlogd_bin45: double
+    @ts(treatment='avg')
+    dndlogd_bin46: double
+    @ts(treatment='avg')
+    dndlogd_bin47: double
+    @ts(treatment='avg')
+    dndlogd_bin48: double
+    @ts(treatment='avg')
+    dndlogd_bin49: double
+    @ts(treatment='avg')
+    dndlogd_bin50: double
+    @ts(treatment='avg')
+    dndlogd_bin51: double
+    @ts(treatment='avg')
+    dndlogd_bin52: double
+    @ts(treatment='avg')
+    dndlogd_bin53: double
+    @ts(treatment='avg')
+    dndlogd_bin54: double
+    @ts(treatment='avg')
+    dndlogd_bin55: double
+    @ts(treatment='avg')
+    dndlogd_bin56: double
+    @ts(treatment='avg')
+    dndlogd_bin57: double
+    @ts(treatment='avg')
+    dndlogd_bin58: double
+    @ts(treatment='avg')
+    dndlogd_bin59: double
+    @ts(treatment='avg')
+    dndlogd_bin60: double
+    @ts(treatment='avg')
+    dndlogd_bin61: double
+    @ts(treatment='avg')
+    dndlogd_bin62: double
+    @ts(treatment='avg')
+    dndlogd_bin63: double
+    @ts(treatment='avg')
+    dndlogd_bin64: double
+    @ts(treatment='avg')
+    dndlogd_bin65: double
+    @ts(treatment='avg')
+    dndlogd_bin66: double
+    @ts(treatment='avg')
+    dndlogd_bin67: double
+    @ts(treatment='avg')
+    dndlogd_bin68: double
+    @ts(treatment='avg')
+    dndlogd_bin69: double
+}
