@@ -5,7 +5,7 @@
 /**
 * A series of simulation results taken from a single [SimulationSample](type:SimulationSample) for Acure Aircraft data
 */
-entity type SimulationAcureAircraftOutputSeries mixes TimedDataHeader<SimulationAcureAircraftOutput> schema name "SMLTN_ACRACRFT_TPT_SRS" {
+entity type SimulationAcureAircraftOutputSeries mixes TimedDataHeader<SimulationAcureAircraftOutput> schema name "SMLTN_ACRACRFT_SRS" {
     // The [SimulationSample](type:SimulationSample) from which values were taken.
     simulationSample: SimulationSample
 }
