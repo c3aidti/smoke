@@ -21,7 +21,4 @@ entity type SimulationSample mixes MetricEvaluatable schema name "SMLTN_SMPL" {
     // Function that callback actually calls
     @dependency(include = "this, ensemble")
     upsertFileTable: member function(): int js server
-    // Upsert data into {@link SimulationModelOutput} for all {@link SimulationOutputFile}s corresponding to this {@link SimulationSample}
-    @dependency(include = "this, outputFiles")
-    upsertSampleData: member function(): int js server
 }

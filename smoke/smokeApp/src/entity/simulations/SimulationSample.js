@@ -98,27 +98,3 @@ function upsertFileTable() {
         };
     };
 };
-
-
-/**
-* Function to upsert Simulation*Output with data from all SimulationOutputFiles
-* corresponding to this Simulation Sample
-* @param this, outputFiles
-*  List of SimulationOutputFiles corresponding to this SimulationSample. 
-*
-* @return Number of files that were processed
-*/
-function upsertSampleData() {
-    var results = this.outputFiles.map(upsert);
-  
-    function upsert(file) {
-        var actual_file = SimulationOutputFile.get(file.id);
-        return actual_file.upsertData();
-    };
-  
-    var total = results.reduce(function (previousValue, currentValue) {
-        return previousValue + currentValue;
-    }, 0)
-  
-    return total;
-};
