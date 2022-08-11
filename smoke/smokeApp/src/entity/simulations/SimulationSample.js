@@ -47,7 +47,7 @@ function upsertFileTable() {
     };
  
     // put two containers together and upsert
-    allFiles = acureFiles.concat(aodFiles);
+    var allFiles = acureFiles.concat(aodFiles);
     var fileObjects = allFiles.map(createSimOutFile);
     SimulationOutputFile.upsertBatch(fileObjects);
 
