@@ -14,11 +14,4 @@ entity type SimulationEnsemble schema name "SMLTN_NSMBL" {
     modelParameters: [SimulationModelParameters](ensemble, id)
     // The collection of all outputs in timeseries
     samples: [SimulationSample](ensemble)
-
-
-    // This clears all seeded data
-    removeAllSeededData: function() : int js server
-    // Upsert data into the corresponding output type for all {@link SimulationOutputFile}s corresponding to all the {@link SimulationSample}s in this {@link SimulationEnsemble}
-    @dependency(include = "this, samples")
-    upsertEnsembleData: member function(): int js server
 }
