@@ -78,8 +78,7 @@ function upsertFileTable() {
                 }),
                 "container": container
             });
-        }
-        else {
+        } else {
             var year = file.url.slice(-11,-7);
             var month = file.url.slice(-7,-5);
             var day = file.url.slice(-5,-3);
