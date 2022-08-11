@@ -18,7 +18,7 @@ function upsertFileTable() {
     var ensemblePath = containerRoot + ensemble.name + '/';
     var prePathToFiles = ensemblePath + ensemble.prePathToFiles;
     var pathToSample = prePathToFiles + simString;
-    var files = FileSystem.inst().listFiles(pathToSample, limit=-1).files;
+    var files = FileSystem.inst().listFiles(pathToSample, -1).files;
     var acureFiles = new Array();
 
     for (var i = 0; i < files.length; i++) {
@@ -35,7 +35,7 @@ function upsertFileTable() {
     for (var i = 0; i < months.length; i++) {
         var month = months[i];
         var pathToFiles = containerRoot + month + "/";
-        var fileStream = FileSystem.inst().listFilesStream(pathToFiles, limit=-1);
+        var fileStream = FileSystem.inst().listFilesStream(pathToFiles, -1);
         while (fileStream.hasNext()) {
             var file = fileStream.next();
             var simString2 = file.url.split("_")[1];
