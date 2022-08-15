@@ -39,7 +39,7 @@ function upsertFileTable() {
 
     var fileObjects = acureFiles.map(createSimOutFile);
     //var fileObjects = files.map(createSimOutFile);
-    SimulationOutputFile.upsertBatch(acureFiles);
+    SimulationOutputFile.upsertBatch(fileObjects);
  
 //   // 3HOURLY-AOD CONTAINER
 //    var aodFiles = new Array();
