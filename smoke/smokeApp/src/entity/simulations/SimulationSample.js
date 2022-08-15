@@ -23,10 +23,14 @@ function upsertFileTable() {
 
     for (var i = 0; i < files.length; i++) {
         var sf = files[i];
-        if (sf.url.includes(".nc")) {
+        //if (sf.url.includes(".nc")) {
+            if (sf.url.slice(-3) === ".nc") {
             acureFiles.push(sf);
         };
     };
+
+    var fileObjects = acureFiles.map(createSimOutFile);
+    SimulationOutputFile.upsertBatch(fileObjects);
  
    // 3HOURLY-AOD CONTAINER
     var aodFiles = new Array();
@@ -47,9 +51,11 @@ function upsertFileTable() {
     };
  
     // put two containers together and upsert
-    var allFiles = acureFiles.concat(aodFiles);
-    var fileObjects = allFiles.map(createSimOutFile);
+    //var allFiles = acureFiles.concat(aodFiles);
+    var fileObjects = aodFiles.map(createSimOutFile);
     SimulationOutputFile.upsertBatch(fileObjects);
+    //var fileObjects = allFiles.map(createSimOutFile);
+    //SimulationOutputFile.upsertBatch(fileObjects);
 
     return 0;
  
