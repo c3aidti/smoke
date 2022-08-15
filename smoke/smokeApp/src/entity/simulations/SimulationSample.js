@@ -10,7 +10,7 @@
 */
 function upsertFileTable() {
     var simSample = this;
-    var ensemble = this.ensemble;
+    var ensemble = SimulationEnsemble.get(this.ensemble.id);
     var simString = padStart(String(this.simulationNumber), 3, '0');
  
    // ACURE-AIRCRAFT CONTAINER
