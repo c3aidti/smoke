@@ -24,7 +24,9 @@ function upsertFileTable() {
 
     while(fileStream.hasNext()) {
         var file = fileStream.next();
-        acureFiles.push(file);
+        if(file.url.endsWith(".nc")) {
+            acureFiles.push(file);
+        }
     }
 
     //for (var i = 0; i < files.length; i++) {
@@ -35,9 +37,9 @@ function upsertFileTable() {
         //};
     //};
 
-    //var fileObjects = acureFiles.map(createSimOutFile);
+    var fileObjects = acureFiles.map(createSimOutFile);
     //var fileObjects = files.map(createSimOutFile);
-    //SimulationOutputFile.upsertBatch(acureFiles);
+    SimulationOutputFile.upsertBatch(acureFiles);
  
 //   // 3HOURLY-AOD CONTAINER
 //    var aodFiles = new Array();
