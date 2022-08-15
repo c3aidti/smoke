@@ -24,7 +24,7 @@ function upsertFileTable() {
 
     while(fileStream.hasNext()) {
         var file = fileStream.next();
-        if(file.url.endsWith(".nc")) {
+        if(file.url.slice(-3) === ".nc") {
             acureFiles.push(file);
         }
     }
