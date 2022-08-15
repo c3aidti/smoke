@@ -18,7 +18,7 @@ function upsertFileTable() {
     var ensemblePath = containerRoot + ensemble.name + '/';
     var prePathToFiles = ensemblePath + ensemble.prePathToFiles;
     var pathToSample = prePathToFiles + simString;
-    var files = FileSystem.inst().listFiles(pathToSample, -1).files;
+    var files = FileSystem.inst().listFiles(pathToSample).files;
     //var acureFiles = new Array();
 
     //for (var i = 0; i < files.length; i++) {
