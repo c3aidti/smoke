@@ -24,7 +24,7 @@ function upsertFileTable() {
 
     while(fileStream.hasNext()) {
         var file = fileStream.next();
-        if(file.name.endsWith(".nc")) {
+        if(file.url.endsWith(".nc")) {
             acureFiles.push(file);
         }
     }
@@ -66,7 +66,7 @@ function upsertFileTable() {
     //var fileObjects = allFiles.map(createSimOutFile);
     //SimulationOutputFile.upsertBatch(fileObjects);
 
-    return 0;
+    return acureFiles;
  
  
     function padStart(text, length, pad) {
