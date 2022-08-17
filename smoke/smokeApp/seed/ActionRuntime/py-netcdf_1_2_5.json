@@ -1,6 +1,6 @@
 {
     "language": "Python",
-    "runtimeVersion": "2.8",
+    "runtimeVersion": "3.6",
     "modules": {
       "conda.netcdf4": "=1.2.5"
     },
