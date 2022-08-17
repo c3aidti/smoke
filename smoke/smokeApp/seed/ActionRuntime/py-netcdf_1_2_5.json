@@ -1,0 +1,14 @@
+{
+    "language": "Python",
+    "runtimeVersion": "2.8",
+    "modules": {
+      "conda.netcdf4": "=1.2.5"
+    },
+    "repositories": [
+      "https://repo.continuum.io/pkgs/main",
+      "conda-forge"
+    ],
+    "runtime": "CPython",
+    "name": "py-netcdf_1_2_5",
+    "id": "py-netcdf_1_2_5"
+}
