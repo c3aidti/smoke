@@ -94,7 +94,7 @@ def upsertATOMData(this):
     - Returns:
         -bool: True if file was processed, false if file has already been processed
     """
-    from datetime import datetime
+    from datetime import datetime, timedelta
     import pandas as pd
 
     obsSet = c3.ObservationSet.get(this.observationSet.id)
@@ -180,11 +180,16 @@ def upsertATOMData(this):
             source = c3.NetCDFUtil.openFileLegacy(c3file.file.url)
             df = pd.DataFrame()
     
+            def get_time_stamps(shift):
+                zero_time = datetime(1904,1,1,0,0)
+                time_stamp = zero_time + timedelta(seconds=shift)
+                return time_stamp
+
             for nc_var in ObsVars.nc_variables:
                 c3_var = ObsVars.variables_map[nc_var]
                 if nc_var == 'time':
                     df[c3_var] = source.variables[nc_var][:]
-                    df[c3_var] = pd.to_datetime(df[c3_var],unit='s')
+                    df[c3_var] = df[c3_var].apply(get_time_stamps)
                 elif nc_var == 'dndlogd':
                     for i in range(0,70):
                         name = c3_var + "_bin" + str(i)
@@ -205,11 +210,11 @@ def upsertATOMData(this):
     parent_id = "OOS_SetName_" + obsSet.name + "_Ver_" + obsSet.versionTag
     df['parent'] = parent_id
 
-    zero_time = datetime(1970,1,1,0,0)
-    now_time = datetime.now()
-    diff_time = (now_time - zero_time)
-    versionTag= -1 * diff_time.total_seconds()
-    df['dataVersion'] = versionTag
+    #zero_time = datetime(1970,1,1,0,0)
+    #now_time = datetime.now()
+    #diff_time = (now_time - zero_time)
+    #versionTag= -1 * diff_time.total_seconds()
+    #df['dataVersion'] = versionTag
 
     output_records = df.to_dict(orient="records")
 
