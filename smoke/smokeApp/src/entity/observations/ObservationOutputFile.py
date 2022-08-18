@@ -10,7 +10,8 @@ def upsertORACLESData(this):
     from datetime import datetime
     import pandas as pd
 
-    if (this.observationSet.name == "ATom_60s"):
+    obsSet = c3.ObservationSet.get(this.observationSet.id)
+    if (obsSet.name == "ATom_60s"):
         return False
         
     class ObsVars:
@@ -61,11 +62,10 @@ def upsertORACLESData(this):
                         df[c3_var] = source.variables[nc_var][:]
                     except:
                         pass
-            c3.NetCDFUtil.closeFile(source)
+            c3.NetCDFUtil.closeFile(source, c3file.file.url)
             return df
 
     df = ObsVars.get_df_from_c3_file(this)
-    obsSet = c3.ObservationSet.get(this.observationSet.id)
     parent_id = "OOS_SetName_" + obsSet.name + "_Ver_" + obsSet.versionTag
     df['parent'] = parent_id
 
@@ -197,7 +197,7 @@ def upsertATOMData(this):
                         df[c3_var] = source.variables[nc_var][:]
                     except:
                         pass
-            c3.NetCDFUtil.closeFileLegacy(source)
+            c3.NetCDFUtil.closeFileLegacy(source, c3file.file.url)
             return df
     
 
