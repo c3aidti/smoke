@@ -61,6 +61,7 @@ def upsertORACLESData(this):
                         df[c3_var] = source.variables[nc_var][:]
                     except:
                         pass
+            c3.NetCDFUtil.closeFile(source)
             return df
 
     df = ObsVars.get_df_from_c3_file(this)
@@ -176,7 +177,7 @@ def upsertATOMData(this):
             """
             Opens file, grab variables in the variables_map and returns pandas DataFrame
             """
-            source = c3.NetCDFUtil.openFile(c3file.file.url)
+            source = c3.NetCDFUtil.openFileLegacy(c3file.file.url)
             df = pd.DataFrame()
     
             for nc_var in ObsVars.nc_variables:
@@ -196,6 +197,7 @@ def upsertATOMData(this):
                         df[c3_var] = source.variables[nc_var][:]
                     except:
                         pass
+            c3.NetCDFUtil.closeFileLegacy(source)
             return df
     
 
