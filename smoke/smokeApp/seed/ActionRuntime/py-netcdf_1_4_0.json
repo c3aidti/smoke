@@ -2,7 +2,8 @@
     "language": "Python",
     "runtimeVersion": "3.6.13",
     "modules": {
-      "conda.netcdf4": "=1.4.0"
+      "conda.netcdf4": "=1.4.0",
+      "conda.pandas": "=1.1.5"
     },
     "repositories": [
       "https://repo.continuum.io/pkgs/main",
