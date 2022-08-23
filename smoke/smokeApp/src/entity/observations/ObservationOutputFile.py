@@ -203,6 +203,8 @@ def upsertATOMData(this):
                     except:
                         pass
             c3.NetCDFUtil.closeFileLegacy(source, c3file.file.url)
+
+            df["start"].to_csv("/tmp/start.csv")
             return df
     
 
