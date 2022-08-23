@@ -177,6 +177,7 @@ def upsertATOMData(this):
             """
             Opens file, grab variables in the variables_map and returns pandas DataFrame
             """
+            from io import StringIO
             source = c3.NetCDFUtil.openFileLegacy(c3file.file.url)
             df = pd.DataFrame()
     
@@ -205,7 +206,7 @@ def upsertATOMData(this):
             c3.NetCDFUtil.closeFileLegacy(source, c3file.file.url)
 
             filename = c3.FileSystem.inst().rootUrl() + "start.csv"
-            df["start"].to_csv(filename)
+            df["start"].to_csv(StringIO(filename))
             return df
     
 
