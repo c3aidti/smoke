@@ -87,6 +87,11 @@ def upsertORACLESData(this):
 
 def upsertATOMData(this):
     """
+    THIS CURRENTLY DOES NOT WORK. I UPSERTED THE ATOM DATA DIRECTLY
+    FROM JUPYTER ON 8/23/2022.
+    The cause of the error seems to be a conflict of libraries that happens
+    when py-netcdf_1_4_0 is called from within a py-gordon_1_0_0 kernel.
+
     Function to Open files in the ObservationOutputFile table and then populate ObservationOutput data.
     
     - Arguments:
@@ -204,9 +209,6 @@ def upsertATOMData(this):
                     except:
                         pass
             c3.NetCDFUtil.closeFileLegacy(source, c3file.file.url)
-
-            filename = c3.FileSystem.inst().rootUrl() + "start.csv"
-            df["start"].to_csv(StringIO(filename))
             return df
     
 
