@@ -204,7 +204,7 @@ def upsertATOMData(this):
                         pass
             c3.NetCDFUtil.closeFileLegacy(source, c3file.file.url)
 
-            filename = c3.FileSystem.rootUrl() + "start.csv"
+            filename = c3.FileSystem.inst().rootUrl() + "start.csv"
             df["start"].to_csv(filename)
             return df
     
