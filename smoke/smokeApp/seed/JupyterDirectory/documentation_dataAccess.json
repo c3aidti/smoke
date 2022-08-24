@@ -1,0 +1,8 @@
+{
+    "name": "dataAccess",
+    "id": "documentation_dataAccess",
+    "path": "documentation/dataAccess",
+    "jupyterContentType": "directory",
+    "format": "json",
+    "writable": true
+}
