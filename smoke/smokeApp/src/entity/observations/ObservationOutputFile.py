@@ -69,16 +69,10 @@ def upsertORACLESData(this):
     parent_id = "OOS_SetName_" + obsSet.name + "_Ver_" + obsSet.versionTag
     df['parent'] = parent_id
 
-    zero_time = datetime(1970,1,1,0,0)
-    now_time = datetime.now()
-    diff_time = (now_time - zero_time)
-    versionTag= -1 * diff_time.total_seconds()
-    df['dataVersion'] = versionTag
-
     output_records = df.to_dict(orient="records")
 
     # upsert this batch
-    c3.ObservationOutput.upsertBatch(objs=output_records)
+    c3.ObservationOraclesOutput.upsertBatch(objs=output_records)
 
     this.processed = True
     c3.ObservationOutputFile.merge(this)
