@@ -74,8 +74,11 @@ def upsertORACLESData(this):
     # upsert this batch
     c3.ObservationOraclesOutput.upsertBatch(objs=output_records)
 
-    this.processed = True
-    c3.ObservationOutputFile.merge(this)
+    c3.ObservationOutputFile(
+                id=this.id, 
+                processed=True
+    ).merge()
+    
     return True
 
 
