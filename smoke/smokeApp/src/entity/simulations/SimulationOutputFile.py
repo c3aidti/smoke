@@ -73,7 +73,7 @@ def upsertAcureAircraftData(this):
         output_records = df.to_dict(orient="records")
 
         # upsert this batch
-        c3.SimulationModelOutput.upsertBatch(objs=output_records)
+        c3.SimulationAcureAircraftOutput.upsertBatch(objs=output_records)
 
         meta = c3.MetaFileProcessing(
             lastAction="upsert-data",
