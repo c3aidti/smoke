@@ -1,0 +1,11 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Represents customization options for a {@link UpsertAcureData} batch job
+*/
+type UpsertAcureDataOptions {
+    batchSize: int = 10
+    hardwareProfileId: string = "appc8m642-w"
+}
