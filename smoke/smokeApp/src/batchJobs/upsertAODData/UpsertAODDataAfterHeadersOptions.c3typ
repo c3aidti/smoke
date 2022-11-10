@@ -14,4 +14,6 @@ type UpsertAODDataAfterHeadersOptions {
     offset: int = 0
     // any additional filters
     filter: Filter
+    // hardware profile ID to run the batches
+    hardwareProfileId: string = "appc8m642-w"
 }

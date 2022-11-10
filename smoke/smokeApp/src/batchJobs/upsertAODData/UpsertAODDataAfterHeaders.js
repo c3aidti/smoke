@@ -8,6 +8,7 @@
  * @param {UpsertAODDataAfterHeadersOptions} options
  */
  function doStart(job, options) {
+    job.setHardwareProfile(options.hardwareProfileId);
     var batch = [];
 
     var finalFilter = options.filter.and().eq("container", "aod-3hourly");
