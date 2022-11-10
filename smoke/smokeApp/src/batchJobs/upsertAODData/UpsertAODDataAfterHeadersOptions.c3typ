@@ -1,0 +1,17 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Represents customization options for a {@link UpsertAODDataAfterHeaders} batch job
+*/
+type UpsertAODDataAfterHeadersOptions {
+    // the number of files that will be processed in each batch
+    batchSize: int = 1
+    // a limit to the number of files that will be processed overall
+    limit: int = -1
+    // offset in the fetch to SimulationOutputFile
+    offset: int = 0
+    // any additional filters
+    filter: Filter
+}
