@@ -26,4 +26,4 @@ def build(this):
         pickledKernel=kernel_pickled
     )
 
-    return 
+    return this
