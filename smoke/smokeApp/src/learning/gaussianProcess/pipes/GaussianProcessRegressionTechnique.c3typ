@@ -27,4 +27,3 @@ entity type GaussianProcessRegressionTechnique mixes MLTechnique schema name 'GP
     @ML(hyperParameter=true)
     splitFraction: float=0.2
 }
-Footer
