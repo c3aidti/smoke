@@ -1,5 +1,8 @@
 /**
-* TransformSourceSimulationEnsembleToSimulationEnsemble.c3typ
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
 * Transforms {@link SourceSimulationEnsemble} to {@link SimulationEnsemble}
 */
 type TransformSourceSimulationEnsembleToSimulationEnsemble mixes SimulationEnsemble transforms SourceSimulationEnsemble {
