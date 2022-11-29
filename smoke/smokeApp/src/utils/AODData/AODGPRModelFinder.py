@@ -58,7 +58,8 @@ def extractLearnedParametersJob(excFeats, gstpFilter, targetName, technique, bat
             mapLambda=map_lambda,
             reduceLambda=reduce_lambda,
             batchSize=batchSize,
-            context=job_context
+            context=job_context,
+            hardwareProfile="appc8m642-w"
         )
     )
 
