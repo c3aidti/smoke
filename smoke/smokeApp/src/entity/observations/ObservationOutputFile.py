@@ -221,7 +221,7 @@ def upsertATOMData(this):
     return True
 
 
-def upserMODISDailyGSTPs(this):
+def upsertMODISDailyGSTPs(this):
     import pandas as pd
     import datetime as dt
     
