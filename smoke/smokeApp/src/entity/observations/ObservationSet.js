@@ -17,7 +17,7 @@ function upsertFileTable() {
         while(fileStream.hasNext()) {
             var file = fileStream.next();
             var url = file.url;
-            if(url.endsWith(".nc" && url.split(".")[0] == obsSet.prePathToFiles)) {
+            if(url.endsWith(".nc") && url.split(".")[0] == obsSet.prePathToFiles) {
                 setFiles.push(file);
             }
         };
