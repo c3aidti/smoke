@@ -233,7 +233,7 @@ def upsertMODISDailyGSTPs(this):
             lastProcessAttempt=dt.datetime.now(),
             lastAttemptFailed=True,
             returnCode=1)
-        c3.SimulationOutputFile(
+        c3.ObservationOutputFile(
             id=this.id, 
             processed=True, 
             processMeta=meta).merge()
@@ -255,7 +255,7 @@ def upsertMODISDailyGSTPs(this):
             lastProcessAttempt=dt.datetime.now(),
             lastAttemptFailed=True,
             returnCode=2)
-        c3.SimulationOutputFile(
+        c3.ObservationOutputFile(
             id=this.id, 
             processed=True, 
             processMeta=meta).merge()
@@ -271,7 +271,7 @@ def upsertMODISDailyGSTPs(this):
             lastProcessAttempt=dt.datetime.now(),
             lastAttemptFailed=True,
             returnCode=3)
-        c3.SimulationOutputFile(
+        c3.ObservationOutputFile(
             id=this.id, 
             processed=True, 
             processMeta=meta).merge()
@@ -284,7 +284,7 @@ def upsertMODISDailyGSTPs(this):
         lastProcessAttempt=dt.datetime.now(),
         lastAttemptFailed=False,
         returnCode=0)
-    c3.SimulationOutputFile(
+    c3.ObservationOutputFile(
         id=this.id, 
         processed=True, 
         processMeta=meta).merge()

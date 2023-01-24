@@ -14,6 +14,8 @@ entity type ObservationOutputFile schema name 'OBS_OTPT_FL' {
     file: !File
     // processed
     processed: boolean post default "false"
+    // metadata for processing
+    processMeta: MetaFileProcessing
 
     // Load data from this oracles file into {@link ObservationOraclesOutput}
     @py(env='gordon_1_0_0')
