@@ -15,10 +15,15 @@ entity type ObservationOutputFile schema name 'OBS_OTPT_FL' {
     // processed
     processed: boolean post default "false"
 
-    // Load data from this oracles file into {@link ObservationOutput}
+    // Load data from this oracles file into {@link ObservationOraclesOutput}
     @py(env='gordon_1_0_0')
     upsertORACLESData: member function(): boolean
-    // Load data from this atom file into {@link ObservationOutput}
+    // Load data from this atom file into {@link ObservationAtomOutput}
     @py(env='gordon_1_0_0')
     upsertATOMData: member function(): boolean
+    // Load data from this MODIS file into {@link ObservationModisDailyOutput}
+    @py(env='gordon_1_0_0')
+    upsertMODISDailyData: member function(): boolean
+    @py(env='gordon_1_0_0')
+    upsertMODISDailyGSTPs: member function(): boolean
 }
