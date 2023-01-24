@@ -9,7 +9,7 @@
 */
 function upsertFileTable() {
     var obsSet = this;
-    if (obsSet.names.slice(0,5) === "MODIS") {
+    if (obsSet.name.slice(0,5) === "MODIS") {
         var containerRoot = FileSystem.urlFromMountAndRelativeEncodedPath("MDS_DLY_LVL3");
         var fileStream = FileSystem.inst().listFilesStream(containerRoot, -1);
         var setFiles = new Array();
