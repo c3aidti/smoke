@@ -55,8 +55,8 @@ function upsertFileTable() {
             var year = file.url.split(".")[1].slice(1,5);
             var dayNumber = parseInt(file.url.split(".")[1].slice(5,8));
             var oneDay = 1000 * 60 * 60 * 24;
-            var start = new Date(year, 0, 0);
-            var date = new Date(start.getTime() + dayNumber * oneDay);
+            var start = new Date(year, 0, 1);
+            var date = new Date(start.getMillis() + (dayNumber-1) * oneDay);
             return ObservationOutputFile.make({
                 "observationSet": obsSet,   
                 "file": File.make({
