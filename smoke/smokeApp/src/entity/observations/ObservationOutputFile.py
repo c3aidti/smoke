@@ -313,17 +313,17 @@ def upsertMODISDailyData(this):
 
     class ObsVars:
         nc_variables = [
-            'latitude', 'longitude',
             'AOD_550_Dark_Target_Deep_Blue_Combined_Mean',
             'AOD_550_Dark_Target_Deep_Blue_Combined_Standard_Deviation'
         ]
 
         variables_map = {
-            'latitude':'latitude',
-            'longitude':'longitude',
             'AOD_550_Dark_Target_Deep_Blue_Combined_Mean': 'aod550arkTargetDeepBlueCombinedMean',
             'AOD_550_Dark_Target_Deep_Blue_Combined_Standard_Deviation': 'aod550arkTargetDeepBlueCombinedStandardDeviation'
         }
+
+        def make_gstp(objId):
+            return c3.GeoSurfaceTimePoint(id=objId)
 
         def get_df_from_c3_file(c3file):
             """
@@ -332,37 +332,25 @@ def upsertMODISDailyData(this):
             from io import StringIO
             source = c3.NetCDFUtil.openFileLegacy(c3file.file.url)
             df = pd.DataFrame()
-    
-            def get_time_stamps(shift):
-                zero_time = datetime(1904,1,1,0,0)
-                time_stamp = zero_time + timedelta(seconds=shift)
-                return time_stamp
 
+            df["latitude"] = source.variables["latitude"][:]
+            df["longitude"] = source.variables["longitude"][:]
+            df["time"] = c3file.dateTag
             for nc_var in ObsVars.nc_variables:
                 c3_var = ObsVars.variables_map[nc_var]
-                if nc_var == 'time':
-                    df[c3_var] = source.variables[nc_var][:]
-                    df[c3_var] = df[c3_var].apply(get_time_stamps)
-                elif nc_var == 'dndlogd':
-                    for i in range(0,70):
-                        name = c3_var + "_bin" + str(i)
-                        try:
-                            df[name] = source.variables[nc_var][:,i]
-                        except:
-                            pass
-                else:
-                    try:
-                        df[c3_var] = source.variables[nc_var][:]
-                    except:
-                        pass
+                df[c3_var] = source.variables[nc_var][:,:].data.flatten()                
+                
+
+            ids = round(df["latitude"],3).astype(str) + "_" + round(df["longitude"],3).astype(str) + "_" + df["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
+            objs = ids.apply(make_gstp)
+            df["geoSurfaceTimePoint"] = objs
+            df = df.drop(columns=["latitude", "longitude", "time"])
+
             c3.NetCDFUtil.closeFileLegacy(source, c3file.file.url)
             return df
     
 
     df = ObsVars.get_df_from_c3_file(this)
-    parent_id = "OOS_SetName_" + obsSet.name + "_Ver_" + obsSet.versionTag
-    df['parent'] = parent_id
-
     output_records = df.to_dict(orient="records")
 
     # upsert this batch
