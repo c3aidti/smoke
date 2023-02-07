@@ -1,0 +1,13 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Yep
+*/
+type TransformSourceSmokePPESimulationModelParametersMapToSmokePPESimulationOutputSeries mixes SmokePPESimulationOutputSeries transforms SmokePPESourceSimulationModelParametersMap {
+    // The id of this timeseries
+    id: ~ expression "concat('PPESMOS_EnsNo_', ensemble_id, '_SimNo_', pcalc_index)"
+    // The {@link SmokePPESimulationSample} this timeseries belongs to
+    simulationSample: ~ expression {id: "concat('EnsNo_',ensemble_id,'_SimNo_',pcalc_index)"}
+}
