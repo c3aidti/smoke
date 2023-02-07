@@ -9,18 +9,33 @@
 */
 function upsertFileTable() {
     var obsSet = this;
+    if (obsSet.name.slice(0,5) === "MODIS") {
+        var containerRoot = FileSystem.urlFromMountAndRelativeEncodedPath("MDS_DLY_LVL3");
+        var pathToFiles = containerRoot + obsSet.prePathToFiles;
+        var fileStream = FileSystem.inst().listFilesStream(pathToFiles, -1);
+        var setFiles = new Array();
 
-    var containerRoot = FileSystem.urlFromMountAndRelativeEncodedPath("RCFT_BSRVTNS");
-    var pathToFiles = containerRoot + obsSet.name;
-    var fileStream = FileSystem.inst().listFilesStream(pathToFiles,-1);
-    var setFiles = new Array();
+        while(fileStream.hasNext()) {
+            var file = fileStream.next();
+            var url = file.url;
+            if(url.endsWith(".nc") && url.split(".")[0].split("/")[3] == obsSet.prePathToFiles) {
+                setFiles.push(file);
+            }
+        };
+    } 
+    else {
+        var containerRoot = FileSystem.urlFromMountAndRelativeEncodedPath("RCFT_BSRVTNS");
+        var pathToFiles = containerRoot + obsSet.name;
+        var fileStream = FileSystem.inst().listFilesStream(pathToFiles,-1);
+        var setFiles = new Array();
 
-    while(fileStream.hasNext()) {
-        var file = fileStream.next();
-        var url = file.url
-        if(url.endsWith(".nc") && url.slice(-6,-3) == this.versionTag) {
-            setFiles.push(file);
-        }
+        while(fileStream.hasNext()) {
+            var file = fileStream.next();
+            var url = file.url
+            if(url.endsWith(".nc") && url.slice(-6,-3) == this.versionTag) {
+                setFiles.push(file);
+            }
+        };
     };
 
     var fileObjects = setFiles.map(createObsOutFile);
@@ -34,6 +49,20 @@ function upsertFileTable() {
                 "file": File.make({
                     "url": file.url
                 }),
+            });
+        }
+        else if (obsSet.name == "MODIS_daily_08_D3") {
+            var year = file.url.split(".")[1].slice(1,5);
+            var dayNumber = parseInt(file.url.split(".")[1].slice(5,8));
+            var oneDay = 1000 * 60 * 60 * 24;
+            var start = new Date(year, 0, 1);
+            var date = new Date(start.getMillis() + (dayNumber-1) * oneDay);
+            return ObservationOutputFile.make({
+                "observationSet": obsSet,   
+                "file": File.make({
+                    "url": file.url
+                }),
+                "dateTag": date
             });
         }
         else {

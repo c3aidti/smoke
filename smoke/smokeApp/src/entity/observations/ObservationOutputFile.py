@@ -83,6 +83,7 @@ def upsertORACLESData(this):
 
 
 def upsertATOMData(this):
+    """
     Function to Open files in the ObservationOutputFile table and then populate ObservationOutput data.
     
     - Arguments:
@@ -207,6 +208,149 @@ def upsertATOMData(this):
     parent_id = "OOS_SetName_" + obsSet.name + "_Ver_" + obsSet.versionTag
     df['parent'] = parent_id
 
+    output_records = df.to_dict(orient="records")
+
+    # upsert this batch
+    c3.ObservationAtomOutput.upsertBatch(objs=output_records)
+
+    c3.ObservationOutputFile(
+                id=this.id, 
+                processed=True
+    ).merge()
+
+    return True
+
+
+def upsertMODISDailyGSTPs(this):
+    import pandas as pd
+    import datetime as dt
+    
+    try:
+        sample = c3.NetCDFUtil.openFile(this.file.url)
+    except:
+        meta = c3.MetaFileProcessing(
+            lastAction="create-headers",
+            lastProcessAttempt=dt.datetime.now(),
+            lastAttemptFailed=True,
+            returnCode=1)
+        c3.ObservationOutputFile(
+            id=this.id, 
+            processed=True, 
+            processMeta=meta).merge()
+        return False
+
+    try:
+        df_st = pd.DataFrame()
+        lat = sample["latitude"][:]
+        lon = [x*(x < 180) + (x - 360)*(x >= 180) for x in sample["longitude"][:]]
+        time = this.dateTag
+        
+        df_st["latitude"] = [l for l in lat for _ in range(len(lon))]
+        df_st["longitude"] = [l for l in lon] * len(lat)
+        df_st["time"] = time
+        df_st["id"] = round(df_st["latitude"],3).astype(str) + "_" + round(df_st["longitude"],3).astype(str) + "_" + df_st["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
+    except:
+        meta = c3.MetaFileProcessing(
+            lastAction="create-headers",
+            lastProcessAttempt=dt.datetime.now(),
+            lastAttemptFailed=True,
+            returnCode=2)
+        c3.ObservationOutputFile(
+            id=this.id, 
+            processed=True, 
+            processMeta=meta).merge()
+        c3.NetCDFUtil.closeFile(sample, this.file.url)
+        return False
+
+    try:
+        output_records = df_st.to_dict(orient="records")
+        c3.GeoSurfaceTimePoint.upsertBatch(objs=output_records)
+    except:
+        meta = c3.MetaFileProcessing(
+            lastAction="create-headers",
+            lastProcessAttempt=dt.datetime.now(),
+            lastAttemptFailed=True,
+            returnCode=3)
+        c3.ObservationOutputFile(
+            id=this.id, 
+            processed=True, 
+            processMeta=meta).merge()
+        c3.NetCDFUtil.closeFile(sample, this.file.url)
+        return False
+
+    # success
+    meta = c3.MetaFileProcessing(
+        lastAction="create-headers",
+        lastProcessAttempt=dt.datetime.now(),
+        lastAttemptFailed=False,
+        returnCode=0)
+    c3.ObservationOutputFile(
+        id=this.id, 
+        processed=True, 
+        processMeta=meta).merge()
+    c3.NetCDFUtil.closeFile(sample, this.file.url)
+    
+    return True
+
+
+
+
+def upsertMODISDailyData(this):
+    """
+    Function to Open files in the ObservationOutputFile table and then populate ObservationModisDailyOutput data.
+    
+    - Arguments:
+        -this: an instance of ObservationOutputFile
+    - Returns:
+        -bool: True if file was processed, false if file has already been processed
+    """
+    from datetime import datetime, timedelta
+    import pandas as pd
+
+    obsSet = c3.ObservationSet.get(this.observationSet.id)
+    if (obsSet.name != "MODIS_daily_08_D3"):
+        return False
+
+    class ObsVars:
+        nc_variables = [
+            'AOD_550_Dark_Target_Deep_Blue_Combined_Mean',
+            'AOD_550_Dark_Target_Deep_Blue_Combined_Standard_Deviation'
+        ]
+
+        variables_map = {
+            'AOD_550_Dark_Target_Deep_Blue_Combined_Mean': 'aod550arkTargetDeepBlueCombinedMean',
+            'AOD_550_Dark_Target_Deep_Blue_Combined_Standard_Deviation': 'aod550arkTargetDeepBlueCombinedStandardDeviation'
+        }
+
+        def make_gstp(objId):
+            return c3.GeoSurfaceTimePoint(id=objId)
+
+        def get_df_from_c3_file(c3file):
+            """
+            Opens file, grab variables in the variables_map and returns pandas DataFrame
+            """
+            from io import StringIO
+            source = c3.NetCDFUtil.openFileLegacy(c3file.file.url)
+            df = pd.DataFrame()
+
+            df["latitude"] = source.variables["latitude"][:]
+            df["longitude"] = source.variables["longitude"][:]
+            df["time"] = c3file.dateTag
+            for nc_var in ObsVars.nc_variables:
+                c3_var = ObsVars.variables_map[nc_var]
+                df[c3_var] = source.variables[nc_var][:,:].data.flatten()                
+                
+
+            ids = round(df["latitude"],3).astype(str) + "_" + round(df["longitude"],3).astype(str) + "_" + df["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
+            objs = ids.apply(make_gstp)
+            df["geoSurfaceTimePoint"] = objs
+            df = df.drop(columns=["latitude", "longitude", "time"])
+
+            c3.NetCDFUtil.closeFileLegacy(source, c3file.file.url)
+            return df
+    
+
+    df = ObsVars.get_df_from_c3_file(this)
     output_records = df.to_dict(orient="records")
 
     # upsert this batch
