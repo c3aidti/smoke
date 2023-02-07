@@ -5,7 +5,7 @@
 /**
 * Transforms data from {@link SourceSimulationModelParametersMap} to {@SimulationModelParameters}
 */
-type TransformSourceSimulationModelParametersMapToSimulationModelParameters mixes SimulationModelParameters transforms SourceSimulationModelParametersMap {
+type TransformSourceSmokePPESimulationModelParametersMapToSmokePPESimulationModelParameters mixes SmokePPESimulationModelParameters transforms SourceSmokePPESimulationModelParametersMap {
     // The id of the simulation
     id: ~ expression "concat('EnsNo_',ensemble_id,'_SimNo_',pcalc_index)"
     // The {@link SimulationEnsemble} for this set of model parameters
