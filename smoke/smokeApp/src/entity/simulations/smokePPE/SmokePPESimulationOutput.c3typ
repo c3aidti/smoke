@@ -5,7 +5,7 @@
 /**
 * A single Smoke PPE output taken from a single [SimulationSample](type:SimulationSample)
 */
-db(datastore='cassandra',
+@db(datastore='cassandra',
     partitionKeyField='parent',
     persistenceOrder='start, dataVersion',
     persistDuplicates=false,
