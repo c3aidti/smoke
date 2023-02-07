@@ -1,0 +1,17 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* A single Smoke PPE output taken from a single [SimulationSample](type:SimulationSample)
+*/
+db(datastore='cassandra',
+    partitionKeyField='parent',
+    persistenceOrder='start, dataVersion',
+    persistDuplicates=false,
+    compactType=true,
+    unique=['parent, start'])
+entity type SmokePPESimulationOutput mixes TimedDataPoint<SmokePPESimulationOutputSeries> schema name 'PPE_SMLTN_TPT' {
+    @ts(treatment='avg')
+    latitude: double
+}
