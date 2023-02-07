@@ -5,7 +5,7 @@
 /**
 * Yep
 */
-type TransformSourceSmokePPESimulationModelParametersMapToSmokePPESimulationOutputSeries mixes SmokePPESimulationOutputSeries transforms SmokePPESourceSimulationModelParametersMap {
+type TransformSourceSmokePPESimulationModelParametersMapToSmokePPESimulationOutputSeries mixes SmokePPESimulationOutputSeries transforms SourceSmokePPESimulationModelParametersMap {
     // The id of this timeseries
     id: ~ expression "concat('PPESMOS_EnsNo_', ensemble_id, '_SimNo_', pcalc_index)"
     // The {@link SmokePPESimulationSample} this timeseries belongs to
