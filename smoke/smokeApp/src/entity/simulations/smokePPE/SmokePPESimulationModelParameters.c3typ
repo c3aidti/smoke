@@ -5,7 +5,7 @@
 /**
 * Entity type that hosts data from {@link SourceSmokePPESimulationModelParameters}.
 */
-entity type SmokePPESimulationModelParameters schema name "PPE_SMLTN_MDL_PRMTRS" {
+entity type SmokePPESimulationModelParameters schema name "PPE_SMLTN_PRMTRS" {
     ensemble: SimulationEnsemble
     smoke_emiss: !double
     smoke_diam: !double
