@@ -11,7 +11,7 @@
     job.setHardwareProfile(options.hardwareProfileId);
     var batch = [];
 
-    var finalFilter = options.filter.and().eq("container", "aod-3hourly");
+    var finalFilter = options.filter.and().paren(eq("container", "aod-3hourly").or(eq("container","smoke-ppe")));
 
     var dataset = SimulationOutputFile.fetchObjStream({
         filter: finalFilter,

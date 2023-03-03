@@ -118,7 +118,7 @@ def createAODDataCassandraHeaders(this):
     import numpy as np
     import datetime as dt
 
-    if(this.container == 'aod-3hourly'):
+    if(this.container == 'aod-3hourly' or (this.container == 'smoke-ppe' and "soluble_accumulation_mode" in this.url)):
         # open file
         try:
             sample = c3.NetCDFUtil.openFile(this.file.url)
