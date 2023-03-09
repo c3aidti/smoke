@@ -13,7 +13,7 @@ entity type SmokePPESimulationSample mixes MetricEvaluatable schema name "PPE_SM
     // The parameters for this simulation
     parameters: !SmokePPESimulationModelParameters
     // The Timeseries output for this simulation: A collection of {@link SimulationAcureAircraftOutputSeries}
-    output: [SmokePPESimulationOutputSeries](simulationSample,id)
+    output: [SmokePPESimulationOutput](simulationSample,id)
     // the collection of {@link SimulationOutputFile}s for this simulation sample
     outputFiles: [SimulationOutputFile](simulationSample, id)
 
