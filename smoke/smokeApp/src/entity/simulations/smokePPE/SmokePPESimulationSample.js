@@ -24,7 +24,7 @@ function upsertFileTable() {
     };
 
     var fileObjects = smokePPEFiles.map(createSimOutFile);
-    SimulationOutputFile.upsertBatch(fileObjects);
+    SmokePPESimulationOutputFile.upsertBatch(fileObjects);
 
     return 0;
  
@@ -32,7 +32,7 @@ function upsertFileTable() {
     function createSimOutFile(file) {
         if (file.url.includes("azure://smoke-ppe/")) {
             var container = "smoke-ppe";
-            return SimulationOutputFile.make({
+            return SmokePPESimulationOutputFile.make({
                 "simulationSample": simSample,
                 "file": File.make({
                     "url": file.url
