@@ -11,5 +11,22 @@
     persistDuplicates=false,
     compactType=true)
 entity type SmokePPESimulationOutput schema name 'PPE_SMLTN_TPT' {
+    // the {@link SmokePPESimulationSample} that this output is associated with
     simulationSample: !SmokePPESimulationSample
+    // the {@link GeoSurfaceTimePoint} that this output is associated with
+    geoSurfaceTimePoint: !GeoSurfaceTimePoint
+    // the pseudoLevel (altitude)
+    pseudoLevel: float
+    // the pseudoLevel index
+    pseudoLevelIndex: int
+    // dust
+    dust: !float
+    // soluble aitken mode
+    solubleAitkenMode: !float
+    // soluble accumulation mode
+    solubleAccumulationMode: !float
+    // soluble coarse mode
+    solubleCoarseMode: !float
+    // insoluble aitken mode
+    insolubleAitkenMode: !float
 }
