@@ -12,7 +12,7 @@ function upsertFileTable() {
  
    // SMOKE-PPE CONTAINER
     var containerRoot = FileSystem.urlFromMountAndRelativeEncodedPath("SMK_PPE");
-    var pathToFiles = containerRoot + "_" + String(this.simulationNumber) + "_glm_atmosphere";
+    var pathToFiles = containerRoot + "ens_" + String(this.simulationNumber) + "_glm_atmosphere";
     var fileStream = FileSystem.inst().listFilesStream(pathToFiles,-1);
     var smokePPEFiles = new Array();
 
