@@ -1,4 +1,0 @@
-entity type SmokePPESimulationOutputSeries mixes TimedDataHeader<SmokePPESimulationOutput> schema name "PPE_SMLTN_SRS" {
-    // The [SimulationSample](type:SimulationSample) from which values were taken.
-    simulationSample: SimulationSample
-}

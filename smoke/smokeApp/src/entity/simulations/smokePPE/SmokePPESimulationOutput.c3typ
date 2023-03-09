@@ -6,12 +6,10 @@
 * A single Smoke PPE output taken from a single [SimulationSample](type:SimulationSample)
 */
 @db(datastore='cassandra',
-    partitionKeyField='parent',
-    persistenceOrder='start, dataVersion',
+    partitionKeyField='geoSurfaceTimePoint',
+    persistenceOrder='simulationSample',
     persistDuplicates=false,
-    compactType=true,
-    unique=['parent, start'])
-entity type SmokePPESimulationOutput mixes TimedDataPoint<SmokePPESimulationOutputSeries> schema name 'PPE_SMLTN_TPT' {
-    @ts(treatment='avg')
-    latitude: double
+    compactType=true)
+entity type SmokePPESimulationOutput schema name 'PPE_SMLTN_TPT' {
+    simulationSample: !SmokePPESimulationSample
 }
