@@ -20,7 +20,7 @@ entity type SmokePPESimulationOutputFile schema name 'PPE_SMLTN_TPT_FL' {
 
 
     @py(env='gordon_1_0_0')
-    createAODDataCassandraHeaders: member function(): boolean
+    createCassandraHeaders: member function(): boolean
     // After headers are created, upsert
     @py(env='gordon_1_0_0')
     upsert3HourlyAODDataAfterHeadersCreated: member function(): boolean

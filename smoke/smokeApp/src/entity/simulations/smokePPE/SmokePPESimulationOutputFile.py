@@ -1,4 +1,4 @@
-def createAODDataCassandraHeaders(this):
+def createCassandraHeaders(this):
     """
     Function to Open files in the SmokePPESimulationOutputFile table GeoSurfaceTimePoint data.
     
