@@ -256,7 +256,7 @@ def upsert3HourlyAODDataAfterHeadersCreated(this):
         try:
             df_var = pd.DataFrame()
             for var in variable_names.items():
-                tensor = sample[var[1]][:][2,:,:,:]
+                tensor = sample[var[1]][:][2,:,:,:] #check 
                 tensor = np.array(tensor).flatten()
                 df_var[var[0]] = tensor
 
