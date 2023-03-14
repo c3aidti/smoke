@@ -18,13 +18,13 @@ entity type SmokePPESimulationOutput schema name 'PPE_SMLTN_TPT' {
     // the pseudoLevel index
     pseudoLevelIndex: int
     // dust
-    dust: !float
+    dust: float
     // soluble aitken mode
-    solubleAitkenMode: !float
+    solubleAitkenMode: float
     // soluble accumulation mode
-    solubleAccumulationMode: !float
+    solubleAccumulationMode: float
     // soluble coarse mode
-    solubleCoarseMode: !float
+    solubleCoarseMode: float
     // insoluble aitken mode
-    insolubleAitkenMode: !float
+    insolubleAitkenMode: float
 }
