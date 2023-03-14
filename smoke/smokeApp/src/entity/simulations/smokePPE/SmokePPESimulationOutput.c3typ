@@ -15,8 +15,6 @@ entity type SmokePPESimulationOutput schema name 'PPE_SMLTN_TPT' {
     simulationSample: !SmokePPESimulationSample
     // the {@link GeoSurfaceTimePoint} that this output is associated with
     geoSurfaceTimePoint: !GeoSurfaceTimePoint
-    // the pseudoLevel (altitude)
-    pseudoLevel: float
     // the pseudoLevel index
     pseudoLevelIndex: int
     // dust
