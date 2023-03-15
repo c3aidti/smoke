@@ -7,7 +7,7 @@
 */
 @db(datastore='cassandra',
     partitionKeyField='geoSurfaceTimePoint',
-    persistenceOrder="pseudoLevel,simulationSample",
+    persistenceOrder="pseudoLevelIndex,simulationSample",
     persistDuplicates=false,
     compactType=true)
 entity type SmokePPESimulationOutput schema name 'PPE_SMLTN_TPT' {
