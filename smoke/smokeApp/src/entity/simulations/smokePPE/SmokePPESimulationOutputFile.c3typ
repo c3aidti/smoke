@@ -18,10 +18,7 @@ entity type SmokePPESimulationOutputFile schema name 'PPE_SMLTN_TPT_FL' {
     // processing metadata
     processMeta: MetaFileProcessing
 
-
+    // create Cassandra partition keys
     @py(env='gordon_1_0_0')
     createCassandraHeaders: member function(): boolean
-    // After headers are created, upsert
-    @py(env='gordon_1_0_0')
-    upsert3HourlyAODDataAfterHeadersCreated: member function(): boolean
 }
