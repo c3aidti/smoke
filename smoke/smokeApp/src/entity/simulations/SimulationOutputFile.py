@@ -239,7 +239,15 @@ def upsert3HourlyAODDataAfterHeadersCreated(this):
     if (this.container == 'aod-3hourly' or this.container == 'smoke-ppe'):
         # open file
         try:
-            sample = c3.NetCDFUtil.openFile(this.file.url)
+            # sample = c3.NetCDFUtil.openFile(this.file.url)
+
+            # use "this" as a list or **kwargs for function parameter
+            # importing the data files of smoke-ppe 
+            samples = [c3.NetCDFUtil.openFile(this1.file.url),
+                       c3.NetCDFUtil.openFile(this2.file.url),
+                       c3.NetCDFUtil.openFile(this3.file.url),
+                       c3.NetCDFUtil.openFile(this4.file.url),
+                       c3.NetCDFUtil.openFile(this5.file.url)]
         except:
             meta = c3.MetaFileProcessing(
                 lastAction="upsert-data",
@@ -254,11 +262,19 @@ def upsert3HourlyAODDataAfterHeadersCreated(this):
 
         # extract variables
         try:
-            df_var = pd.DataFrame()
-            for var in variable_names.items():
-                tensor = sample[var[1]][:][2,:,:,:] #check 
+            # df_var = pd.DataFrame()
+            # for var in variable_names.items():
+            #     tensor = sample[var[1]][:][2,:,:,:] #check 
+            #     tensor = np.array(tensor).flatten()
+            #     df_var[var[0]] = tensor
+            
+
+            #loop for the smoke-ppe data, 
+            variables_list = list(variable_names.items())
+            for i in range(len(variable_names.items())):
+                tensor = samples[i][:][:,2,:,:]
                 tensor = np.array(tensor).flatten()
-                df_var[var[0]] = tensor
+                df_var[variables_list[i][1]] = tensor
 
             df_var["simulationSample"] = this.simulationSample
         except:
