@@ -112,13 +112,13 @@ def createAODDataCassandraHeaders(this):
         1: Failed to open NetCDFFile
         2: Failed to create DataFrame
         3: Failed to upsert data to PostGres table
-        4: File container is not aod-3hourly
+        4: File container is not aod-3hourly or smoke-ppe
     """
     import pandas as pd
     import numpy as np
     import datetime as dt
 
-    if(this.container == 'aod-3hourly'):
+    if(this.container == 'aod-3hourly' or (this.container == 'smoke-ppe' and "soluble_accumulation_mode" in this.url)):
         # open file
         try:
             sample = c3.NetCDFUtil.openFile(this.file.url)
@@ -219,7 +219,7 @@ def upsert3HourlyAODDataAfterHeadersCreated(this):
         2: Failed to create variables dataframe
         3: Failed to create Cassandra partition keys
         4: Failed to upsert data to Cassandra
-        5: File container is not aod-3hourly
+        5: File container is not aod-3hourly or smoke-ppe
     """
     import pandas as pd
     import numpy as np
@@ -236,7 +236,7 @@ def upsert3HourlyAODDataAfterHeadersCreated(this):
     def make_gstp(objId):
         return c3.GeoSurfaceTimePoint(id=objId)
 
-    if (this.container == 'aod-3hourly'):
+    if (this.container == 'aod-3hourly' or this.container == 'smoke-ppe'):
         # open file
         try:
             sample = c3.NetCDFUtil.openFile(this.file.url)

@@ -13,12 +13,15 @@ entity type SmokePPESimulationSample mixes MetricEvaluatable schema name "PPE_SM
     // The parameters for this simulation
     parameters: !SmokePPESimulationModelParameters
     // The Timeseries output for this simulation: A collection of {@link SimulationAcureAircraftOutputSeries}
-    output: [SmokePPESimulationOutputSeries](simulationSample,id)
+    output: [SmokePPESimulationOutput](simulationSample,id)
     // the collection of {@link SimulationOutputFile}s for this simulation sample
-    outputFiles: [SimulationOutputFile](simulationSample, id)
+    outputFiles: [SmokePPESimulationOutputFile](simulationSample, id)
 
 
     // Function that callback actually calls
     @dependency(include = "this, ensemble")
     upsertFileTable: member function(): any js server
+    // Upsert data associated to this simulation after Cassandra headers are created
+    @py(env='gordon_1_0_0')
+    upsertDataAfterHeadersCreated: member function(pseudoLevelIndex: !int): boolean
 }

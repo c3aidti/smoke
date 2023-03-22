@@ -3,18 +3,16 @@
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
 /**
- * Implementation of UpsertAODDataAfterHeaders.c3typ
- * @param {UpsertAODDataAfterHeaders} job
- * @param {UpsertAODDataAfterHeadersOptions} options
+ * Implementation of CreateAODHeaders.c3typ
+ * @param {CreateAODHeaders} job
+ * @param {CreateAODHeadersOptions} options
  */
  function doStart(job, options) {
     job.setHardwareProfile(options.hardwareProfileId);
     var batch = [];
 
-    var finalFilter = options.filter.and().paren(filter.eq("container", "aod-3hourly").or().eq("container","smoke-ppe"));
-
-    var dataset = SimulationOutputFile.fetchObjStream({
-        filter: finalFilter,
+    var dataset = SmokePPESimulationOutputFile.fetchObjStream({
+        filter: options.filter,
         limit: options.limit,
         offset: options.offset
     });
@@ -23,7 +21,7 @@
         batch.push(dataset.next());
 
         if (batch.length >= options.batchSize || !dataset.hasNext()) {
-            var batchSpec = UpsertAODDataAfterHeadersBatch.make({values: batch});
+            var batchSpec = CreateSmokePPEHeadersBatch.make({values: batch});
             job.scheduleBatch(batchSpec);
             
             batch = [];
@@ -32,12 +30,12 @@
 }
 
 /**
- * @param {UpsertAODDataAfterHeadersBatch} batch
- * @param {UpsertAODDataAfterHeaders} job
- * @param {UpsertAODDataAfterHeadersOptions} options
+ * @param {CreateSmokePPEHeadersBatch} batch
+ * @param {CreateSmokePPEHeaders} job
+ * @param {CreateSmokePPEHeadersOptions} options
  */
 function processBatch(batch, job, options) {
     batch.values.forEach(function(file) {
-        file.upsert3HourlyAODDataAfterHeadersCreated();
+        file.createCassandraHeaders();
     });
 }
