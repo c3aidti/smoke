@@ -1,3 +1,7 @@
 .vscode*
 .DS_Store*
-smoke/.vscode/
+/smoke/smokeApp/script
+/smoke/smokeApp/seed/JupyterNotebook
+/smoke/smokeApp/seed/SourceObservationSet
+/smoke/smokeApp/seed/SourceSmokePPESimulationModelParametersMap
+/smoke/smokeApp/seed/UIConfig
