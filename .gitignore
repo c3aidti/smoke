@@ -12,3 +12,7 @@
 smoke/smokeApp/src/entity/observations
 /smoke/smokeApp/src/entity/simulations/acureAircraft
 /smoke/smokeApp/src/entity/simulations/smokePPE
+/smoke/smokeApp/src/source/SourceSmokePPESimulationModelParametersMap.c3typ
+/smoke/smokeApp/src/source/SourceObservationSet.c3typ
+/smoke/smokeApp/src/transform/TransformSourceSmokePPESimulationModelParametersMapToSmokePPESimulation*
+/smoke/smokeApp/src/transform/TransformSourceObservationSetToObservation*
