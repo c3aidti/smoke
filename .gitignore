@@ -16,3 +16,4 @@ smoke/smokeApp/src/entity/observations
 /smoke/smokeApp/src/source/SourceObservationSet.c3typ
 /smoke/smokeApp/src/transform/TransformSourceSmokePPESimulationModelParametersMapToSmokePPESimulation*
 /smoke/smokeApp/src/transform/TransformSourceObservationSetToObservation*
+.github
