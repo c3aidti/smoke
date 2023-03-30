@@ -1,0 +1,28 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* A single 3HourlyAOD output taken from a single [SimulationSample](type:SimulationSample) with references to {@link GeoSurfaceTimePoint}, stored in Cassandra
+*/
+@db(datastore='cassandra',
+    partitionKeyField='geoSurfaceTimePoint',
+    persistenceOrder='simulationSample',
+    persistDuplicates=false,
+    compactType=true)
+entity type Simulation3HourlyAODOutput schema name 'SM_3HAOD_TPT' {
+    // The {@link SimulationSample} this output belongs to
+    simulationSample: !SimulationSample
+    // dust
+    dust: !float
+    // soluble aitken mode
+    solubleAitkenMode: !float
+    // soluble accumulation mode
+    solubleAccumulationMode: !float
+    // soluble coarse mode
+    solubleCoarseMode: !float
+    // insoluble aitken mode
+    insolubleAitkenMode: !float
+    // the space-time point for this measurement
+    geoSurfaceTimePoint: !GeoSurfaceTimePoint
+}

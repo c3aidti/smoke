@@ -1,0 +1,32 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Files containing output from {@link SimulationSample}s
+*/
+@db(unique=["file"])
+entity type SimulationOutputFile schema name 'SMLTN_TPT_FL' {
+    // The {@link SimulationSample} that theses files belong to.
+    simulationSample: !SimulationSample
+    // The date for this file (comes with the file name)
+    dateTag: datetime
+    // The simulation output file
+    file: !File
+    // The container this file belongs to
+    container: !string enum('acure-aircraft', 'aod-3hourly')
+    // processed
+    processed: boolean post default "false"
+    // processing metadata
+    processMeta: MetaFileProcessing
+
+    // Load data from this file into {@link SimulationModelOutput}
+    @py(env='gordon_1_0_0')
+    upsertAcureAircraftData: member function(): boolean
+    // Create headers for {@link Simulation3HourlyAODOutput}
+    @py(env='gordon_1_0_0')
+    createAODDataCassandraHeaders: member function(): boolean
+    // After headers are created, upsert
+    @py(env='gordon_1_0_0')
+    upsert3HourlyAODDataAfterHeadersCreated: member function(): boolean
+}
