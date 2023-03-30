@@ -2,6 +2,13 @@
 .DS_Store*
 /smoke/smokeApp/script
 /smoke/smokeApp/seed/JupyterNotebook
+/smoke/smokeApp/seed/JupyterDirectory
 /smoke/smokeApp/seed/SourceObservationSet
 /smoke/smokeApp/seed/SourceSmokePPESimulationModelParametersMap
 /smoke/smokeApp/seed/UIConfig
+/smoke/smokeApp/src/batchJobs/smokePPEGaussianML
+/smoke/smokeApp/src/batchJobs/upsertAcureData
+/smoke/smokeApp/src/batchJobs/upsertSmokePPEData
+smoke/smokeApp/src/entity/observations
+/smoke/smokeApp/src/entity/simulations/acureAircraft
+/smoke/smokeApp/src/entity/simulations/smokePPE
