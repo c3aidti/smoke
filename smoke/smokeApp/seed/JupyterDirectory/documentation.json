@@ -1,8 +1,0 @@
-{
-    "name": "documentation",
-    "id": "documentation",
-    "path": "documentation",
-    "jupyterContentType": "directory",
-    "format": "json",
-    "writable": false
-}
