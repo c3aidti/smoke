@@ -10,12 +10,11 @@ authors:
   affiliation: "University of Illinois at Urbana-Champaign"
 - family-names: "Carzon"
   given-names: "James"
-  orcid: ""
-  affiliation: ""
+  orcid: "https://orcid.org/0009-0000-1038-5475"
+  affiliation: "Carnegie Mellon University"
 - family-names: "Gordon"
   given-names: "Hamish"
-  orcid: ""
-  affiliation: ""
+  affiliation: "Carnegie Mellon University"
 title: "c3aidti/smoke: Scalable ML framework for UKESM1 climate model data"
 version: v1.0.0
 date-released: 2023-03-31
