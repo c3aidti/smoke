@@ -1,25 +1,23 @@
 cff-version: 1.0.0
 message: "If you use this software, please cite it as below."
-references:
-  - type: software
-    authors:
-      - family-names: Abreu
-        given-names: Bruno
-        orcid: https://orcid.org/0000-0002-9067-779X
-        affiliation: University of Illinois at Urbana-Champaign
-      - family-names: Adams
-        given-names: Darren
-        affiliation: University of Illinois at Urbana-Champaign
-      - family-names: Carzon
-        given-names: James
-        orcid:
-        affiliation:
-      - family-names: Gordon
-        given-names: Hamish
-        orcid: 
-        affiliation:
-    title: c3aidti/smoke: Scalable ML framework for UKESM1 climate model data
-    version: v1.0.0
-    date-released: 2023-03-31
-    doi: 10.5281/zenodo.7789889
-    repository-code: https://github.com/c3aidti/smoke
+authors:
+- family-names: "Abreu"
+  given-names: "Bruno"
+  orcid: "https://orcid.org/0000-0002-9067-779X"
+  affiliation: "University of Illinois at Urbana-Champaign"
+- family-names: "Adams"
+  given-names: "Darren"
+  affiliation: "University of Illinois at Urbana-Champaign"
+- family-names: "Carzon"
+  given-names: "James"
+  orcid: ""
+  affiliation: ""
+- family-names: "Gordon"
+  given-names: "Hamish"
+  orcid: ""
+  affiliation: ""
+title: "c3aidti/smoke: Scalable ML framework for UKESM1 climate model data"
+version: v1.0.0
+date-released: 2023-03-31
+doi: 10.5281/zenodo.7789889
+repository-code: "https://github.com/c3aidti/smoke"
