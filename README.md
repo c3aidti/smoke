@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/481699806.svg)](https://zenodo.org/badge/latestdoi/481699806)
+
 # smoke
 Hamish Gordon's group space for development and deployment of C3 AI DTI applications.
 
