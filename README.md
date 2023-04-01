@@ -4,7 +4,7 @@
 Hamish Gordon's group space for development and deployment of C3 AI DTI applications.
 
 ### Main components
-The `smoke` space in C3's IDS, which lives in DTI RC01, currently has one application (`smokeApp`) and one branch (`dev/smokeApp/rc1`). The latter corresponds to a C3 tag that can be access via the vanity URL [https://dev01-smokeapp.devrc01.c3aids.cloud/static/console/](https://devsmokeapprc1-smokeapp.devrc01.c3aids.cloud/static/console/)
+The `smoke` space in C3's IDS, which lives in DTI RC01, currently has one application (`smokeApp`) and one branch (`dev/smokeApp/rc1`). The latter corresponds to a C3 tag that can be access via the vanity URL https://devsmokeapprc1-smokeapp.devrc01.c3aids.cloud/static/console/
 
 ### Typical development workflow
 This GitHub repository always contains at least three branches: 
