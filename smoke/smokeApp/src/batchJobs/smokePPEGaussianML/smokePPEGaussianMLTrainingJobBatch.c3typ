@@ -5,7 +5,7 @@
 /**
 * Represents a unit of work (batch) in a {@link AODGaussianMLTraningJob}
 */
-type AODGaussianMLTrainingJobBatch {
+type smokePPEGaussianMLTrainingJobBatch {
     // The {@link GeoSurfaceTimePoint}s that define the targets for the models in this batch
     values: [GeoSurfaceTimePoint]
 }

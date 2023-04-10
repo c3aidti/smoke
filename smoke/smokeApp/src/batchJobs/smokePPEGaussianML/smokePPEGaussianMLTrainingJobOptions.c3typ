@@ -5,7 +5,7 @@
 /**
 * Represents customization options for {@link AODGaussianMLTrainingJob}
 */
-type AODGaussianMLTrainingJobOptions {
+type smokePPEGaussianMLTrainingJobOptions {
     // How many models will be trained in each batch
     batchSize: int = 10
     // {@link GeoSurfaceTimePoint}s filter that defines the total number of models
