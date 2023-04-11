@@ -3,9 +3,9 @@
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
 /**
- * Implementation of smokePPEGaussianMLTrainingJob
- * @param {smokePPEGaussianMLTrainingJob} job
- * @param {smokePPEGaussianMLTrainingJobOptions} options
+ * Implementation of SmokePPEGaussianMLTrainingJob
+ * @param {SmokePPEGaussianMLTrainingJob} job
+ * @param {SmokePPEGaussianMLTrainingJobOptions} options
  */
 function doStart(job, options) {
     job.setHardwareProfile(options.hardwareProfileId);
@@ -20,7 +20,7 @@ function doStart(job, options) {
         batch.push(gstps.next());
 
         if (batch.length >= options.batchSize || !gstps.hasNext()) {
-            var batchSpec = smokePPEGaussianMLTrainingJobBatch.make({values: batch});
+            var batchSpec = SmokePPEGaussianMLTrainingJobBatch.make({values: batch});
             job.scheduleBatch(batchSpec);
             
             batch = [];
@@ -31,9 +31,9 @@ function doStart(job, options) {
 
 /**
  * Implementation of what to do in each batch
- * @param {smokePPEGaussianMLTrainingJobBatch} batch
- * @param {smokePPEGaussianMLTrainingJob} job
- * @param {smokePPEGaussianMLTrainingJobOptions} options
+ * @param {SmokePPEGaussianMLTrainingJobBatch} batch
+ * @param {SmokePPEGaussianMLTrainingJob} job
+ * @param {SmokePPEGaussianMLTrainingJobOptions} options
  */
 function processBatch(batch, job, options) {
     batch.values.forEach(function(gstp) {

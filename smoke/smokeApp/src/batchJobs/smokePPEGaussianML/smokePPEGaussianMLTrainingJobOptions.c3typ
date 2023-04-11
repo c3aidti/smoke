@@ -3,9 +3,9 @@
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
 /**
-* Represents customization options for {@link AODGaussianMLTrainingJob}
+* Represents customization options for {@link SmokePPEGaussianMLTrainingJob}
 */
-type smokePPEGaussianMLTrainingJobOptions {
+type SmokePPEGaussianMLTrainingJobOptions {
     // How many models will be trained in each batch
     batchSize: int = 10
     // {@link GeoSurfaceTimePoint}s filter that defines the total number of models

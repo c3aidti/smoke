@@ -6,7 +6,7 @@
 * Training job for AOD data {@link Simulation3HourlyAODOutput} 
 * and {@link GaussianProcessRegressionPipe}s
 */
-type smokePPEGaussianMLTrainingJob extends BatchJob<smokePPEGaussianMLTrainingJob, smokePPEGaussianMLTrainingJobOptions, smokePPEGaussianMLTrainingJobBatch> type key 'AODGMLJB' {
+type SmokePPEGaussianMLTrainingJob extends BatchJob<SmokePPEGaussianMLTrainingJob, SmokePPEGaussianMLTrainingJobOptions, SmokePPEGaussianMLTrainingJobBatch> type key 'SMKPPEMLJB' {
     doStart:        ~ js server
     processBatch:   ~ js server
 }
