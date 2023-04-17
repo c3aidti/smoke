@@ -105,9 +105,10 @@ function processBatch(batch, job, options) {
         var X = GPR_pipe.getFeatures();
         var y = GPR_pipe.getTarget();
 
-        // train and save
-        var GPR_pipe_trained = GPR_pipe.train(X, y);
-        GPR_pipe_trained.upsert();
-
+        if (X.size() > 0 && y.size() > 0) {
+            // train and save
+            var GPR_pipe_trained = GPR_pipe.train(X, y);
+            GPR_pipe_trained.upsert();
+        };
     });
 }
