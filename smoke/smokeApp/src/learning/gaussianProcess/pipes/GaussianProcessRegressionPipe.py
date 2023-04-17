@@ -117,18 +117,18 @@ def getFeatures(this):
         return c3.Dataset.fromPython(df)
 
 
-    inputTableC3 = featuresType.fetch(dataSourceSpec.featuresSpec).objs.toJson()
-    inputTablePandas = pd.DataFrame(inputTableC3)
-    inputTablePandas = inputTablePandas.drop("version", axis=1)
-
-    # collect only the numeric fields
-    inputTablePandas = inputTablePandas.select_dtypes(["number"])
-
-    # drop ignored features
-    if (dataSourceSpec.excludeFeatures):
-        inputTablePandas.drop(columns=dataSourceSpec.excludeFeatures, inplace=True)
-
-    return c3.Dataset.fromPython(inputTablePandas)
+    inputTableC3 = featuresType.fetch(dataSourceSpec.featuresSpec).objs
+    if inputTableC3 is not None:
+        inputTablePandas = pd.DataFrame(inputTableC3.toJson())
+        inputTablePandas = inputTablePandas.drop("version", axis=1)
+        # collect only the numeric fields
+        inputTablePandas = inputTablePandas.select_dtypes(["number"])
+        # drop ignored features
+        if (dataSourceSpec.excludeFeatures):
+            inputTablePandas.drop(columns=dataSourceSpec.excludeFeatures, inplace=True)
+        return c3.Dataset.fromPython(inputTablePandas)
+    else:
+        return c3.Dataset.fromPython(pd.DataFrame([]))
 
 
 def getTarget(this):
@@ -158,22 +158,22 @@ def getTarget(this):
         return c3.Dataset.fromPython(df)
  
         
-    outputTableC3 = targetType.fetch(dataSourceSpec.targetSpec).objs.toJson()
-    outputTablePandas = pd.DataFrame(outputTableC3)
-    outputTablePandas = outputTablePandas.drop("version", axis=1)
-
-    # collect only the numeric fields
-    outputTablePandas = outputTablePandas.select_dtypes(["number"])
-
-    if dataSourceSpec.targetName == "all":
-        outputTablePandas = pd.DataFrame(
-            outputTablePandas.sum(axis=1),
-            columns=[dataSourceSpec.targetName]
-        )
+    outputTableC3 = targetType.fetch(dataSourceSpec.targetSpec).objs
+    if outputTableC3 is not None:
+        outputTablePandas = pd.DataFrame(outputTableC3.toJson())
+        outputTablePandas = outputTablePandas.drop("version", axis=1)
+        # collect only the numeric fields
+        outputTablePandas = outputTablePandas.select_dtypes(["number"])
+        if dataSourceSpec.targetName == "all":
+            outputTablePandas = pd.DataFrame(
+                outputTablePandas.sum(axis=1),
+                columns=[dataSourceSpec.targetName]
+            )
+        else:
+            outputTablePandas = pd.DataFrame(outputTablePandas[dataSourceSpec.targetName])
+        return c3.Dataset.fromPython(outputTablePandas)
     else:
-        outputTablePandas = pd.DataFrame(outputTablePandas[dataSourceSpec.targetName])
-
-    return c3.Dataset.fromPython(outputTablePandas)
+        return c3.Dataset.fromPython(pd.DataFrame([]))
 
 
 def trainWithStagedAOD(this, modelIds):
