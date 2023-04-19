@@ -163,7 +163,7 @@ def getTarget(this):
         outputTablePandas = pd.DataFrame(outputTableC3.toJson())
         outputTablePandas = outputTablePandas.drop("version", axis=1)
         # collect only the numeric fields
-        outputTablePandas = outputTablePandas.select_dtypes(["number"])
+        outputTablePandas = outputTablePandas.select_dtypes(include=["number"], exclude=["int"])
         if dataSourceSpec.targetName == "all":
             outputTablePandas = pd.DataFrame(
                 outputTablePandas.sum(axis=1),
