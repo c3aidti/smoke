@@ -1,0 +1,18 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Staged {@link GeoSurfaceTimePoint} for faster processing by ML pipes.
+*/
+@db(unique=['geoSurfaceTimePoint'])
+entity type StagedGSTP schema name 'STGD_GSTP' {
+    // the {@link GeoSurfaceTimePoint}
+    geoSurfaceTimePoint: !GeoSurfaceTimePoint
+    // stage based on a region filter
+    @py(env='gordon-ML_1_0_0')
+    stage: function(gstpFilter: any): int
+    // unstage based on a ragion filter
+    @py(env='gordon-ML_1_0_0')
+    unstage: function(gstpFilter: any): int
+}
