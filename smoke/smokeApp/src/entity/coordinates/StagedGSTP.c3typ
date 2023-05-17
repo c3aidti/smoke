@@ -11,7 +11,7 @@ entity type StagedGSTP schema name 'STGD_GSTP' {
     geoSurfaceTimePoint: !GeoSurfaceTimePoint
     // stage based on a region filter
     @py(env='gordon-ML_1_0_0')
-    stage: function(gstpFilter: any): int
+    directStage: function(gstpFilter: any): int
     // unstage based on a ragion filter
     @py(env='gordon-ML_1_0_0')
     unstage: function(gstpFilter: any): int
