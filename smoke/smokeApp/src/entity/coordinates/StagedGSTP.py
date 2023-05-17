@@ -7,7 +7,7 @@ def directStage(gstpFilter):
         "filter": gstpFilter,
         "limit": -1,
         "include": "id"
-    })
+    }).objs
 
     # upsert to staging area
     c3.StagedGSTP.upsertBatch(gstps)
