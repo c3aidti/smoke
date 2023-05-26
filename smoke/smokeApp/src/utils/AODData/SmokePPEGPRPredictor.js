@@ -3,13 +3,11 @@
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
 function getPipe(excFeats, gstpId, targetName, technique) {
-    // identical to the methods used in AODGPRModelFinder.js
-
     // find the data source specs
     var gstpKey = "geoSurfaceTimePoint.id == \"" + gstpId + "\"";
     var filter = Filter.eq("featuresType.typeName", "SmokePPESimulationModelParameters")
         .and().eq("targetType.typeName", "SmokePPESimulationOutput")
-        .and().intersects("excludeFeatures", excFeats)
+        //.and().intersects("excludeFeatures", excFeats)
         .and().eq("targetName", targetName)
         .and().eq("targetSpec.filter", gstpKey);
 
