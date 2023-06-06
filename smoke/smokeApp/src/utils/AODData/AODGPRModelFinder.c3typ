@@ -19,7 +19,7 @@ type AODGPRModelFinder {
     getPipes: function(excFeats: [string], gstpFilter: any, targetName: string, technique: any): any js server
     // Extract learned parameters from trained {@link GaussianProcessRegressionPipe}s specified by {@link GeoSurfaceTimePoint} filter, target name, excluded features and {@link GaussianProcessRegressionTechnque}
     @py(env='gordon-ML_1_0_0')
-    extractLearnedParametersJob: function(excFeats: [string], gstpFilter: any, targetName: string, technique: any, batchSize: int): any
+    extractLearnedParametersJob: function(excFeats: [string], gstpFilter: any, targetName: string, technique: any, batchSize: int, smokeppe: boolean = false): any
     // Build a pandas dataframe with the hyper parameters once job is complete
     @py(env='gordon-ML_1_0_0')
     getDataframeFromJob: inline function(job: any): any
