@@ -23,7 +23,7 @@ def extractLearnedParametersJob(excFeats, gstpFilter, targetName, technique, bat
         def cassandra_mapper(batch, objs, job):
             models = []
             for obj in objs:
-                model = c3.SmokePPEPredictor.getPipe(
+                model = c3.SmokePPEGPRPredictor.getPipe(
                     job.context.value["excludeFeatures"],
                     obj.id,
                     job.context.value["targetName"],
