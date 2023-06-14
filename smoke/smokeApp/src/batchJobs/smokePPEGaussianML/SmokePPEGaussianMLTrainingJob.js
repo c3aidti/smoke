@@ -12,24 +12,36 @@ function doStart(job, options) {
     var batch = [];
 
     if (options.stagedGSTP) {
-        var gstps = stagedGSTP.fetchObjStream({
+        var staged_gstps = StagedGSTP.fetchObjStream({
             limit: -1
-        });   
+        });
+        
+        while(staged_gstps.hasNext()) {
+            var gstp = GeoSurfaceTimePoint.get(staged_gstps.next().geoSurfaceTimePoint.id);
+            batch.push(gstp);
+
+            if (batch.length >= options.batchSize || !gstps.hasNext()) {
+                var batchSpec = SmokePPEGaussianMLTrainingJobBatch.make({values: batch});
+                job.scheduleBatch(batchSpec);
+            
+                batch = [];
+            }
+        }
     } else {
         var gstps = GeoSurfaceTimePoint.fetchObjStream({
             filter: options.gstpFilter,
             limit: -1
         });
-    }
 
-    while(gstps.hasNext()) {
-        batch.push(gstps.next());
-
-        if (batch.length >= options.batchSize || !gstps.hasNext()) {
-            var batchSpec = SmokePPEGaussianMLTrainingJobBatch.make({values: batch});
-            job.scheduleBatch(batchSpec);
-            
-            batch = [];
+        while(gstps.hasNext()) {
+            batch.push(gstps.next());
+    
+            if (batch.length >= options.batchSize || !gstps.hasNext()) {
+                var batchSpec = SmokePPEGaussianMLTrainingJobBatch.make({values: batch});
+                job.scheduleBatch(batchSpec);
+                
+                batch = [];
+            }
         }
     }
 }
