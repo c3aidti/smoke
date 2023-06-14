@@ -9,7 +9,12 @@ def directStage(gstpFilter):
         "include": "id"
     }).objs
 
+    stagedObjs = []
+    for gstp in gstps:
+        o = c3.StagedGSTP(geoSurfaceTimePoint=gstp)
+        stagedObjs.append(o)
+
     # upsert to staging area
-    c3.StagedGSTP.upsertBatch(gstps)
+    c3.StagedGSTP.upsertBatch(stagedObjs)
 
     return 0

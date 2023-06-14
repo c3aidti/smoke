@@ -11,10 +11,16 @@ function doStart(job, options) {
     job.setHardwareProfile(options.hardwareProfileId);
     var batch = [];
 
-    var gstps = GeoSurfaceTimePoint.fetchObjStream({
-        filter: options.gstpFilter,
-        limit: -1
-    });
+    if (options.stagedGSTP) {
+        var gstps = stagedGSTP.fetchObjStream({
+            limit: -1
+        });   
+    } else {
+        var gstps = GeoSurfaceTimePoint.fetchObjStream({
+            filter: options.gstpFilter,
+            limit: -1
+        });
+    }
 
     while(gstps.hasNext()) {
         batch.push(gstps.next());

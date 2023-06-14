@@ -18,4 +18,6 @@ type SmokePPEGaussianMLTrainingJobOptions {
     gprTechnique: !GaussianProcessRegressionTechnique
     // hardware profile ID to run the batches
     hardwareProfileId: string = "appc8m642-w"
+    // flag for staged GSTPs training ({@link StagedGSTP})
+    stagedGSTP: boolean = false
 }
