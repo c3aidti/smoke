@@ -155,7 +155,8 @@ def extractLearnedParametersJob(excFeats, gstpFilter, targetName, technique, bat
         value={
             'excludeFeatures': excFeats,
             'targetName': targetName,
-            'technique': technique
+            'technique': technique,
+            'limit': -1
         }
     )
     job = c3.DynMapReduce.startFromSpec(
