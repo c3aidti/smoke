@@ -2,36 +2,23 @@
 # Copyright (c) 2022, C3 AI DTI, Development Operations Team
 # All rights reserved. License: https://github.com/c3aidti/.github
 ##
-def extractLearnedParametersJob(excFeats, gstpFilter, targetName, technique, batchSize , smokeppe=False):
+def extractLearnedParametersJob(excFeats, gstpFilter, targetName, technique, batchSize):
     """
     Dynamic map-reduce job to extract learned hyper parameters.
     """
-    if not smokeppe:
-        def cassandra_mapper(batch, objs, job):
-            models = []
-            for obj in objs:
-                model = c3.AODGPRModelFinder.getPipe(
-                    job.context.value["excludeFeatures"],
-                    obj.id,
-                    job.context.value["targetName"],
-                    job.context.value["technique"]
-                )
-                models.append(model)
-            
-            return {batch: models}
-    else:
-        def cassandra_mapper(batch, objs, job):
-            models = []
-            for obj in objs:
-                model = c3.SmokePPEGPRPredictor.getPipe(
-                    job.context.value["excludeFeatures"],
-                    obj.id,
-                    job.context.value["targetName"],
-                    job.context.value["technique"]
-                )
-                models.append(model)
-            
-            return {batch: models}
+
+    def cassandra_mapper(batch, objs, job):
+        models = []
+        for obj in objs:
+            model = c3.AODGPRModelFinder.getPipe(
+                job.context.value["excludeFeatures"],
+                obj.id,
+                job.context.value["targetName"],
+                job.context.value["technique"]
+            )
+            models.append(model)
+        
+        return {batch: models}
 
     def cassandra_reducer(key, interValues, job):
         values = []
