@@ -54,7 +54,7 @@ function getPipes(excFeats, gstpFilter, targetName, technique) {
         "include": "id"
     }).objs.map(obj => obj.id);
 
-    var pipes = gstpIds.map(id => AODGPRModelFinder.getPipe(excFeats, id, targetName, technique));
+    var pipes = gstpIds.map(id => SmokePPEGPRPredictor.getPipe(excFeats, id, targetName, technique));
     var nonNulls = pipes.filter(function (el) {
         return el.length != 0;
     });
