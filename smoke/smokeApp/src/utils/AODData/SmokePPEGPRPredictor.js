@@ -75,7 +75,7 @@ function countPipes(excFeats, gstpFilter, targetName, technique) {
  
     while(gstpStream.hasNext()) {
 
-        gstp = gstpStream.next();
+        var gstp = gstpStream.next();
 
         // find source specs
         var gstpKey = "geoSurfaceTimePoint.id == \"" + gstp.id + "\"";
