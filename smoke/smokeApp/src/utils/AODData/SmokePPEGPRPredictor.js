@@ -113,8 +113,7 @@ function countPipes(excFeats, gstpFilter, targetName, technique) {
         var m_filter = Filter.intersects("technique.id", techIds)
         .and().intersects("dataSourceSpec.id", sourceSpecIds);
         var n_pipes = GaussianProcessRegressionPipe.fetchCount({
-            "filter": m_filter.value,
-            "limit": -1
+            "filter": m_filter.value
         });
         total_pipes += n_pipes;
     };
