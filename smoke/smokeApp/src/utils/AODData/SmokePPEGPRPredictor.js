@@ -61,3 +61,63 @@ function getPipes(excFeats, gstpFilter, targetName, technique) {
 
     return nonNulls
 }
+
+
+function countPipes(excFeats, gstpFilter, targetName, technique) {
+
+    var gstpStream = GeoSurfaceTimePoint.fetchObjStream({
+        "filter": gstpFilter,
+        "limit": -1,
+        "include": "id"
+    });
+
+    var total_pipes = 0;
+ 
+    while(gstpStream.hasNext()) {
+
+        var gstp = gstpStream.next();
+
+        // find source specs
+        var gstpKey = "geoSurfaceTimePoint.id == \"" + gstp.id + "\"";
+        var g_filter = Filter.eq("featuresType.typeName", "SmokePPESimulationModelParameters")
+        .and().eq("targetType.typeName", "SmokePPESimulationOutput")
+        //.and().intersects("excludeFeatures", excFeats)
+        .and().eq("targetName", targetName)
+        .and().eq("targetSpec.filter", gstpKey);
+        var sourceSpecIds = GPRDataSourceSpec.fetch({
+            "filter": g_filter,
+            "limit": -1,
+            "include": "id"
+        }).objs.map(obj => obj.id);
+
+        // find kernels
+        var fullTech = GaussianProcessRegressionTechnique.get(technique.id);
+        var fullKernel = SklearnGPRKernel.get(fullTech.kernel.id);
+        var k_filter = Filter.eq("pickledKernel", fullKernel.pickledKernel);
+        var kernelIds = SklearnGPRKernel.fetch({
+            "filter": k_filter.value,
+            "limit": -1,
+            "include": "id"
+        }).objs.map(obj => obj.id);
+
+        // find techniques
+        var t_filter = Filter.intersects("kernel.id", kernelIds)
+        .and().eq("centerTarget", technique.centerTarget);
+        var techIds = GaussianProcessRegressionTechnique.fetch({
+            "filter": t_filter.value,
+            "limit": -1,
+            "include": "id"
+        }).objs.map(obj => obj.id);
+
+        // partial pipe count
+        var m_filter = Filter.intersects("technique.id", techIds)
+        .and().intersects("dataSourceSpec.id", sourceSpecIds);
+        var n_pipes = GaussianProcessRegressionPipe.fetchCount({
+            "filter": m_filter.value
+        });
+        total_pipes += n_pipes;
+    };
+
+    return total_pipes
+}
+

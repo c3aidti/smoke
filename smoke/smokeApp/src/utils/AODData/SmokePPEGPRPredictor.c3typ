@@ -25,4 +25,6 @@ type SmokePPEGPRPredictor {
     // Build a pandas dataframe with the hyper parameters once job is complete
     @py(env='gordon-ML_1_0_0')
     getDataframeFromJob: inline function(job: any): any
+    // count the number of existing pipes 
+    countPipes: function(excFeats: [string], gstpFilter: any, targetName: string, technique: any): any js server
 }
