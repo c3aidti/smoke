@@ -71,8 +71,7 @@ def makePredictionsJob(
             reduceLambda=reduce_lambda,
             batchSize=batchSize,
             context=job_context,
-            hardwareProfile="appc8m642-w",
-            limit = -1
+            hardwareProfile="appc8m642-w"
         )
     )
 
