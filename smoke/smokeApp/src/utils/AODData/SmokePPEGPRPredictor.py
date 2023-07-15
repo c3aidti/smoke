@@ -12,17 +12,13 @@ def makePredictionsJob(
     def cassandra_mapper(batch, objs, job):
         models = []
         for obj in objs:
-            #Here, only the hours 09 and 12 are selected because only these have MODIS data for comparison
-            if "T09" in obj.id or "T12" in obj.id:
-                model = c3.SmokePPEGPRPredictor.getPipe(
-                    job.context.value["excludeFeatures"],
-                    obj.id,
-                    job.context.value["targetName"],
-                    job.context.value["technique"]
-                )
-                models.append(model)
-            else:
-                continue
+            model = c3.SmokePPEGPRPredictor.getPipe(
+                job.context.value["excludeFeatures"],
+                obj.id,
+                job.context.value["targetName"],
+                job.context.value["technique"]
+            )
+            models.append(model)
         
         return {batch: models}
 
