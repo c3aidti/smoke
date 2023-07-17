@@ -47,7 +47,7 @@ def makePredictionsJob(
                     lat = gstp.latitude
                     lon = gstp.longitude
                     time = gstp.time
-                    values.append((model_id, mean, center, sd, lat, lon, time))
+                    values.append((model_id, mean, center, sd, lat, lon, time, model))
                     
 
         return values
@@ -99,6 +99,7 @@ def getPredictionsDataframeFromJob(job):
                 df_m["time"] = subvalue[6]
                 df_m["modelId"] = subvalue[0]
                 df_m["variant"] = list(range(df_m.shape[0]))
+                df_m["model"] = subvalue[7]
 
             predictions.append(df_m)
 
