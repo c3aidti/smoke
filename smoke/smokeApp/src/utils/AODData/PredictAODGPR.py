@@ -88,7 +88,7 @@ def getPredictionsDataframeFromJob(job):
     predictions = []
 
     if job.status().status == "completed":
-        for key, value in job.results().items():
+        for key, value in job.results(limit=-1).items():
             for subvalue in value:
                 df_m = pd.DataFrame()
                 df_m["meanResponse"] = np.array(subvalue[1]).flatten()
