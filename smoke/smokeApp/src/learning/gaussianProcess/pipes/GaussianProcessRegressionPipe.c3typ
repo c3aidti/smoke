@@ -1,0 +1,37 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* GaussianProcessRegressionPipe.c3typ
+* Performs Scikit-Learn's GP Regression.
+*/
+@db(unique=['technique, dataSourceSpec'])
+entity type GaussianProcessRegressionPipe extends MLLeafPipe<Dataset, Dataset> type key 'GPREG' {
+    // the technique for this regression
+    technique: !GaussianProcessRegressionTechnique
+    // data source spec for this regression
+    dataSourceSpec: GPRDataSourceSpec
+
+    // get features data
+    @py(env='gordon-ML_1_0_0')
+    getFeatures: member function(): Dataset
+    // get target data
+    @py(env='gordon-ML_1_0_0')
+    getTarget: member function(): Dataset
+    // train the model
+    @py(env='gordon-ML_1_0_0')
+    train: ~
+    // process data, ie predictions
+    @py(env='gordon-ML_1_0_0')
+    process: member function(input: Dataset, spec: MLProcessSpec, computeStd: boolean, computeCov: boolean): Dataset
+    // guarantee that process() is only allowed after train()
+    @py(env='gordon-ML_1_0_0')
+    isProcessable: ~
+    // train large model with AOD staged data
+    @py(env='gordon-ML_1_0_0')
+    trainWithStagedAOD: member function(modelIds: any): integer
+    // train with list of GSTPs
+    @py(env='gordon-ML_1_0_0')
+    trainWithListOfAODModels: member function(modelIds: any, excludeFeatures: any): integer
+}

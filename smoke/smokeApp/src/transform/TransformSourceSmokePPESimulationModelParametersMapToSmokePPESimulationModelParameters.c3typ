@@ -1,0 +1,26 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Transforms data from {@link SourceSimulationModelParametersMap} to {@SimulationModelParameters}
+*/
+type TransformSourceSmokePPESimulationModelParametersMapToSmokePPESimulationModelParameters mixes SmokePPESimulationModelParameters transforms SourceSmokePPESimulationModelParametersMap {
+    // The id of the simulation
+    id: ~ expression "concat('EnsNo_',ensemble_id,'_SimNo_',pcalc_index)"
+    // The {@link SimulationEnsemble} for this set of model parameters
+    ensemble: ~ expression {id: "ensemble_id"}
+    // The remaining parameters (all doubles for now)
+    smoke_emiss: ~ expression "smoke_emiss"
+    smoke_diam: ~ expression "smoke_diam"
+    sig_w: ~ expression "sig_w"
+    dry_dep_acc: ~ expression "dry_dep_acc"
+    sea_spray: ~ expression "sea_spray"
+    a_ent_1_rp: ~ expression "a_ent_1_rp"
+    bparam: ~ expression "bparam"
+    kappa_oc: ~ expression "kappa_oc"
+    dms: ~ expression "dms"
+    anth_so2: ~ expression "anth_so2"
+    autoconv_exp_nd: ~ expression "autoconv_exp_nd"
+    bc_ri: ~ expression "bc_ri"
+}

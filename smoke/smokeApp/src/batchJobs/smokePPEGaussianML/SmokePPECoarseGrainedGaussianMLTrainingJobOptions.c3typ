@@ -1,0 +1,33 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Represents customization options for {@link SmokePPECoarseGrainedGaussianMLTrainingJob}
+*/
+type SmokePPECoarseGrainedGaussianMLTrainingJobOptions {
+    // How many models will be trained in each batch
+    batchSize: int = 10
+    // the min latitude
+    minLat: !float
+    // the max latitude
+    maxLat: !float
+    // the min longitude
+    minLon: !float
+    // the max longitude
+    maxLon: !float
+    // the latitute step
+    latStep: !float
+    // the longitude step
+    lonStep: !float
+    // the name of the variable to collect from {@link Simulation3HourlyAODData}
+    targetName: !string
+    // the features to exclude in {@link SimulationModelParameters}
+    excludeFeatures: [string]
+    // the {@link GaussianProcessRegressionTechnique} to train the models
+    gprTechnique: !GaussianProcessRegressionTechnique
+    // hardware profile ID to run the batches
+    hardwareProfileId: string = "appc8m642-w"
+    // flag for staged GSTPs training ({@link StagedGSTP})
+    stagedGSTP: boolean = false
+}

@@ -1,0 +1,17 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Contains meta data about attempts to process files. 
+*/
+type MetaFileProcessing {
+    // last action
+    lastAction: string enum("create-headers", "upsert-data")
+    // the timestamp for the last attempt to process the file
+    lastProcessAttempt: datetime
+    // did the attempt succeed?
+    lastAttemptFailed: boolean  
+    // return (error) code
+    returnCode: int
+}

@@ -1,0 +1,11 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Batch job to create headers {@GeoSurfaceTimePoint} for {@link Simulation3HourlyAODOutput} 
+*/
+type CreateAODHeaders extends BatchJob<CreateAODHeaders, CreateAODHeadersOptions, CreateAODHeadersBatch> type key 'CRT_AOD_HDRS' {
+    doStart:        ~ js server
+    processBatch:   ~ js server
+}
