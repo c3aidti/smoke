@@ -19,7 +19,9 @@ function getPipe(excFeats, gstpId, targetName, technique) {
     }).objs.map(obj => obj.id);
 
     // find the kernels
-    filter = Filter.eq("pickledKernel", technique.kernel.pickledKernel);
+    var fullTech = GaussianProcessRegressionTechnique.get(technique.id);
+    var fullKernel = SklearnGPRKernel.get(fullTech.kernel.id);
+    filter = Filter.eq("pickledKernel", fullKernel.pickledKernel);
     var kernelIds = SklearnGPRKernel.fetch({
         "filter": filter.value,
         "limit": -1,

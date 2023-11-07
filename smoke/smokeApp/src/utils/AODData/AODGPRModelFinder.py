@@ -6,6 +6,7 @@ def extractLearnedParametersJob(excFeats, gstpFilter, targetName, technique, bat
     """
     Dynamic map-reduce job to extract learned hyper parameters.
     """
+
     def cassandra_mapper(batch, objs, job):
         models = []
         for obj in objs:

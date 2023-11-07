@@ -3,13 +3,23 @@
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
 /**
-* Represents customization options for {@link SmokePPEGaussianMLTrainingJob}
+* Represents customization options for {@link SmokePPECoarseGrainedGaussianMLTrainingJob}
 */
-type SmokePPEGaussianMLTrainingJobOptions {
+type SmokePPECoarseGrainedGaussianMLTrainingJobOptions {
     // How many models will be trained in each batch
     batchSize: int = 10
-    // {@link GeoSurfaceTimePoint}s filter that defines the total number of models
-    gstpFilter: !Filter
+    // the min latitude
+    minLat: !float
+    // the max latitude
+    maxLat: !float
+    // the min longitude
+    minLon: !float
+    // the max longitude
+    maxLon: !float
+    // the latitute step
+    latStep: !float
+    // the longitude step
+    lonStep: !float
     // the name of the variable to collect from {@link Simulation3HourlyAODData}
     targetName: !string
     // the features to exclude in {@link SimulationModelParameters}

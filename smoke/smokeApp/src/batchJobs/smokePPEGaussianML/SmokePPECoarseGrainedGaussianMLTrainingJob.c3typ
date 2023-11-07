@@ -1,0 +1,12 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/*
+* Training job for AOD data {@link Simulation3HourlyAODOutput} 
+* and {@link GaussianProcessRegressionPipe}s with coarse graining
+*/
+type SmokePPECoarseGrainedGaussianMLTrainingJob extends BatchJob<SmokePPECoarseGrainedGaussianMLTrainingJob, SmokePPECoarseGrainedGaussianMLTrainingJobOptions, SmokePPECoarseGrainedGaussianMLTrainingJobBatch> type key 'SMKPPECRSMLJB' {
+    doStart:        ~ js server
+    processBatch:   ~ js server
+}

@@ -3,45 +3,30 @@
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
 /**
- * Implementation of SmokePPEGaussianMLTrainingJob
- * @param {SmokePPEGaussianMLTrainingJob} job
- * @param {SmokePPEGaussianMLTrainingJobOptions} options
+ * Implementation of SmokePPECoarseGrainedGaussianMLTrainingJob
+ * @param {SmokePPECoarseGrainedGaussianMLTrainingJob} job
+ * @param {SmokePPECoarseGrainedGaussianMLTrainingJobOptions} options
  */
 function doStart(job, options) {
     job.setHardwareProfile(options.hardwareProfileId);
     var batch = [];
 
-    if (options.stagedGSTP) {
-        var staged_gstps = StagedGSTP.fetchObjStream({
-            limit: -1
-        });
-        
-        while(staged_gstps.hasNext()) {
-            var gstp = GeoSurfaceTimePoint.get(staged_gstps.next().geoSurfaceTimePoint.id);
-            batch.push(gstp);
 
-            if (batch.length >= options.batchSize || !gstps.hasNext()) {
-                var batchSpec = SmokePPEGaussianMLTrainingJobBatch.make({values: batch});
-                job.scheduleBatch(batchSpec);
+    var gstpFilter = Filter.ge("latitude", options.minLat).and().lt("latitude", options.maxLat).and().ge("longitude", options.minLon).and().lt("longitude", options.maxLon).and().ge("time", options.minTime).and().lt("time", options.maxTime);
+
+    var gstps = GeoSurfaceTimePoint.fetchObjStream({
+        filter: gstpFilter,
+        limit: -1
+    });
+
+    while(gstps.hasNext()) {
+        batch.push(gstps.next());
+
+        if (batch.length >= options.batchSize || !gstps.hasNext()) {
+            var batchSpec = SmokePPEGaussianMLTrainingJobBatch.make({values: batch});
+            job.scheduleBatch(batchSpec);
             
-                batch = [];
-            }
-        }
-    } else {
-        var gstps = GeoSurfaceTimePoint.fetchObjStream({
-            filter: options.gstpFilter,
-            limit: -1
-        });
-
-        while(gstps.hasNext()) {
-            batch.push(gstps.next());
-    
-            if (batch.length >= options.batchSize || !gstps.hasNext()) {
-                var batchSpec = SmokePPEGaussianMLTrainingJobBatch.make({values: batch});
-                job.scheduleBatch(batchSpec);
-                
-                batch = [];
-            }
+            batch = [];
         }
     }
 }
