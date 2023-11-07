@@ -1,7 +1,0 @@
-/**
-* UpsertDataOptions.c3typ
-* Represents customization options for a {@link UpsertData} batch job
-*/
-type UpsertDataOptions {
-    batchSize: int = 10
-}

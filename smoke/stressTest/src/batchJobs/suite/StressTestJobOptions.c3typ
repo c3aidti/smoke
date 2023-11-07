@@ -1,9 +1,0 @@
-/**
-* Represents customization options for a {@link StressTestJob} batch job
-*/
-type StressTestJobOptions {
-    // the number calls in each batch
-    batchSize: int = 1
-    // the number of batches
-    nBatches: int = 1
-}

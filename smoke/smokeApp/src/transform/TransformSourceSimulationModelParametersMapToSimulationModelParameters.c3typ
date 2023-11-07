@@ -1,5 +1,8 @@
 /**
-* TransformSourceSimulationModelParametersMapToSimulationModelParameters.c3typ
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
 * Transforms data from {@link SourceSimulationModelParametersMap} to {@SimulationModelParameters}
 */
 type TransformSourceSimulationModelParametersMapToSimulationModelParameters mixes SimulationModelParameters transforms SourceSimulationModelParametersMap {

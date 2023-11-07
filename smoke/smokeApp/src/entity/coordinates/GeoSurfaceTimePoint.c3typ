@@ -1,0 +1,15 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* A space-time point where space is the Earth's surface.
+*/
+entity type GeoSurfaceTimePoint schema name 'GSRFCTMPT' {
+    // the latitude
+    latitude: !float
+    // the longitude
+    longitude: !float
+    // the timestamp
+    time: !datetime
+}
