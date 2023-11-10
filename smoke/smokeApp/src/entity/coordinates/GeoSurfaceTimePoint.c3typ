@@ -5,7 +5,7 @@
 /**
 * A space-time point where space is the Earth's surface.
 */
-@db(index=['latitude,longitude', 'time', 'latitude,longitude,time'])
+//@db(index=['latitude,longitude', 'time', 'latitude,longitude,time'])
 entity type GeoSurfaceTimePoint schema name 'GSRFCTMPT' {
     // the latitude
     latitude: !float
