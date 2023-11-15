@@ -1,0 +1,26 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* A single Smoke PPE output taken from a single [SimulationSample](type:SimulationSample)
+*/
+entity type SmokePPEGeoTimeSimulationOutput schema name 'PPE_GT_SMLTN_TPT' {
+    // the {@link SmokePPESimulationSample} that this output is associated with
+    simulationSample: !SmokePPESimulationSample
+    // The geometry (lat,long) and measure (time) [{@link geoPointWithMeasure}] that this output is associated with.
+    // Note that {@link geoPointWithMeasure} is a PostGIS geometry type with spatial indices.
+    geomTime: geoPointWithMeasure
+    // the pseudoLevel index (starts at 0)
+    pseudoLevelIndex: int
+    // dust
+    dust: float
+    // soluble aitken mode
+    solubleAitkenMode: float
+    // soluble accumulation mode
+    solubleAccumulationMode: float
+    // soluble coarse mode
+    solubleCoarseMode: float
+    // insoluble aitken mode
+    insolubleAitkenMode: float
+}
