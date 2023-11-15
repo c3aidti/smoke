@@ -8,9 +8,9 @@
 entity type SmokePPEGeoTimeSimulationOutput schema name 'PPE_GT_SMLTN_TPT' {
     // the {@link SmokePPESimulationSample} that this output is associated with
     simulationSample: !SmokePPESimulationSample
-    // The geometry (lat,long) and measure (time) [{@link geoPointWithMeasure}] that this output is associated with.
-    // Note that {@link geoPointWithMeasure} is a PostGIS geometry type with spatial indices.
-    geomTime: geoPointWithMeasure
+    // The geometry (lat,long) and measure (time) [{@link GeoPointWithMeasure}] that this output is associated with.
+    // Note that {@link GeoPointWithMeasure} is a PostGIS geometry type with spatial indices.
+    geomTime: GeoPointWithMeasure
     // the pseudoLevel index (starts at 0)
     pseudoLevelIndex: int
     // dust
