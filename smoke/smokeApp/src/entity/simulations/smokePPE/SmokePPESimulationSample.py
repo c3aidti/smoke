@@ -218,7 +218,7 @@ def upsertDataToGeoPointPlustTime(this, pseudoLevelIndex):
     df_st["id"] = round(df_st["lat"],3).astype(str) + "_" + round(df_st["long"],3).astype(str) + "_" + df_st["time"].astype(str).apply(lambda x: x.replace(" ", 'T')) + "_" + this.id
     # df_st["geoSurfaceTimePoint"] = df_st["id"].apply(make_gstp)
     df_st['geo'] = df_st.apply(lambda row: createGeoPoint(row['long'], row['lat']), axis=1)
-    df_st = df_st.drop(columns=["time","lat", "long"])
+    #df_st = df_st.drop(columns=["lat", "long"])
 
     # add simulation
     df_st["simulationSample"] = this
