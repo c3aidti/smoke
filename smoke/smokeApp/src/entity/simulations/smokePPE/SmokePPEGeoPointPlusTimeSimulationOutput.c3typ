@@ -5,7 +5,7 @@
 /**
 * A single Smoke PPE output taken from a single [SimulationSample](type:SimulationSample)
 */
-@db(index=["simulationNumber","time"])
+@db(index=["simulationNumber","time","lat,long"])
 entity type SmokePPEGeoPointPlusTimeSimulationOutput schema name 'PPE_GPPT_SMLTN_TPT' {
     // the {@link SmokePPESimulationSample} that this output is associated with
     simulationSample: !SmokePPESimulationSample
@@ -16,6 +16,10 @@ entity type SmokePPEGeoPointPlusTimeSimulationOutput schema name 'PPE_GPPT_SMLTN
     geo: !GeoPoint
     // The time that this output is associated with.
     time: !datetime
+    // Legacy field for latitude
+    lat: !float
+    // Legacy field for longitude
+    long: !float
     // the pseudoLevel index (starts at 0)
     pseudoLevelIndex: int
     // dust
