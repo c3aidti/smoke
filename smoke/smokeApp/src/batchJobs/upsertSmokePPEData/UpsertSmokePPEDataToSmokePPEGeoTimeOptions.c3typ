@@ -18,4 +18,6 @@ type UpsertSmokePPEDataToSmokePPEGeoTimeOptions {
     parallelStreams: int = 12
     // hardware profile ID to run the batches
     hardwareProfileId: string = "appc8m642-w"
+    // the method to call in the batch job
+    method: string = "upsertSmokePPEDataToSmokePPEGeoTime"
 }

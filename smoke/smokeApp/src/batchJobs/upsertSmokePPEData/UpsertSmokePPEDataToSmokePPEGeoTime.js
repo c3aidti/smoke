@@ -41,6 +41,6 @@ function doStart(job, options) {
 
 function processBatch(batch, job, options) {
     batch.values.forEach(function(simSample) {
-        simSample.upsertDataToGisOutputType(options.pseudoLevelIndex);
+        simSample[options.method](options.pseudoLevelIndex);
     });
 }

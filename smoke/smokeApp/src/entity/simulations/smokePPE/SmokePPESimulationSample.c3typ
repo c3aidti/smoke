@@ -27,4 +27,7 @@ entity type SmokePPESimulationSample mixes MetricEvaluatable schema name "PPE_SM
 
     @py(env='gordon_1_0_0')
     upsertDataToGisOutputType: member function(pseudoLevelIndex: !int): boolean
+
+    @py(env='gordon_1_0_0')
+    upsertDataToGeoPointPlustTime: member function(pseudoLevelIndex: !int): boolean
 }
