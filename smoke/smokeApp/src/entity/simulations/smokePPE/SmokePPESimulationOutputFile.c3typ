@@ -3,15 +3,16 @@
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
 /**
-* Files containing output from {@link SimulationSample}s
+* Files containing output from {@link SimulationSample}s.  These are the simulation data from large scale 
+* simulations and are stored in NetCDF format
 */
 @db(unique=["file"])
 entity type SmokePPESimulationOutputFile schema name 'PPE_SMLTN_TPT_FL' {
     // The {@link SimulationSample} that theses files belong to.
     simulationSample: !SmokePPESimulationSample
-    // The simulation output file
+    // The simulation output file (NetCFD)
     file: !File
-    // The container this file belongs to
+    // The container this file belongs to (Azure blob container)
     container: !string enum('smoke-ppe')
     // processed
     processed: boolean post default "false"
