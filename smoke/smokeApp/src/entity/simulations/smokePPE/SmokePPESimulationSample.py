@@ -167,7 +167,7 @@ def upsertDataToGisOutputType(this, pseudoLevelIndex):
 
     return True
 
-def upsertDataToGeoPointPlustTime(this, pseudoLevelIndex):
+def upsertDataToGeoPointPlusTime(this, pseudoLevelIndex):
     """
     Upsert data to the PostGIS-based output type.
     """
@@ -211,14 +211,22 @@ def upsertDataToGeoPointPlustTime(this, pseudoLevelIndex):
     # this is the format that the PostGIS-based output type expects
     # epoch_times = [int((t - zero_time).total_seconds()*1000) for t in times]
 
-    df_st["time"] = [t for t in times for n in range(0, len(lat)*len(lon))]
-    # df_st["epochTime"] = [t for t in epoch_times for n in range(0, len(lat)*len(lon))]
     df_st["lat"] = [l for l in lat for n in range(0, len(lon))]*len(times)
     df_st["long"] = [l for l in lon]*len(times)*len(lat)
-    df_st["id"] = round(df_st["lat"],3).astype(str) + "_" + round(df_st["long"],3).astype(str) + "_" + df_st["time"].astype(str).apply(lambda x: x.replace(" ", 'T')) + "_" + this.id
-    # df_st["geoSurfaceTimePoint"] = df_st["id"].apply(make_gstp)
     df_st['geo'] = df_st.apply(lambda row: createGeoPoint(row['long'], row['lat']), axis=1)
     #df_st = df_st.drop(columns=["lat", "long"])
+
+    # Add geo coords only to geoGrid2d
+    df_st["id"] = round(df_st["lat"],3).astype(str) + "_" + round(df_st["long"],3).astype(str)
+    geo_records = df_st.to_dict(orient="records")
+    c3.GeoGrid2D.upsertBatch(objs=geo_records)
+    df_st = df_st.drop(columns=["id"])
+
+    # Add time and id for each point
+    df_st["time"] = [t for t in times for n in range(0, len(lat)*len(lon))]
+    # df_st["epochTime"] = [t for t in epoch_times for n in range(0, len(lat)*len(lon))]
+    # df_st["geoSurfaceTimePoint"] = df_st["id"].apply(make_gstp)
+    df_st["id"] = round(df_st["lat"],3).astype(str) + "_" + round(df_st["long"],3).astype(str) + "_" + df_st["time"].astype(str).apply(lambda x: x.replace(" ", 'T')) + "_" + this.id
 
     # add simulation
     df_st["simulationSample"] = this

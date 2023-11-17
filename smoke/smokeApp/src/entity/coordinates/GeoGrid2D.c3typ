@@ -1,6 +1,9 @@
 /**
 Experimental typ to extract unique lat long pairs from the {@link GeoSurfaceTimePoint} type
 */
+@db(index=["lat,long"])
 entity type GeoGrid2D schema name "GG2D" {
-    coord: GeoPoint
+    lat: Float
+    long: Float
+    geo: GeoPoint
 }
