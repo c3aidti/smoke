@@ -6,7 +6,7 @@
 * A single Smoke PPE output taken from a single [SimulationSample](type:SimulationSample)
 */
 @db(index=["time"])
-entity type SmokePPEGeometryPointPlusTimeSimulationOutput schema name 'PPE_GM_PPT_SMLTN_TPT' {
+entity type SmokePPEGeometryPointPlusTimeSimulationOutput schema name 'PPE_GM_PPT_SIM_OTP' {
     // the {@link SmokePPESimulationSample} that this output is associated with
     simulationSample: !SmokePPESimulationSample
     // The geometry (x,y) [(long,lat)] of this output.
