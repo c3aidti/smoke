@@ -217,13 +217,13 @@ def upsertDataToGeoPointPlusTime(this, pseudoLevelIndex):
     #df_st = df_st.drop(columns=["lat", "long"])
 
     # Add geo coords only to geoGrid2d
-    df_st["id"] = round(df_st["lat"],3).astype(str) + "_" + round(df_st["long"],3).astype(str)
-    geo_records = df_st.to_dict(orient="records")
-    # at this point geo_records contains many duplicates, let's remove them
-    geo_records = [dict(t) for t in {tuple(d.items()) for d in geo_records}]
-    # upsert geoGrid2d
-    c3.GeoGrid2D.upsertBatch(objs=geo_records)
-    df_st = df_st.drop(columns=["id"])
+    # df_st["id"] = round(df_st["lat"],3).astype(str) + "_" + round(df_st["long"],3).astype(str)
+    # geo_records = df_st.to_dict(orient="records")
+    # # at this point geo_records contains many duplicates, let's remove them
+    # geo_records = [dict(t) for t in {tuple(d.items()) for d in geo_records}]
+    # # upsert geoGrid2d
+    # c3.GeoGrid2D.upsertBatch(objs=geo_records)
+    # df_st = df_st.drop(columns=["id"])
 
     # Add time and id for each point
     df_st["time"] = [t for t in times for n in range(0, len(lat)*len(lon))]
@@ -233,9 +233,6 @@ def upsertDataToGeoPointPlusTime(this, pseudoLevelIndex):
 
     # add simulation
     df_st["simulationSample"] = this
-
-    # add simulationNumber for filtering
-    df_st["simulationNumber"] = this.simulationNumber
 
     # go over files and add data to dataframe
     for file in files:
