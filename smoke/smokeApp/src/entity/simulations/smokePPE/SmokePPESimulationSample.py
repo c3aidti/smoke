@@ -214,7 +214,6 @@ def upsertDataToGeoPointPlusTime(this, pseudoLevelIndex):
     df_st["lat"] = [l for l in lat for n in range(0, len(lon))]*len(times)
     df_st["long"] = [l for l in lon]*len(times)*len(lat)
     df_st['geo'] = df_st.apply(lambda row: createGeoPoint(row['long'], row['lat']), axis=1)
-    #df_st = df_st.drop(columns=["lat", "long"])
 
     # Add geo coords only to geoGrid2d
     # df_st["id"] = round(df_st["lat"],3).astype(str) + "_" + round(df_st["long"],3).astype(str)
@@ -230,10 +229,11 @@ def upsertDataToGeoPointPlusTime(this, pseudoLevelIndex):
     # df_st["epochTime"] = [t for t in epoch_times for n in range(0, len(lat)*len(lon))]
     # df_st["geoSurfaceTimePoint"] = df_st["id"].apply(make_gstp)
     df_st["id"] = round(df_st["lat"],3).astype(str) + "_" + round(df_st["long"],3).astype(str) + "_" + df_st["time"].astype(str).apply(lambda x: x.replace(" ", 'T')) + "_" + this.id
-
     # add simulation
     df_st["simulationSample"] = this
 
+    df_st = df_st.drop(columns=["lat", "long"])
+    
     # go over files and add data to dataframe
     for file in files:
         var_name = file.file.url.split('glm_')[-1].split('_m01')[0]
@@ -243,17 +243,6 @@ def upsertDataToGeoPointPlusTime(this, pseudoLevelIndex):
             tensor = np.array(tensor[:,pseudoLevelIndex,:,:]).flatten()
             df_st[var_names_ppe_inv[var_name]] = tensor
             c3.NetCDFUtil.closeFile(data, file.file.url)
-    #         meta = c3.MetaFileProcessing(
-    #             lastAction="upsert-data",
-    #             lastProcessAttempt=dt.datetime.now(),
-    #             lastAttemptFailed=False,
-    #             returnCode=0
-    #         )
-    #         c3.SmokePPESimulationOutputFile(
-    #             id=file.id, 
-    #             processed=True, 
-    #             processMeta=meta
-    #         ).merge()
 
     # add pseudoLevelIndex
     df_st["pseudoLevelIndex"] = pseudoLevelIndex

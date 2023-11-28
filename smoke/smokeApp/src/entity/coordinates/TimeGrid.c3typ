@@ -1,0 +1,8 @@
+/**
+
+*/
+@db(index=["time"])
+entity type TimeGrid schema name "SE_TG" {
+    ensemble: !SimulationEnsemble
+    time: !datetime
+}
