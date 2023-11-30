@@ -26,10 +26,15 @@ entity type SmokePPESimulationSample mixes MetricEvaluatable schema name "PPE_SM
     upsertDataAfterHeadersCreated: member function(pseudoLevelIndex: !int): boolean
     /**
     */
-    @py(env='gordon_1_0_0')
-    upsertDataToGisOutputType: member function(pseudoLevelIndex: !int): boolean
+    // @py(env='gordon_1_0_0')
+    // upsertDataToGisOutputType: member function(pseudoLevelIndex: !int): boolean
+    /**
+    */
+    // @py(env='gordon_1_0_0')
+    // upsertDataToGeoPointPlusTime: member function(pseudoLevelIndex: !int): boolean
+
     /**
     */
     @py(env='gordon_1_0_0')
-    upsertDataToGeoPointPlusTime: member function(pseudoLevelIndex: !int): boolean
+    upsertToSmokePPEGstpSimulationOutput: member function(pseudoLevelIndex: !int, batchSize: int=40138): boolean
 }
