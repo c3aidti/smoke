@@ -36,5 +36,5 @@ entity type SmokePPESimulationSample mixes MetricEvaluatable schema name "PPE_SM
     /**
     */
     @py(env='gordon_1_0_0')
-    upsertToSmokePPEGstpSimulationOutput: member function(pseudoLevelIndex: !int, batchSize: int=40138): boolean
+    upsertToSmokePPEGstpSimulationOutput: member function(pseudoLevelIndex: !int, batchSize: int=80276): boolean
 }

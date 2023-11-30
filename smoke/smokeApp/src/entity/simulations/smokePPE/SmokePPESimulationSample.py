@@ -76,7 +76,7 @@ def upsertDataAfterHeadersCreated(this, pseudoLevelIndex):
 
     return True
 
-def upsertToSmokePPEGstpSimulationOutput(this, pseudoLevelIndex, batchSize=40138):
+def upsertToSmokePPEGstpSimulationOutput(this, pseudoLevelIndex, batchSize=80276):
     """
     Upsert data to Cassandra after the partition keys are created.
     """
@@ -155,13 +155,14 @@ def upsertToSmokePPEGstpSimulationOutput(this, pseudoLevelIndex, batchSize=40138
 
     # Initialize an index to track batches
     start_index = 0
-    end_index = batch_size
+    end_index = batchSize
 
     # Number of records
     total_records = len(df_st)
 
     # upsert data
     while start_index < total_records:
+#         print(f"Upserting Batch {start_index}")
         # Create a smaller DataFrame for the current batch
         batch_df = df_st.iloc[start_index:end_index]
 
@@ -173,12 +174,10 @@ def upsertToSmokePPEGstpSimulationOutput(this, pseudoLevelIndex, batchSize=40138
 
         # Update indices for the next batch
         start_index = end_index
-        end_index = min(end_index + batch_size, total_records)
+        end_index = min(end_index + batchSize, total_records)
         
-#     output_records = df_st.to_dict(orient="records")
-#     c3.SmokePPEGstpSimulationOutput.upsertBatch(objs=output_records)
-
     return True
+
 
 
 # def upsertDataToGisOutputType(this, pseudoLevelIndex):

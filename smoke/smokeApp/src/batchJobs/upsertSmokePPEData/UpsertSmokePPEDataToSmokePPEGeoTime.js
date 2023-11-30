@@ -41,6 +41,6 @@ function doStart(job, options) {
 
 function processBatch(batch, job, options) {
     batch.values.forEach(function(simSample) {
-        simSample[options.method](options.pseudoLevelIndex);
+        simSample[options.method](options.pseudoLevelIndex,options.batchSize);
     });
 }

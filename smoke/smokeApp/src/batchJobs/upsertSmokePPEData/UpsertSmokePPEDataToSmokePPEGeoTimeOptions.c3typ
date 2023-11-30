@@ -19,5 +19,7 @@ type UpsertSmokePPEDataToSmokePPEGeoTimeOptions {
     // hardware profile ID to run the batches
     hardwareProfileId: string = "appc8m642-w"
     // the method to call in the batch job
-    method: string = "upsertSmokePPEDataToSmokePPEGeoTime"
+    method: string = "upsertToSmokePPEGstpSimulationOutput"
+    //
+    batchSize: int = 80276
 }
