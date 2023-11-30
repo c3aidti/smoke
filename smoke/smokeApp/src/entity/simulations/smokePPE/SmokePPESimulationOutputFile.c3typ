@@ -22,4 +22,9 @@ entity type SmokePPESimulationOutputFile schema name 'PPE_SMLTN_TPT_FL' {
     // create Cassandra partition keys
     @py(env='gordon_1_0_0')
     createCassandraHeaders: member function(): boolean
+
+    /**
+    */
+    @py(env='gordon_1_0_0')
+    upsertDataToGeoGrid2DAndTimeGrid: member function(gstpType: string,geoGridType:string,timeGridType:string)
 }
