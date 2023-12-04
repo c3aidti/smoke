@@ -4,9 +4,7 @@
 **/
 /**
 */
-type SimParamsBase {
-    //
-    description: long string
-    //
-    uom: Unit
+type SourceSimulationParameters mixes Source {
+    simulationModel: string
+    name: string
 }
