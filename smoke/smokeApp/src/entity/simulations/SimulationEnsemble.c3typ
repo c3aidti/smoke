@@ -17,5 +17,5 @@ entity type SimulationEnsemble schema name "SMLTN_NSMBL" {
     // The collection of all outputs in timeseries
     samples: [SimulationSample](ensemble)
     //
-    datasets: [anyof(SimulationDataset)](ensemble,id)
+    datasets: [SimulationDataset](ensemble,id)
 }
