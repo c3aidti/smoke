@@ -2,4 +2,4 @@
 * Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
-entity type GaussianProcessRegressionPipe extends MLLeafPipe<Dataset, Dataset> type key 'SPPE_TATZF_GPR'
+entity type SppeTatzFullPredictionModel extends MLLeafPipe<Dataset, Dataset> type key 'SPPE_TATZF_GPR'
