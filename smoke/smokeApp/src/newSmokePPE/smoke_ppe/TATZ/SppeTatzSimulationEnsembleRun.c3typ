@@ -2,8 +2,8 @@
 * Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
-entity type SppeTatzSimulationRun
-    extends SimulationRun<SppeSimulationRun,SppeSimulationEnsembleOutputFile> 
+entity type SppeTatzSimulationEnsembleRun
+    extends SimulationRun<SppeTatzSimulationEnsembleRun,SppeTatzSimulationEnsembleOutputFile> 
     mixes SppeSimulationRunParameters type key "SPPE_TATZ" {
     /**
     */    
