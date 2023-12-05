@@ -8,9 +8,4 @@
  * @var OT - Output type
  * @var MT - Models type
 */
-extendable entity type SimulationDataset mixes SimulationDatasetBase<DT,GT,OT,MT> schema name "SIM_DST" {
-    //
-    ensemble: !SimulationEnsemble
-    //
-    description: long string
-}
+type SimulationDatasetBase<DT,GT,OT,MT> 
