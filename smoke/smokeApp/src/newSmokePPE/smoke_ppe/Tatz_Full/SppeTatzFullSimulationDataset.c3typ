@@ -3,5 +3,6 @@
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
 entity type SppeTatzFullSimulationDataset
-    extends SimulationDataset<SppeTatzFullSimulationDataset, SppeTatzFullGeoTimeGrid, SppeTatzFullSimulationOutput, SppeTatzFullPredictionModel>  type key "TATZF"
+    extends SimulationDataset
+    mixes SimulationDatasetBase<SppeTatzFullSimulationDataset, SppeTatzFullGeoTimeGrid, SppeTatzFullSimulationOutput, SppeTatzFullPredictionModel>  type key "TATZF"
     
