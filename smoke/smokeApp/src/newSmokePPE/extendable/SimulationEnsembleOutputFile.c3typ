@@ -6,9 +6,9 @@
 * Files containing output from {@link SimulationSample}s.  These are the simulation data from large scale 
 * simulations and are stored in NetCDF format
 */
-extendable entity type SimulationEnsembleOutputFile schema name 'SIM_OTP_FL' {
+extendable entity type SimulationEnsembleOutputFile<ST> schema name 'SIM_OTP_FL' {
     // The {@link SimulationSample} that theses files belong to.
-    simulationRun: anyof(SimulationRun)
+    simulationRun: ST
     // The simulation output file (NetCFD)
     file: !File
     // The container this file belongs to (Azure blob container)

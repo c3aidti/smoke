@@ -2,7 +2,7 @@
 * Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
-entity type SppeSimulationParameterValues<SppeSimulationRun> extends SimulationParameterValues type key "SPPE" {
+entity type SppeSimulationParameterValues extends SimulationParameterValues<SppeSimulationRun> type key "SPPE" {
     smoke_emiss: !double
     smoke_diam: !double
     sig_w: !double
