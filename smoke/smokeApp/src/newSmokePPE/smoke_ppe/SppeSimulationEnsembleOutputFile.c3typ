@@ -3,5 +3,4 @@
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
 entity type SppeSimulationEnsembleOutputFile 
-    extends SimulationEnsembleOutputFile<SppeSimulationRun> type key "SPPE" {
-}
+    extends SimulationEnsembleOutputFile<SppeSimulationRun> type key "SPPE"
