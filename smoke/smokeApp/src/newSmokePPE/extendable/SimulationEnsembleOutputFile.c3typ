@@ -7,8 +7,6 @@
 * simulations and are stored in NetCDF format
 */
 extendable entity type SimulationEnsembleOutputFile<ST> schema name 'SIM_OTP_FL' {
-    //
-    ensemble: !SimulationEnsemble
     // The {@link SimulationSample} that theses files belong to.
     simulationRun: !ST
     // The simulation output file (NetCFD)

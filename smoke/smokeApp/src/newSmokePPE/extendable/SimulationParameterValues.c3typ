@@ -6,7 +6,5 @@
 */
 extendable entity type SimulationParameterValues<ST> schema name "SIM_PRM_VLS" {
     //
-    ensemble: SimulationEnsemble
-    //
     simulationRun: ST
 }
