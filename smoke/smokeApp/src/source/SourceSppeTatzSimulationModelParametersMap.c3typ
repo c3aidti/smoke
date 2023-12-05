@@ -6,7 +6,7 @@
 * SourceSmokePPESimulationModelParametersMap.c3typ
 * The source for {@link SmokePPESimulationModelParameters} data
 */
-type SourceNewSppeTatzSimulationModelParametersMap mixes Source {
+type SourceSppeTatzSimulationModelParametersMap mixes Source {
     ensemble_id: string
     smoke_emiss: double
     smoke_diam: double
