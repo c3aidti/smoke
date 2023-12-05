@@ -18,4 +18,8 @@ extendable entity type SimulationEnsembleOutputFile<ST> schema name 'SIM_OTP_FL'
     // processing metadata
     // processMeta: MetaFileProcessing
 
+    /**
+    */
+    @py(env='gordon_1_0_0')
+    upsertGridData: member function(datasetType: !string, geoTimeGridType: !string, datasetId: !string): boolean
 }
