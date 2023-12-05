@@ -1,0 +1,20 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* @var ST - Simulation Type
+* @var PT - Parameter Type
+*/
+extendable entity type SimulationRun<ST,PT> schema name "SIM_RUN" {
+    //
+    ensemble: SimulationEnsemble
+    //
+    simulationNumber: integer
+    /**
+    * Implement this function to populate the {@link SimulationEnsembleOutputFiles} table for a particular 
+    * {@link SimulationModel}.
+    */
+    upsertFileTable: abstract member function(): any
+
+}
