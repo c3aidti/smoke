@@ -7,7 +7,6 @@
 * @var PT - Parameter Type
 * @var FT - Output file Type
 */
-*/
 extendable entity type SimulationRun<ST,PT,FT> schema name "SIM_RUN" {
     //
     ensemble: SimulationEnsemble
