@@ -1,0 +1,26 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* A single Smoke PPE output taken from a single [SimulationSample](type:SimulationSample)
+*/
+@db(index=['simulationSample', 'geoSurfaceTimePoint'],compactType=true)
+entity type SppeTatzFullGstpSimulationOutput schema name 'SPPE_TATZF_OTP' {
+    // the {@link SmokePPESimulationSample} that this output is associated with
+    simulationRun: !SppeSimulationRun
+    // the {@link GeoSurfaceTimePoint} that this output is associated with
+    geoTimeGridPoint: !SppeTatzFullGeoTimeGrid
+    // the pseudoLevel index (starts at 0)
+    pseudoLevelIndex: int
+    // dust
+    dust: float
+    // soluble aitken mode
+    solubleAitkenMode: float
+    // soluble accumulation mode
+    solubleAccumulationMode: float
+    // soluble coarse mode
+    solubleCoarseMode: float
+    // insoluble aitken mode
+    insolubleAitkenMode: float
+}
