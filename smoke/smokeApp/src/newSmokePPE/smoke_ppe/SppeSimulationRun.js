@@ -4,7 +4,7 @@
 **/
 /**
 * Implementation of upsertFileTable
-* @param this: {@link SmokePPESimulationSample} instance
+* @param this: {@link SmokePPESimulationRun} instance
 * @return: integer 
 */
 function upsertFileTable() {

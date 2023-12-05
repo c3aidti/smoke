@@ -7,7 +7,7 @@
 * The source for {@link SmokePPESimulationModelParameters} data
 */
 type SourceNewSmokePPESimulationModelParametersMap mixes Source {
-    ensemble_id: int
+    ensemble_id: string
     smoke_emiss: double
     smoke_diam: double
     sig_w: double
