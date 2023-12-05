@@ -12,7 +12,7 @@ def upsertGridData(this,datasetType,geoTimeGridType,datasetId):
         """
         return c3.GeoPoint(long=long, lat=lat)
 
-    dataset = getattr(c3,datasetType)(id=datasetId).merge()
+    dataset = getattr(c3,datasetType)(id=datasetId,ensemble=this.simulationRun.ensemble).merge()
 
     sample = c3.NetCDFUtil.openFile(this.file.url)
     lat = sample["latitude"][:]
