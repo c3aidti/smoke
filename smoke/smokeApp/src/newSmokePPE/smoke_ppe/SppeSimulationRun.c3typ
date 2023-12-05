@@ -2,5 +2,5 @@
 * Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
-entity type SppeSimulationRun<SppeSimulationRun,SppeSimulationParameterValues>
-    extends SimulationRun type key "SPPE"
+entity type SppeSimulationRun
+    extends SimulationRun<SppeSimulationRun,SppeSimulationParameterValues,SppeSimulationEnsembleOutputFile> type key "SPPE"
