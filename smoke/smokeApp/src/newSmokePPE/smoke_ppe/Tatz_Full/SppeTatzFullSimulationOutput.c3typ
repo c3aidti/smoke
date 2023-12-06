@@ -5,8 +5,10 @@
 /**
 * A single Smoke PPE output taken from a single [SimulationSample](type:SimulationSample)
 */
-@db(index=['simulationRun', 'geoTimeGridPoint'],compactType=true)
+@db(index=['simulationRun', 'geoTimeGridPoint', 'dataset'],compactType=true)
 entity type SppeTatzFullSimulationOutput schema name 'SPPE_TATZF_OTP' {
+    //
+    dataset: !SppeTatzFullSimulationEnsembleDataset
     // the {@link SmokePPESimulationSample} that this output is associated with
     simulationRun: !SppeSimulationEnsembleRun
     // the {@link GeoSurfaceTimePoint} that this output is associated with

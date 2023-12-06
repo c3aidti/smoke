@@ -8,7 +8,7 @@
  * @var OT - Output type
  * @var MT - Models type
 */
-extendable entity type SimulationDataset  schema name "SIM_DST" {
+extendable entity type SimulationEnsembleDataset  schema name "SIM_ENS_DST" {
     //
     ensemble: !SimulationEnsemble
     //
