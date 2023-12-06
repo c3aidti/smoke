@@ -34,5 +34,10 @@ extendable entity type SimulationEnsembleDataset  schema name "SIM_ENS_DST" {
     //
     timeSeriesCount: long integer stored calc "count(timeSeries)"
     //
-    geoGridTimeSeriesCount: long integer stored calc "count(geoGrid) * count(timeSeries)"
+    expectedGeoGridTimeSeriesCount: long integer stored calc "count(geoGrid) * count(timeSeries)"
+    //
+    coarseGrainOptions: CoarseGrainOptions
+    /**
+    */
+    initialzeGrid: member function(options:CoarseGrainOptions): boolean js server
 }
