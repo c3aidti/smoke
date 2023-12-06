@@ -8,7 +8,7 @@
 @db(index=['simulationRun', 'geoTimeGridPoint'],compactType=true)
 entity type SppeTatzFullSimulationOutput schema name 'SPPE_TATZF_OTP' {
     // the {@link SmokePPESimulationSample} that this output is associated with
-    simulationRun: !SppeSimulationRun
+    simulationRun: !SppeSimulationEnsembleRun
     // the {@link GeoSurfaceTimePoint} that this output is associated with
     geoTimeGridPoint: !SppeTatzFullGeoTimeGrid
     // the pseudoLevel index (starts at 0)
