@@ -24,9 +24,15 @@ extendable entity type SimulationEnsembleDataset  schema name "SIM_ENS_DST" {
     //
     minLon: double stored calc "min(geoGrid.geo.long)"
     //
+    geoGridCount: long integer stored calc "count(geoGrid)"
+    //
     timeSeries: [DatasetTimeSeries](dataset,id)
     //
     minTime: datetime stored calc "min(timeSeries.time)"
     //
     maxTime: datetime stored calc "max(timeSeries.time)"
+    //
+    timeSeriesCount: long integer stored calc "count(timeSeries)"
+    //
+    geoGridTimeSeriesCount: long integer stored calc "count(geoGrid) * count(timeSeries)"
 }
