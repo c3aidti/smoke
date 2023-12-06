@@ -1,0 +1,13 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+entity type SppeTatzCoarseSimulationEnsembleDataset
+    extends SimulationEnsembleDataset
+    mixes SimulationDatasetBase<SppeTatzCoarseSimulationEnsembleDataset, SppeTatzCoarseGeoTimeGrid, SppeTatzCoarseSimulationOutput, SppeTatzCoarsePredictionModel>  type key "TATZC" {
+        //
+        geoTimeGrid: [SppeTatzCoarseGeoTimeGrid](dataset,id)
+        //
+        geoGridTimeSeriesCount: long integer stored calc "count(geoTimeGrid)"
+    }
+    
