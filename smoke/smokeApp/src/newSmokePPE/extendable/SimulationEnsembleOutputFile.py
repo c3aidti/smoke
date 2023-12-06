@@ -1,4 +1,4 @@
-def upsertGridData(this,datasetType,geoTimeGridType,datasetId,batchSize=160552,coarseFactor=None):
+def upsertGridData(this,datasetType,geoTimeGridType,datasetId,coarseFactor=None,batchSize=160552):
     """
     Upsert Geo-spatial plus time data to provided types
     """
