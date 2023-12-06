@@ -1,11 +1,11 @@
-def upsertGridData(this,datasetType,geoTimeGridType,datasetId,coarseFactor=None,batchSize=160552):
+def upsertGridData(this,datasetType,geoTimeGridType,datasetId,coarseGrainOptions=None,batchSize=160552):
     """
     Upsert Geo-spatial plus time data to provided types
     """
     import pandas as pd
     import datetime as dt
     import numpy as np
-
+    
     def createGeoPoint(long,lat):
         """
         Create a GeoPoint object from long, lat.
@@ -26,10 +26,10 @@ def upsertGridData(this,datasetType,geoTimeGridType,datasetId,coarseFactor=None,
         target_time = zero_time + dt.timedelta(hours=t)
         times.append(target_time)
     
-    if coarseFactor:
+    if coarseGrainOptions:
         # Coarse-graining: Reduce the resolution of the lat-lon grid
-        lat = lat[::coarseFactor]
-        lon = lon[::coarseFactor]
+        lat = lat[::coarseGrainOptions.coarseFactor]
+        lon = lon[::coarseGrainOptions.coarseFactor]
 
     # Create space-time dataframe
     df_st = pd.DataFrame()

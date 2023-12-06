@@ -1,7 +1,10 @@
 /**
  * 
  */
-function initialzeGrid() {
+function initialzeGrid(options) {
+    if (typeof options === 'undefined') {
+        options = null;
+    }
     var typeName = this.type().typeName()
     // Use  TypeRef to access the bindings of this type
     var thisType = TypeRef.make({"typeName": typeName}).toType()
@@ -23,7 +26,7 @@ function initialzeGrid() {
       geoTimeGridType,
       this.id,
       batchSize=100000,
-      coarseFactor=None
+      coarseGrainOptions=options
     )
     return file
 }
