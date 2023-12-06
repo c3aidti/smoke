@@ -1,4 +1,4 @@
-def upsertGridData(this,datasetType,geoTimeGridType,datasetId):
+def upsertGridData(this,datasetType,geoTimeGridType,datasetId,batchSize=160552,coarseFactor=None):
     """
     Upsert Geo-spatial plus time data to provided types
     """
@@ -25,6 +25,11 @@ def upsertGridData(this,datasetType,geoTimeGridType,datasetId):
     for t in tim:
         target_time = zero_time + dt.timedelta(hours=t)
         times.append(target_time)
+    
+    if coarseFactor:
+        # Coarse-graining: Reduce the resolution of the lat-lon grid
+        lat = lat[::coarseFactor]
+        lon = lon[::coarseFactor]
 
     # Create space-time dataframe
     df_st = pd.DataFrame()
@@ -37,7 +42,24 @@ def upsertGridData(this,datasetType,geoTimeGridType,datasetId):
     # Upsert gstp data to gstpType
     df_st["id"] = dataset.id +"_"+round(df_st["latitude"],3).astype(str) + "_" + round(df_st["longitude"],3).astype(str) + "_" + df_st["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
     st_records = df_st.to_dict(orient="records")
-    getattr(c3,geoTimeGridType).upsertBatch(st_records)
+
+    start_index = 0
+    end_index = batchSize
+    total_records = len(df_st)
+    while start_index < total_records:
+#         print(f"Upserting Batch {start_index}")
+        # Create a smaller DataFrame for the current batch
+        batch_df = df_st.iloc[start_index:end_index]
+
+        # Convert the batch DataFrame to a list of dictionaries
+        batch_records = batch_df.to_dict(orient="records")
+
+        # Upsert the batch
+        getattr(c3,geoTimeGridType).upsertBatch(batch_records)
+
+        # Update indices for the next batch
+        start_index = end_index
+        end_index = min(end_index + batchSize, total_records)
     
     # Create geo dataframe
     # df_geo = pd.DataFrame()

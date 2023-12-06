@@ -21,5 +21,5 @@ extendable entity type SimulationEnsembleOutputFile<ST> schema name 'SIM_OTP_FL'
     /**
     */
     @py(env='gordon_1_0_0')
-    upsertGridData: member function(datasetType: !string, geoTimeGridType: !string, datasetId: !string): boolean
+    upsertGridData: member function(datasetType: !string, geoTimeGridType: !string, datasetId: !string, batchSize: integer=160552, coarseFactor: integer): boolean
 }
