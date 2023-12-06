@@ -25,8 +25,7 @@ function initializeGrid(coarseGrainOptions) {
       typeName,
       geoTimeGridType,
       this.id,
-      batchSize=100000,
-      coarseGrainOptions=coarseGrainOptions
+      coarseGrainOptions
     )
     return file
 }
