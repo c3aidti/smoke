@@ -5,7 +5,7 @@
 /**
 * Yeah
 */
-type TransformSourceSppeTatzSimulationModelParametersMapToSppeTatzSimulationRun mixes SppeTatzSimulationRun transforms SourceSppeTatzSimulationModelParametersMap {
+type TransformSourceSppeTatzSimulationModelParametersMapToSppeSimulationEnsembleRun mixes SppeSimulationEnsembleRun transforms SourceSppeTatzSimulationModelParametersMap {
   // The id of this simulation (unique over all simulations, all ensembles)
   id: ~ expression "concat(ensemble_id,'_',pcalc_index)"
   // The simulation number (unqiue only within each ensemble)
