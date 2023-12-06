@@ -8,6 +8,7 @@
  * @var OT - Output type
  * @var MT - Models type
 */
+@db(compactType=true)
 extendable entity type SimulationEnsembleDataset  schema name "SIM_ENS_DST" {
     //
     ensemble: !SimulationEnsemble
