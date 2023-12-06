@@ -4,7 +4,7 @@
 **/
 @db(index=["lat,long","dataset"])
 entity type DatasetGeoGrid schema name "DST_GEO_GRID" {
-    dataset: !SimulationDataset
+    dataset: !SimulationEnsembleDataset
     lat: !double
     long: !double
     geo: !GeoPoint

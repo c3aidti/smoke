@@ -7,7 +7,7 @@
 @db(index=['latitude,longitude', 'time','dataset'],compactType=true)
 entity type SppeTatzFullGeoTimeGrid schema name 'SPPE_TATZF_GTG' {
     //
-    dataset: !SppeTatzFullSimulationDataset
+    dataset: !SppeTatzFullSimulationEnsembleDataset
     // the latitude
     latitude: !double
     // the longitude

@@ -4,6 +4,6 @@
 **/
 @db(index=["time", "dataset"])
 entity type DatasetTimeSeries schema name "DST_TS" {
-    dataset: !SimulationDataset
+    dataset: !SimulationEnsembleDataset
     time: !datetime
 }
