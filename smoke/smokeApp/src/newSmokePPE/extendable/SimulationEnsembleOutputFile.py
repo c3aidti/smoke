@@ -47,7 +47,7 @@ def upsertGridData(this,datasetType,geoTimeGridType,datasetId,coarseFactor=None,
     end_index = batchSize
     total_records = len(df_st)
     while start_index < total_records:
-#         print(f"Upserting Batch {start_index}")
+        # print(f"Upserting Batch {start_index}")
         # Create a smaller DataFrame for the current batch
         batch_df = df_st.iloc[start_index:end_index]
 
@@ -62,23 +62,27 @@ def upsertGridData(this,datasetType,geoTimeGridType,datasetId,coarseFactor=None,
         end_index = min(end_index + batchSize, total_records)
     
     # Create geo dataframe
-    # df_geo = pd.DataFrame()
-    # df_geo["lat"] = [l for l in lat for n in range(0, len(lon))]
-    # df_geo["long"] = [l for l in lon]*len(lat)
-    # df_geo['geo'] = df_geo.apply(lambda row: createGeoPoint(row['long'], row['lat']), axis=1)
+    # print("geo grid")
+    df_geo = pd.DataFrame()
+    df_geo["lat"] = [l for l in lat for n in range(0, len(lon))]
+    df_geo["long"] = [l for l in lon]*len(lat)
+    df_geo['geo'] = df_geo.apply(lambda row: createGeoPoint(row['long'], row['lat']), axis=1)
+    df_geo["dataset"] = dataset
+    df_geo["id"] = dataset.id +"_"+round(df_geo["lat"],3).astype(str) + "_" + round(df_geo["long"],3).astype(str)
 
-    # # Upsert geo coords to geoGridType
-    # df_geo["id"] = round(df_geo["lat"],3).astype(str) + "_" + round(df_geo["long"],3).astype(str)
-    # geo_records = df_geo.to_dict(orient="records")
-    # getattr(c3,geoGridType).upsertBatch(objs=geo_records)
+    # Upsert geo coords to geoGridType
+    geo_records = df_geo.to_dict(orient="records")
+    c3.DatasetGeoGrid.upsertBatch(objs=geo_records)
 
     # Create time dataframe
-    # df_time = pd.DataFrame()
-    # df_time["time"] = [t for t in times]
+    # print("time grid")
+    df_time = pd.DataFrame()
+    df_time["time"] = [t for t in times]
+    df_time["dataset"] = dataset
+    df_time["id"] = dataset.id +"_"+df_time["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
     
-    # # Upsert times to timeGridType
-    # df_time["id"] = df_time["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
-    # time_records = df_time.to_dict(orient="records")
-    # getattr(c3,timeGridType).upsertBatch(objs=time_records)
+    # Upsert times to timeGridType
+    time_records = df_time.to_dict(orient="records")
+    c3.DatasetTimeSeries.upsertBatch(objs=time_records)
     
     return True

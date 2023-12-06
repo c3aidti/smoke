@@ -13,4 +13,19 @@ extendable entity type SimulationEnsembleDataset  schema name "SIM_ENS_DST" {
     ensemble: !SimulationEnsemble
     //
     description: long string
-}
+    // Collection of {@link DatasetGeoGrid} points for this dataset
+    geoGrid: [DatasetGeoGrid](dataset,id)
+    //
+    maxLat: double stored calc "max(geoGrid.geo.lat)"
+    //
+    maxLon: double stored calc "max(geoGrid.geo.long)"
+    //
+    minLat: double stored calc "min(geoGrid.geo.lat)"
+    //
+    minLon: double stored calc "min(geoGrid.geo.long)"}
+    //
+    timeSeries: [DatasetTimeSeries](dataset,id)
+    //
+    minTime: datetime stored calc "min(timeSeries.time)"
+    //
+    maxTime: datetime stored calc "max(timeSeries.time)"
