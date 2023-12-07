@@ -10,6 +10,7 @@ function initializeGrid(coarseGrainOptions) {
     else {
       var updated = TypeRef.make({"typeName": typeName}).toType()
       updated.id = this.id
+      updated.ensemble = this.ensemble
       updated.coarseGrainOptions = coarseGrainOptions
       updated.merge() 
     }
