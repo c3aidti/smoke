@@ -5,12 +5,21 @@
 
 function doStart(job, options) {
     var simulationRunType = TypeRef.make({"typeName": options.typeName}).toType()
+    var datasetObj = SimulationEnsembleDataset.fetch(
+        {
+            "filter":"id=='datasetId'",
+            "include": "id"
+        }
+    ).objs[0]
+    var datasetType = datasetObj.type().typeName()
+    datasetObj = datasetType.fetch({"filter":"id=='datasetId'"}).objs[0]
     job.setHardwareProfile(options.hardwareProfileId);
     var batch = [];
 
     /** Compute batch size based on number of parallel "streams" or upsert tasks. */
+    var filter = Filter.eq("ensemble.id", datasetObj.ensemble.id);
     var cnt = SmokePPESimulationSample.fetchCount({
-        filter: options.filter
+        filter: filter
     });
     var q = parseInt(cnt/options.parallelStreams);
     var r = cnt % options.parallelStreams;

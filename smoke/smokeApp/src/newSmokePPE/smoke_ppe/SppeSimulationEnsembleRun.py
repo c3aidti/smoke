@@ -1,9 +1,7 @@
 def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
-    """
     import pandas as pd
     import datetime as dt
     import numpy as np
-    """
     import iris
     import iris.analysis
     from iris.coords import DimCoord
