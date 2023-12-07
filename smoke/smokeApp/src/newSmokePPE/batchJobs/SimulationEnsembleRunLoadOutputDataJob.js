@@ -5,9 +5,10 @@
 
 function doStart(job, options) {
     var simulationRunType = TypeRef.make({"typeName": options.typeName}).toType()
+    var dsFilter = Filter.eq("id", options.datasetId);
     var datasetObj = SimulationEnsembleDataset.fetch(
         {
-            "filter":"id=='datasetId'",
+            "filter": dsFilter,
             "include": "id"
         }
     ).objs[0]
