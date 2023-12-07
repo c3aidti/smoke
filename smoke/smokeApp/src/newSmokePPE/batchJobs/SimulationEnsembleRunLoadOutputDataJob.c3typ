@@ -1,0 +1,6 @@
+entity type SimulationEnsembleRunLoadOutputDataJob 
+extends BatchJob<SimulationEnsembleRunLoadOutputDataJob,SimulationEnsembleRunLoadOutputDataJobOptions,SimulationEnsembleRunLoadOutputDataJobBatch>
+type key "SM_ENS_RN_LOD" {
+    doStart:        ~ js server
+    processBatch:   ~ js server
+}
