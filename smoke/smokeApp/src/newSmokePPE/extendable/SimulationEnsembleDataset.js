@@ -8,8 +8,10 @@ function initializeGrid(coarseGrainOptions) {
         coarseGrainOptions = null;
     }
     else {
-      thisType.coarseGrainOptions = coarseGrainOptions
-      thisType.merge() 
+      var updated = TypeRef.make({"typeName": typeName}).toType()
+      updated.id = this.id
+      updated.coarseGrainOptions = coarseGrainOptions
+      updated.merge() 
     }
     // Use  TypeRef to access the bindings of this type
     var geoTimeGridType = thisType.mixins()[2].bindings()['GT'].name()
