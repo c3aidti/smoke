@@ -30,5 +30,5 @@ function initializeGrid(coarseGrainOptions) {
       this.id,
       coarseGrainOptions
     )
-    return file
+    return true
 }
