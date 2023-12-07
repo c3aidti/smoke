@@ -16,5 +16,9 @@ extendable entity type SimulationRun<ST,FT> schema name "SIM_RUN" {
     * {@link SimulationModel}.
     */
     upsertFileTable: abstract member function(): any
+    /**
+    *
+    */
+    upsertSimulationOutput: abstract member function(datasetId: !string, pseudoLevelIndex: !int, batchSize: int): boolean
 
 }

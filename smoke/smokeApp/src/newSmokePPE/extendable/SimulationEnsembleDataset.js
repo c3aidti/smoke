@@ -2,12 +2,16 @@
  * 
  */
 function initializeGrid(coarseGrainOptions) {
+    var typeName = this.type().typeName()
+    var thisType = TypeRef.make({"typeName": typeName}).toType()
     if (typeof coarseGrainOptions === 'undefined') {
         coarseGrainOptions = null;
     }
-    var typeName = this.type().typeName()
+    else {
+      thisType.coarseGrainOptions = coarseGrainOptions
+      thisType.merge() 
+    }
     // Use  TypeRef to access the bindings of this type
-    var thisType = TypeRef.make({"typeName": typeName}).toType()
     var geoTimeGridType = thisType.mixins()[2].bindings()['GT'].name()
     
     //Fetch a simulation Run from the ensemble and get its' typeRef to access it's bindings

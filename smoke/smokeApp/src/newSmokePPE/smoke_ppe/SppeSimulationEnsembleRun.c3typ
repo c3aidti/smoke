@@ -8,4 +8,9 @@ entity type SppeSimulationEnsembleRun
     /**
     */    
     upsertFileTable: ~ js server
+    /**
+    */
+    @py(env='gordon_1_0_0')
+    upsertSimulationOutput: abstract member function(datasetId: !string, pseudoLevelIndex: !int, batchSize: int): boolean
+
 }
