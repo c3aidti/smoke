@@ -3,4 +3,7 @@
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
 @db(unique=["lengthScale,coefficient,nu"])
-entity type GprPredictionModelParameters mixes SklearnGPRKernelMatern schema name "GPR_PRD_MDL_PRMS" 
+entity type GprPredictionModelParameters mixes SklearnGPRKernelMatern schema name "GPR_PRD_MDL_PRMS" {
+    // The length scale of the kernel
+    lengthScale: ![double] schema name "LNTH_SCL"
+}
