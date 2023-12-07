@@ -14,7 +14,7 @@ function doStart(job, options) {
     ).objs[0]
     var datasetTypeName = datasetObj.type().typeName()
     var datasetType = TypeRef.make({"typeName": datasetTypeName}).toType()
-    datasetObj = datasetType.fetch({"filter":"id=='datasetId'"}).objs[0]
+    datasetObj = datasetType.fetch({"filter": dsFilter}).objs[0]
     job.setHardwareProfile(options.hardwareProfileId);
     var batch = [];
 
