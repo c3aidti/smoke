@@ -38,7 +38,7 @@ entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_
     Method to create a new instance of this type.
     */
     @py(env='gordon_1_0_0')
-    createTechnique: function(kernelName: string, kernelHyperparameters: json, featureList: [string], simulationList: [any], targetName: string randomState: integer, centerTarget: boolean, validation: boolean, randomSeed: integer, splitFraction: float): GprPredictionModelParameters
+    createTechnique: function(kernelName: string, kernelHyperparameters: json, featureList: [string], simulationList: [any], targetName: string, randomState: integer, centerTarget: boolean, validation: boolean, randomSeed: integer, splitFraction: float): GprPredictionModelParameters
     /**
     */
     @py(env='gordon_1_0_0')

@@ -10,4 +10,6 @@ entity type SppeTatzCoarsePredictionModel extends MLLeafPipe<Dataset, Dataset> t
     simulationRun: !SppeSimulationEnsembleRun
     // the {@link GeoSurfaceTimePoint} that this output is associated with
     geoTimeGridPoint: !SppeTatzCoarseGeoTimeGrid
+    // technique used to generate the prediction model
+    //technique: string
 }
