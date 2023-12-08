@@ -2,8 +2,55 @@
 * Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
-@db(unique=["lengthScale,coefficient,nu"])
-entity type GprPredictionModelParameters mixes SklearnGPRKernelMatern schema name "GPR_PRD_MDL_PRMS" {
-    // The length scale of the kernel
-    lengthScale: ![double] schema name "LNTH_SCL"
+@db(unique=["kernelName,kernelHyperparametersHash,featureListHash,randomState,centerTarget,validation,randomSeed,splitFraction"])
+entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_MDL_PRMS" {
+    // the name of the kernel
+    kernelName: string enum('Constant', 'DotProduct', 'ExpSineSquared', 'Matern', 'RBF', 'RationalQuadratic', 'White')
+    //
+    kernelHyperparameters: !json
+    //
+    kernelHyperparametersHash: !string
+    //
+    featureList: !json
+    //
+    featureListHash: !string
+
+    // random seed
+    @ML(hyperParameter=true)
+    randomState: integer
+    // center target data before fitting
+    @ML(hyperParameter=true)
+    centerTarget: boolean=false
+    // leave fraction of rows for post-validation
+    @ML(hyperParameter=true)
+    validation: boolean=false
+    // random seed to be used by numpy.shuffle
+    @ML(hyperParameter=true)
+    randomSeed: integer=42
+    // fraction to be left for validation
+    @ML(hyperParameter=true)
+    splitFraction: float=0.2
+    /**
+    Method to create a new instance of this type.
+    */
+    @py(env='gordon_1_0_0')
+    createTechnique: function(kernelHyperparameters: json, featureList: json): GprPredictionModelParameters
+    /**
+    */
+    @py(env='gordon_1_0_0')
+    getKernelHyperparameters: function(): json
+    /**
+    */
+    @py(env='gordon_1_0_0')
+    getFeatureList: function(): json
+    /**
+    Get the kernel object
+    */
+    @py(env='gordon_1_0_0')
+    getKernel: function(): any
+    /**
+    Get the serialized kernel object
+    */
+    @py(env='gordon_1_0_0')
+    getSerializedKernel: function(): string
 }
