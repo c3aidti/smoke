@@ -43,7 +43,16 @@ function getSimulationRunTypeName() {
 function getSimulationParameterList() {
   var simulationRunTypeName = this.getSimulationRunTypeName()
   var simulationRunType = TypeRef.make({"typeName": simulationRunTypeName}).toType()
-  return simulationRunType.mixins()[2]._fields.map(function(el){
-      return el.name()
-  })
+  var parameterTypeName = simulationRunType.mixins()[2].typeName()
+  var fields = simulationRunType.mixins()[2].fieldTypes()
+
+  var filteredFields = fields.filter(function(field) {
+      return simulationRunType.fieldTypeDeclaredOn(field.name()).typeName() === parameterTypeName;
+  });
+
+  var fieldNames = filteredFields.map(function(field) {
+      return field.name();
+  });
+
+  return fieldNames;
 }
