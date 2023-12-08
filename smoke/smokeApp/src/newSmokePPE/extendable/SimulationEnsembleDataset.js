@@ -32,3 +32,18 @@ function initializeGrid(coarseGrainOptions) {
     )
     return true
 }
+
+function getSimulationRunTypeName() {
+  var thisTypeName = this.type().typeName()
+  var thisType = TypeRef.make({"typeName": thisTypeName}).toType()
+  var filter = Filter.eq("ensemble.id", "smoke_ppe_tatz")
+  return simulationRunTypeName = SimulationRun.fetch({"filter": filter,"include":"id"}).objs[0].type().typeName()
+}
+
+function getSimulationParameterList() {
+  var simulationRunTypeName = getSimulationRunTypeName(this)
+  var simulationRunType = TypeRef.make({"typeName": simulationRunTypeName}).toType()
+  return simulationRunType.mixins()[2]._fields.map(function(el){
+      return el.name()
+  })
+}

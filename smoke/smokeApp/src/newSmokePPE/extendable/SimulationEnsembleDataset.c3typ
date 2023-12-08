@@ -10,13 +10,13 @@
 */
 @db(compactType=true)
 extendable entity type SimulationEnsembleDataset  schema name "SIM_ENS_DST" {
-    //
+    // The {@link SimulationEnsemble} to which this dataset belongs
     ensemble: !SimulationEnsemble
-    //
+    // A description of this dataset
     description: long string
     // Collection of {@link DatasetGeoGrid} points for this dataset
     geoGrid: [DatasetGeoGrid](dataset,id)
-    //
+    // 
     maxLat: double stored calc "max(geoGrid.geo.lat)"
     //
     maxLon: double stored calc "max(geoGrid.geo.long)"
@@ -39,6 +39,19 @@ extendable entity type SimulationEnsembleDataset  schema name "SIM_ENS_DST" {
     //
     coarseGrainOptions: CoarseGrainOptions
     /**
+        * Initializes the geoTime grid for this dataset
+        * @param coarseGrainOptions - The options to use when initializing the grid
+        * @returns True if the grid was successfully initialized, false otherwise
     */
     initializeGrid: member function(coarseGrainOptions:CoarseGrainOptions): boolean js server
+
+    /**
+        * Returns the name of the simulation run type associated with this dataset
+        * @returns The name of the simulation run type
+    */
+    getSimulationRunTypeName: member function(): string js server
+
+    /**
+    */
+    getSimulationParameterList: member function(): [string] js server
 }
