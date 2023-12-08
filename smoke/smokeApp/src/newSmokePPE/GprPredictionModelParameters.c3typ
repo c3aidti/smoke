@@ -5,7 +5,7 @@
 @db(unique=["kernelName,kernelHyperparametersHash,featureListHash,randomState,centerTarget,validation,randomSeed,splitFraction"])
 entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_MDL_PRMS" {
     // the name of the kernel
-    kernelName: string enum('Constant', 'DotProduct', 'ExpSineSquared', 'Matern', 'RBF', 'RationalQuadratic', 'White')
+    kernelName: !string enum('Constant', 'DotProduct', 'ExpSineSquared', 'Matern', 'RBF', 'RationalQuadratic', 'White')
     //
     kernelHyperparameters: !json
     //
@@ -13,11 +13,13 @@ entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_
     //
     featureList: !json
     //
-    featureListHash: !string
+    featureListHash: private !string
     //
     simulationList: !json
     //
-    targetName: string
+    simulationListHash: private !string
+    //
+    targetName: !string
 
     // random seed
     @ML(hyperParameter=true)
