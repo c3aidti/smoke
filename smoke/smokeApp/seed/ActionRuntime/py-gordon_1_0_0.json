@@ -12,7 +12,7 @@
       "conda.iris":"=3.1.0",
       "conda.fsspec":"",
       "conda.scikit-learn":"=0.23.1",
-      "conda.jsonpickle":""
+      "conda.dill":""
     },
     "repositories": [
       "https://repo.continuum.io/pkgs/main",
