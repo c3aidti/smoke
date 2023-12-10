@@ -45,7 +45,7 @@ function getSimulationEnsemble() {
 }
 
 function getSimulationModel() {
-  ensemble = this.getSimulationEnsemble()
+  var ensemble = this.getSimulationEnsemble()
   return getSimulationModel.get(ensemble.model.id)
 }
 
