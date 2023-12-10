@@ -4,23 +4,23 @@
 **/
 @db(unique=["kernelName,kernelHyperparametersHash,featureListHash,randomState,centerTarget,validation,randomSeed,splitFraction"])
 entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_MDL_PRMS" {
-    // the name of the kernel
-    kernelName: !string enum('Constant', 'DotProduct', 'ExpSineSquared', 'Matern', 'RBF', 'RationalQuadratic', 'White')
     //
-    kernelHyperparameters: !json
+    model: !SimulationModel
+    // the name of the kernel.  Must correspod t oclass names in sklearn.gaussian_process.kernels module
+    @ML(hyperParameter=true)
+    kernelName: !string enum('ConstantKernel', 'DotProduct', 'ExpSineSquared', 'Matern', 'RBF', 'RationalQuadratic', 'WhiteKernel')
     //
-    kernelHyperparametersHash: private !string
+    @ML(hyperParameter=true)
+    serializedKernelHyperparameters: private !string
     //
-    featureList: !json
+    @ML(hyperParameter=true)
+    serializedFeatureList: private !string
     //
-    featureListHash: private !string
+    @ML(hyperParameter=true)
+    serializedSimulationList: [integer]
     //
-    simulationList: !json
-    //
-    simulationListHash: private !string
-    //
+    @ML(hyperParameter=true)
     targetName: !string
-
     // random seed
     @ML(hyperParameter=true)
     randomState: integer
@@ -39,24 +39,24 @@ entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_
     /**
     Method to create a new instance of this type.
     */
+    createTechnique: function(kernelName: string, kernelHyperparameters: json, featureList: [string], simulationList: [any], targetName: string, randomState: integer, centerTarget: boolean, validation: boolean, randomSeed: integer, splitFraction: float): GprPredictionModelParameters py server
+     /**
+    Get the serialized kernel Hyperparameters
+    */
     @py(env='gordon_1_0_0')
-    createTechnique: function(kernelName: string, kernelHyperparameters: json, featureList: [string], simulationList: [any], targetName: string, randomState: integer, centerTarget: boolean, validation: boolean, randomSeed: integer, splitFraction: float): GprPredictionModelParameters
+    getSerializedKernelHyperparameters: inline member function(): string
     /**
     */
     @py(env='gordon_1_0_0')
-    getKernelHyperparameters: function(): json
+    getFeatureList: inline member function(): [string]
     /**
     */
     @py(env='gordon_1_0_0')
-    getFeatureList: function(): json
+    getSimulationList: inline member function(): [integer]
     /**
     Get the kernel object
     */
     @py(env='gordon_1_0_0')
-    getKernel: function(): any
-    /**
-    Get the serialized kernel object
-    */
-    @py(env='gordon_1_0_0')
-    getSerializedKernel: function(): string
+    getKernel: inline member function(): any
+   
 }

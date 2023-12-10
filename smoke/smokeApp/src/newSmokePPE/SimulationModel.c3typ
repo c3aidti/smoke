@@ -5,4 +5,22 @@
 entity type SimulationModel mixes SimModelBase schema name "SIM_MDL" {
     //
     ensembles: [SimulationEnsemble](model,id)
+    //
+    GprTrainingTechniques: [GprPredictionModelParameters](model,id)
+    /**
+    */
+    createTrainingTechnique:  function(
+        kernelName: !string, 
+        serializedKernelHyperparameters: !string, 
+        featureExcludeList: [string], 
+        featureIncludeList: [string], 
+        simulationExcludeList: [integer],
+        simulationIncludeList: [integer],
+        targetName: string = 'sumAll',
+        randomSeed: integer = 42, 
+        centerTarget: boolean = false, 
+        validation: boolean = false, 
+        splitFraction: float = 0.2
+        ): GprPredictionModelParameters
+    
 }
