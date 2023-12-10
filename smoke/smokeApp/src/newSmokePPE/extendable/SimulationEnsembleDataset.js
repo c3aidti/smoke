@@ -57,7 +57,7 @@ function getSimulationParameterList() {
   return fieldNames;
 }
 
-function(pseudoLevelIndex, hardwareProfileId, parallelStreams, batchSize) {
+function startLoadOutputDataJob(pseudoLevelIndex, hardwareProfileId, parallelStreams, batchSize) {
   var simulationRunTypeName = this.getSimulationRunTypeName();
   var options = SimulationEnsembleRunLoadOutputDataJobOptions.make({
     typeName: simulationRunTypeName,
