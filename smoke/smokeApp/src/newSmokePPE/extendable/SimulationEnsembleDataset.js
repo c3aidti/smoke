@@ -70,5 +70,5 @@ function startLoadOutputDataJob(pseudoLevelIndex, hardwareProfileId, parallelStr
   var job = SimulationEnsembleRunLoadOutputDataJob.make({
     options: options
   }).upsert();
-  return job;
+  return job.start();
 }
