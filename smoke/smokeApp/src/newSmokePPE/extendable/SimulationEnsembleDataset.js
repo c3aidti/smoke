@@ -40,6 +40,15 @@ function getSimulationRunTypeName() {
   return SimulationRun.fetch({"filter": filter,"include":"id"}).objs[0].type().typeName()
 }
 
+function getSimulationEnsemble() {
+  return SimulationEnsemble.get(this.ensemble.id)
+}
+
+function getSimulationModel() {
+  ensemble = this.getSimulationEnsemble()
+  return getSimulationModel.get(ensemble.model.id)
+}
+
 function getSimulationParameterList() {
   var simulationRunTypeName = this.getSimulationRunTypeName()
   var simulationRunType = TypeRef.make({"typeName": simulationRunTypeName}).toType()

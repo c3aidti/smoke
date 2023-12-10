@@ -58,4 +58,12 @@ extendable entity type SimulationEnsembleDataset  schema name "SIM_ENS_DST" {
     /**
     */
     getSimulationParameterList: member function(): [string] js server
+
+    /**
+    */
+    getSimulationEnsemble: member function(): SimulationEnsemble js server
+
+    /**
+    */
+    getSimulationModel: member function(): SimulationModel js server
 }
