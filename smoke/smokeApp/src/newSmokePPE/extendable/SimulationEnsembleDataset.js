@@ -67,7 +67,7 @@ function startLoadOutputDataJob(pseudoLevelIndex, hardwareProfileId, parallelStr
     parallelStreams: parallelStreams,
     batchSize: batchSize
   });
-  job = SimulationEnsembleRunLoadOutputDataJob.make({
+  var job = SimulationEnsembleRunLoadOutputDataJob.make({
     options: options
   }).upsert();
   return job;
