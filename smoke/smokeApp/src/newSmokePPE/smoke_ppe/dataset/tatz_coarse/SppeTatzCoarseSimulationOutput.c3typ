@@ -6,23 +6,5 @@
 * A single Smoke PPE output taken from a single [SimulationSample](type:SimulationSample)
 */
 @db(index=['simulationRun', 'geoTimeGridPoint', 'dataset'],compactType=true)
-entity type SppeTatzCoarseSimulationOutput schema name 'SPPE_TATZC_OTP' {
-    //
-    dataset: !SppeTatzCoarseSimulationEnsembleDataset
-    // the {@link SmokePPESimulationSample} that this output is associated with
-    simulationRun: !SppeSimulationEnsembleRun
-    // the {@link GeoSurfaceTimePoint} that this output is associated with
-    geoTimeGridPoint: !SppeTatzCoarseGeoTimeGrid
-    // the pseudoLevel index (starts at 0)
-    pseudoLevelIndex: int
-    // dust
-    dust: float
-    // soluble aitken mode
-    solubleAitkenMode: float
-    // soluble accumulation mode
-    solubleAccumulationMode: float
-    // soluble coarse mode
-    solubleCoarseMode: float
-    // insoluble aitken mode
-    insolubleAitkenMode: float
-}
+entity type SppeTatzCoarseSimulationOutput 
+mixes DatasetSimulationOutputBase, SppeSimulationOutputParameters schema name 'SPPE_TATZC_OTP'

@@ -46,6 +46,10 @@ extendable entity type SimulationEnsembleDataset  schema name "SIM_ENS_DST" {
     initializeGrid: member function(coarseGrainOptions:CoarseGrainOptions): boolean js server
 
     /**
+    */
+    startLoadOutputDataJob: member function(pseudoLevelIndex: integer = 2, hardwareProfileId: string ='appc72m660-w', parallelStreams: integer = 8, batchSize: integer=160552): BatchJob js server
+
+    /**
         * Returns the name of the simulation run type associated with this dataset
         * @returns The name of the simulation run type
     */

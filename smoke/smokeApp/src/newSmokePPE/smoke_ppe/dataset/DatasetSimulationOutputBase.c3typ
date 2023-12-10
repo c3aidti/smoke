@@ -1,0 +1,9 @@
+type DatasetSimulationOutputBase {
+    //
+    dataset: !SppeTatzCoarseSimulationEnsembleDataset
+    // the {@link SmokePPESimulationSample} that this output is associated with
+    simulationRun: !SppeSimulationEnsembleRun
+    // the {@link GeoSurfaceTimePoint} that this output is associated with
+    geoTimeGridPoint: !SppeTatzCoarseGeoTimeGrid
+    // the pseudoLevel index (starts at 0)
+}
