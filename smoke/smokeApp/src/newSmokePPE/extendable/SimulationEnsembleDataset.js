@@ -46,7 +46,16 @@ function getSimulationEnsemble() {
 
 function getSimulationModel() {
   var ensemble = this.getSimulationEnsemble()
-  return getSimulationModel.get(ensemble.model.id)
+  return SimulationModel.get(ensemble.model.id)
+}
+
+function getSimulationList () {
+  var simulationRunTypeName = this.getSimulationRunTypeName();
+  var simulationRunType = TypeRef.make({"typeName": simulationRunTypeName}).toType();
+  // create list of o.simulationNumner, order by simulationNumber
+  return simulationRunType.fetch({
+    filter: Filter.eq("ensemble.id", this.ensemble.id)
+  }).objs.map(function(o) { return o.simulationNumber }).sort(function(a, b) { return a - b });
 }
 
 function getSimulationParameterList() {
