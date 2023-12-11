@@ -85,5 +85,5 @@ extendable entity type SimulationEnsembleDataset  schema name "SIM_ENS_DST" {
     /**
     */
     @py(env='gordon_1_0_0')
-    getTargetForTechnique: member function(technique: string): Dataset js server
+    getTargetForTechnique: member function(technique: string, geoTimeGridId: string): Dataset js server
 }

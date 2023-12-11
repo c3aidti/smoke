@@ -19,4 +19,6 @@ type SppeSimulationOutputParameters {
     solubleCoarseMode: float
     // insoluble aitken mode
     insolubleAitkenMode: float
+    //
+    sumAll: stored calc "sum(dust, solubleAitkenMode, solubleAccumulationMode, solubleCoarseMode, insolubleAitkenMode)"
 }

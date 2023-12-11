@@ -26,3 +26,20 @@ def getFeaturesForTechnique(this,technique):
     df = pd.DataFrame(simulationOutputFields)
     df.drop(["type","id","typeIdent","meta","version"],axis=1, inplace=True)
     return c3.Dataset.fromPython(df)
+
+def getTargetForTechnique(this,technique,geoTimeGridId):
+    import pandas as pd
+    simulationOutputTypeName = this.getSimulationOutputTypeName()
+    simulationList = c3.PythonSerialization.deserialize(serialized=technique.serializedSimulationList)
+    filter = c3.Filter.inst().eq('geoTimeGridPoint',geoTimeGridId)
+    availableSimulations = this.getSimulationList()
+    if simulationList != availableSimulations:
+        filter = filter.and_().intersects('simulationRun.simulationNumber',simulationList)
+    res = getattr(c3,simulationOutputTypeName).fetch(spec={
+        "filter": filter,
+        "include": "dust,simulationRun.simulationNumber",
+        "limit": -1
+    })
+    df = pd.DataFrame(res.objs.toJson())
+    df.drop(["type","id","meta","version","simulationRun"],axis=1, inplace=True)
+    return c3.Dataset.fromPython(df)
