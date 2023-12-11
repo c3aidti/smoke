@@ -2,12 +2,10 @@
 * Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
-@db(unique=["modelId,kernelName,serializedKernel,serializedFeatureList,serializedSimulationList,randomSeed,centerTarget,validation,splitFraction"])
+@db(unique=["model,kernelName,serializedKernel,serializedFeatureList,serializedSimulationList,randomSeed,centerTarget,validation,splitFraction"])
 entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_MDL_PRMS" {
     //
     model: !SimulationModel
-    //
-    modelId: !string
     // the name of the kernel.  Must correspod t oclass names in sklearn.gaussian_process.kernels module
     @ML(hyperParameter=true)
     kernelName: !string enum('ConstantKernel', 'DotProduct', 'ExpSineSquared', 'Matern', 'RBF', 'RationalQuadratic', 'WhiteKernel')
@@ -41,21 +39,20 @@ entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_
     @py(env='gordon_1_0_0')
     createTechnique: function(
         kernelName: string,
-        kernelHyperparameters: json,
-        featureList: [string],
-        simulationList: [any],
+        serializedKernel: string,
+        serializedFeatureList: string,
+        serializedSimulationList: string,
         targetName: string,
-        randomState: integer,
-        centerTarget: boolean,
-        validation: boolean,
-        randomSeed: integer,
-        splitFraction: float
+        randomSeed: integer = 42,
+        centerTarget: boolean = false,
+        validation: boolean = false,
+        splitFraction: float = 0.2
         ): GprPredictionModelParameters
      /**
     Get the serialized kernel Hyperparameters
     */
     @py(env='gordon_1_0_0')
-    getSerializedKernelHyperparameters: inline member function(): string
+    getSerializedKernel: inline member function(): string
     /**
     */
     @py(env='gordon_1_0_0')
