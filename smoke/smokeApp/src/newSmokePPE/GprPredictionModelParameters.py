@@ -34,7 +34,7 @@ def createTechnique(
             ).eq("splitFraction", splitFraction)
         }
     ).objs
-    if len(existing) > 0:
+    if existing:
         return existing[0]
     
     obj = c3.GprPredictionModelParameters(
