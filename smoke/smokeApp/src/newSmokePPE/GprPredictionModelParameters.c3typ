@@ -2,7 +2,7 @@
 * Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
-@db(unique=["model,kernelName,serializedKernelHyperparameters,serializedFeatureList,serializedSimulationList,randomState,centerTarget,validation,randomSeed,splitFraction"])
+@db(unique=["model,kernelName,serializedKernel,serializedFeatureList,serializedSimulationList,randomState,centerTarget,validation,randomSeed,splitFraction"])
 entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_MDL_PRMS" {
     //
     model: !SimulationModel
@@ -11,7 +11,7 @@ entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_
     kernelName: !string enum('ConstantKernel', 'DotProduct', 'ExpSineSquared', 'Matern', 'RBF', 'RationalQuadratic', 'WhiteKernel')
     //
     @ML(hyperParameter=true)
-    serializedKernelHyperparameters: private !string
+    serializedKernel: private !string
     //
     @ML(hyperParameter=true)
     serializedFeatureList: private !string
@@ -39,7 +39,19 @@ entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_
     /**
     Method to create a new instance of this type.
     */
-    createTechnique: function(kernelName: string, kernelHyperparameters: json, featureList: [string], simulationList: [any], targetName: string, randomState: integer, centerTarget: boolean, validation: boolean, randomSeed: integer, splitFraction: float): GprPredictionModelParameters py server
+    @py(env='gordon_1_0_0')
+    createTechnique: function(
+        kernelName: string,
+        kernelHyperparameters: json,
+        featureList: [string],
+        simulationList: [any],
+        targetName: string,
+        randomState: integer,
+        centerTarget: boolean,
+        validation: boolean,
+        randomSeed: integer,
+        splitFraction: float
+        ): GprPredictionModelParameters
      /**
     Get the serialized kernel Hyperparameters
     */
