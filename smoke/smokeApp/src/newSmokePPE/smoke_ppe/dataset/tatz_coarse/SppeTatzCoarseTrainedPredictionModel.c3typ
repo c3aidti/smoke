@@ -4,4 +4,4 @@
 **/
 @db(index=['simulationRun', 'geoTimeGridPoint', 'dataset','technique'],compactType=true)
 entity type SppeTatzCoarseTrainedPredictionModel 
-mixes TrainedPredictionModel schema name 'SPPE_TATZC_GPR'
+mixes TrainedPredictionModelBase schema name 'SPPE_TATZC_GPR'

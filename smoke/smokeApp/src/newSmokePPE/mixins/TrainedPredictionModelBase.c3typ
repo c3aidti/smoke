@@ -1,4 +1,4 @@
-type TrainedPredictionModel {
+type TrainedPredictionModelBase {
     //
     dataset: !SppeTatzCoarseSimulationEnsembleDataset
     // the {@link SmokePPESimulationSample} that this output is associated with
