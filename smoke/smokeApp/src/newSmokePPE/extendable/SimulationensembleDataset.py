@@ -31,13 +31,14 @@ def getTargetForTechnique(this,technique,geoTimeGridId):
     import pandas as pd
     simulationOutputTypeName = this.getSimulationOutputTypeName()
     simulationList = c3.PythonSerialization.deserialize(serialized=technique.serializedSimulationList)
+    geoTimeGridTypeName = this.getGeoTimeGridTypeName()
     filter = c3.Filter.inst().eq('geoTimeGridPoint',geoTimeGridId)
     availableSimulations = this.getSimulationList()
     if simulationList != availableSimulations:
         filter = filter.and_().intersects('simulationRun.simulationNumber',simulationList)
     res = getattr(c3,simulationOutputTypeName).fetch(spec={
         "filter": filter,
-        "include": "dust,simulationRun.simulationNumber",
+        "include": technique.targetName+",simulationRun.simulationNumber",
         "limit": -1
     })
     df = pd.DataFrame(res.objs.toJson())
