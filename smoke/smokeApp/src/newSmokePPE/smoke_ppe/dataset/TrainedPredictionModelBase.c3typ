@@ -8,9 +8,9 @@ type TrainedPredictionModelBase<DT, ST, GT> {
     // the {@link SmokePPESimulationSample} that this output is associated with
     simulationRun: !ST
     // the {@link GeoSurfaceTimePoint} that this output is associated with
-    geoTimeGridPoint: !SppeTatzCoarseGeoTimeGrid
+    geoTimeGridPoint: !GT
     // technique used to generate the prediction model
-    technique: !GT
+    technique: !GprPredictionModelParameters
     // the serialized prediction model
     trainedModel: string
     //
