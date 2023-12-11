@@ -10,7 +10,7 @@ entity type SimulationModel mixes SimModelBase schema name "SIM_MDL" {
     /**
     */
     @py(env='gordon_1_0_0')
-    createTrainingTechnique:  function(
+    createTrainingTechnique:  member function(
         kernelName: !string, 
         serializedKernel: !string, 
         featureExcludeList: [string], 
