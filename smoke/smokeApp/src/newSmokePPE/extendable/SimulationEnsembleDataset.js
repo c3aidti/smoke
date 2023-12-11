@@ -46,6 +46,12 @@ function getSimulationOutputTypeName() {
   return thisType.mixins()[2].bindings()['OT'].typeName()
 }
 
+function getGeoTimeGridTypeName() {
+  var thisTypeName = this.type().typeName()
+  var thisType = TypeRef.make({"typeName": thisTypeName}).toType()
+  return thisType.mixins()[2].bindings()['GT'].typeName()
+}
+
 function getSimulationEnsemble() {
   return SimulationEnsemble.get(this.ensemble.id)
 }
