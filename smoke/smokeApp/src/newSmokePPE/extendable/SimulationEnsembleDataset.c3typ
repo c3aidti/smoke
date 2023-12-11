@@ -92,5 +92,5 @@ extendable entity type SimulationEnsembleDataset  schema name "SIM_ENS_DST" {
     getTargetForTechnique: inline member function(technique: !GprPredictionModelParameters, geoTimeGridId: !string): Dataset
     /**
     */
-    stageTrainedPredictionModelRowsForTechnique: member function(geoTimeGridFetchSpec: !FetchSpec, technique: !GprPredictionModelParameters): long integer js server
+    stageTrainedPredictionModelRowsForTechnique: member function(geoTimeGridFetchSpec: !FetchSpec, technique: !GprPredictionModelParameters, batchSize: integer = 65536): long integer js server
 }

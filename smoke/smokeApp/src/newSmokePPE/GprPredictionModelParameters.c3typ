@@ -52,8 +52,7 @@ entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_
      /**
     Get the serialized kernel Hyperparameters
     */
-    @py(env='gordon_1_0_0')
-    getSerializedKernel: inline member function(): string
+    getSerializedKernel: member function(): string js server
     /**
     */
     @py(env='gordon_1_0_0')
