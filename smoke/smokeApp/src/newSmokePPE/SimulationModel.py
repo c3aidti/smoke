@@ -50,8 +50,7 @@ def createTrainingTechnique(
         simulationList = ds.getSimulationList()
     serializedSimulationList = c3.PythonSerialization.serialize(obj=simulationList)
 
-#     return c3.GprPredictionModelParameters.createTechnique(
-    return createTechnique(
+    return c3.GprPredictionModelParameters.createTechnique(
         this,
         kernelName=kernelName,
         serializedKernel=serializedKernel,
