@@ -2,10 +2,12 @@
 * Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
-@db(unique=["model,kernelName,serializedKernel,serializedFeatureList,serializedSimulationList,randomState,centerTarget,validation,randomSeed,splitFraction"])
+@db(unique=["modelId,kernelName,serializedKernel,serializedFeatureList,serializedSimulationList,randomState,centerTarget,validation,randomSeed,splitFraction"])
 entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_MDL_PRMS" {
     //
     model: !SimulationModel
+    //
+    modelId: !string
     // the name of the kernel.  Must correspod t oclass names in sklearn.gaussian_process.kernels module
     @ML(hyperParameter=true)
     kernelName: !string enum('ConstantKernel', 'DotProduct', 'ExpSineSquared', 'Matern', 'RBF', 'RationalQuadratic', 'WhiteKernel')
