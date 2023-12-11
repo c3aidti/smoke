@@ -109,7 +109,7 @@ function startLoadOutputDataJob(pseudoLevelIndex, hardwareProfileId, parallelStr
   return job;
 }
 
-function stageTrainedPredictionModelRowsForTechnique(this,geoTimeGridFetchSpec,technique, batchSize) {
+function stageTrainedPredictionModelRowsForTechnique(geoTimeGridFetchSpec,technique, batchSize) {
   var geoGridTypeName = this.getGeoTimeGridTypeName();
   var geoGridType = TypeRef.make({"typeName": geoGridTypeName}).toType()
   // var gridPointCount = geoGridType.fetchCount(geoTimeGridFetchSpec)
