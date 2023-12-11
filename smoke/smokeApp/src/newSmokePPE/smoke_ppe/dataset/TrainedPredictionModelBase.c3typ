@@ -1,4 +1,8 @@
-type TrainedPredictionModelBase {
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+type TrainedPredictionModelBase<DT, ST, DT> {
     //
     dataset: !SppeTatzCoarseSimulationEnsembleDataset
     // the {@link SmokePPESimulationSample} that this output is associated with
