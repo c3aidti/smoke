@@ -1,4 +1,4 @@
-def getFeaturesForTechnique(this,technique):
+def getFeaturesFromTechnique(this,technique):
     """
     Get the features for the GPR prediction model.
     """
@@ -27,7 +27,7 @@ def getFeaturesForTechnique(this,technique):
     df.drop(["type","id","typeIdent","meta","version"],axis=1, inplace=True)
     return c3.Dataset.fromPython(df)
 
-def getTargetForTechnique(this,technique,geoTimeGridId):
+def getTargetFromTechnique(this,technique,geoTimeGridId):
     import pandas as pd
     simulationOutputTypeName = this.getSimulationOutputTypeName()
     simulationList = c3.PythonSerialization.deserialize(serialized=technique.serializedSimulationList)
