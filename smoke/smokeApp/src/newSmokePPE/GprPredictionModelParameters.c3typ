@@ -2,7 +2,7 @@
 * Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
-@db(unique=["modelId,kernelName,serializedKernel,serializedFeatureList,serializedSimulationList,randomState,centerTarget,validation,randomSeed,splitFraction"])
+@db(unique=["modelId,kernelName,serializedKernel,serializedFeatureList,serializedSimulationList,randomSeed,centerTarget,validation,splitFraction"])
 entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_MDL_PRMS" {
     //
     model: !SimulationModel
@@ -19,22 +19,19 @@ entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_
     serializedFeatureList: private !string
     //
     @ML(hyperParameter=true)
-    serializedSimulationList: !string
+    serializedSimulationList: private !string
     //
     @ML(hyperParameter=true)
     targetName: !string
     // random seed
     @ML(hyperParameter=true)
-    randomState: integer
+    randomSeed: integer = 42
     // center target data before fitting
     @ML(hyperParameter=true)
     centerTarget: boolean=false
     // leave fraction of rows for post-validation
     @ML(hyperParameter=true)
     validation: boolean=false
-    // random seed to be used by numpy.shuffle
-    @ML(hyperParameter=true)
-    randomSeed: integer=42
     // fraction to be left for validation
     @ML(hyperParameter=true)
     splitFraction: float=0.2
