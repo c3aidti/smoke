@@ -2,19 +2,19 @@
 * Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
-type TrainedPredictionModelBase<DT, ST, DT> {
+type TrainedPredictionModelBase<DT, ST, GT> {
     //
-    dataset: !SppeTatzCoarseSimulationEnsembleDataset
+    dataset: !DT
     // the {@link SmokePPESimulationSample} that this output is associated with
-    simulationRun: !SppeSimulationEnsembleRun
+    simulationRun: !ST
     // the {@link GeoSurfaceTimePoint} that this output is associated with
     geoTimeGridPoint: !SppeTatzCoarseGeoTimeGrid
     // technique used to generate the prediction model
-    technique: !GprPredictionModelParameters
+    technique: !GT
     // the serialized prediction model
     trainedModel: string
     //
-    trained: boolean post default "exists(trainedModel)"
+    isTrained: boolean post default "exists(trainedModel)"
     /**
     */
     @py(env='gordon_1_0_0')
