@@ -2,11 +2,9 @@
 * Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
-type TrainedPredictionModelBase<DT, ST, GT> {
+type TrainedPredictionModelBase<DT, GT> {
     //
     dataset: !DT
-    // the {@link SmokePPESimulationSample} that this output is associated with
-    simulationRun: !ST
     // the {@link GeoSurfaceTimePoint} that this output is associated with
     geoTimeGridPoint: !GT
     // technique used to generate the prediction model

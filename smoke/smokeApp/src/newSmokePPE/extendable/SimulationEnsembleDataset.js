@@ -112,6 +112,33 @@ function startLoadOutputDataJob(pseudoLevelIndex, hardwareProfileId, parallelStr
 function stageTrainedPredictionModelRowsForTechnique(thiso,geoTimeGridFetchSpec,technique) {
   var geoGridTypeName = thiso.getGeoTimeGridTypeName();
   var geoGridType = TypeRef.make({"typeName": geoGridTypeName}).toType()
-  var gridPointCount = geoGridType.fetchCount(geoTimeGridFetchSpec)
-  return gridPointCount
-}
+  // var gridPointCount = geoGridType.fetchCount(geoTimeGridFetchSpec)
+  var modelTypeName = thiso.getTrainedPredictionModelTypeName();
+  var modelType = TypeRef.make({"typeName": modelTypeName}).toType()
+
+  var specj = geoTimeGridFetchSpec.toJson();
+  specj.type = 'FetchStreamSpec'
+  var streamSpec = FetchStreamSpec.make(specj)
+  var gridPoints = geoGridType.fetchObjStream(streamSpec);
+
+    var batchSize = 50000;
+  var batch = [];
+  var upcount = 0;
+  while(gridPoints.hasNext()) {
+    var gridPoint = gridPoints.next();
+    var row = modelType.make({
+      "dataset": thiso,
+      "geoTimeGridPoint": gridPoint,
+      "technique": technique
+    });
+    batch.push(row);
+    if (batch.length >= batchSize || !gridPoints.hasNext()) {
+      uplist = modelType.upsertBatch(batch);
+      upcount += uplist.count();
+      batch = [];
+    }
+  }
+
+  return upcount;
+    
+  }
