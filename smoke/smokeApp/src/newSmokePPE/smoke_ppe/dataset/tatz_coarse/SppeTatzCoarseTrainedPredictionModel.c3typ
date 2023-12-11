@@ -3,5 +3,5 @@
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
 @db(index=['simulationRun', 'geoTimeGridPoint', 'dataset','technique'],compactType=true)
-entity type SppeTatzTrainedCoarsePredictionModel 
+entity type SppeTatzCoarseTrainedPredictionModel 
 mixes TrainedPredictionModel schema name 'SPPE_TATZC_GPR'
