@@ -74,4 +74,8 @@ extendable entity type SimulationEnsembleDataset  schema name "SIM_ENS_DST" {
     /**
     */
     getSimulationList: member function(): [int] js server
+    /**
+    */
+    @py(env='gordon_1_0_0')
+    getFeaturesForTechnique: member function(technique: string): Dataset js server
 }

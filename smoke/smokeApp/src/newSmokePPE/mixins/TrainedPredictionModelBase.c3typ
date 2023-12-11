@@ -1,9 +1,4 @@
-/**
-* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
-* All rights reserved. License: https://github.com/c3aidti/.github
-**/
-@db(index=['simulationRun', 'geoTimeGridPoint', 'dataset'],compactType=true)
-entity type SppeTatzCoarsePredictionModel extends MLLeafPipe<Dataset, Dataset> type key 'SPPE_TATZC_GPR' {
+type TrainedPredictionModel {
     //
     dataset: !SppeTatzCoarseSimulationEnsembleDataset
     // the {@link SmokePPESimulationSample} that this output is associated with
@@ -11,5 +6,9 @@ entity type SppeTatzCoarsePredictionModel extends MLLeafPipe<Dataset, Dataset> t
     // the {@link GeoSurfaceTimePoint} that this output is associated with
     geoTimeGridPoint: !SppeTatzCoarseGeoTimeGrid
     // technique used to generate the prediction model
-    //technique: string
+    technique: !GprPredictionModelParameters
+    // the serialized prediction model
+    trainedModel: string
+    //
+    trained: boolean post default "exists(trainedModel)"
 }

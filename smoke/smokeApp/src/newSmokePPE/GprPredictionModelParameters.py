@@ -50,3 +50,7 @@ def createTechnique(
         splitFraction = splitFraction
     ).upsert()
     return c3.GprPredictionModelParameters.get(obj.id)
+
+
+
+    

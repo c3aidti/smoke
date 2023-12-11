@@ -4,7 +4,7 @@
 **/
 entity type SppeTatzCoarseSimulationEnsembleDataset
     extends SimulationEnsembleDataset
-    mixes SimulationDatasetBase<SppeTatzCoarseSimulationEnsembleDataset, SppeTatzCoarseGeoTimeGrid, SppeTatzCoarseSimulationOutput, SppeTatzCoarsePredictionModel>  type key "TATZC" {
+    mixes SimulationDatasetBase<SppeTatzCoarseSimulationEnsembleDataset, SppeTatzCoarseGeoTimeGrid, SppeTatzCoarseSimulationOutput, SppeTatzCoarseTrainedPredictionModel>  type key "TATZC" {
         //
         geoTimeGrid: [SppeTatzCoarseGeoTimeGrid](dataset,id)
         //
