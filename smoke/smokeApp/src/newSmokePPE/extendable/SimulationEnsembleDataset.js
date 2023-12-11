@@ -52,6 +52,11 @@ function getGeoTimeGridTypeName() {
   return thisType.mixins()[2].bindings()['GT'].typeName()
 }
 
+function getTrainedPredictionModelTypeName() {
+  var thisTypeName = this.type().typeName()
+  var thisType = TypeRef.make({"typeName": thisTypeName}).toType()
+  return thisType.mixins()[2].bindings()['MT'].typeName()
+}
 function getSimulationEnsemble() {
   return SimulationEnsemble.get(this.ensemble.id)
 }
@@ -102,4 +107,11 @@ function startLoadOutputDataJob(pseudoLevelIndex, hardwareProfileId, parallelStr
   }).upsert();
   job.start();
   return job;
+}
+
+function stageTrainedPredictionModelRowsForTechnique(thiso,geoTimeGridFetchSpec,technique) {
+  var geoGridTypeName = thiso.getGeoTimeGridTypeName();
+  var geoGridType = TypeRef.make({"typeName": geoGridTypeName}).toType()
+  var gridPointCount = geoGridType.fetchCount(geoTimeGridFetchSpec)
+  return gridPointCount
 }
