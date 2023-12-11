@@ -11,4 +11,8 @@ type TrainedPredictionModelBase {
     trainedModel: string
     //
     trained: boolean post default "exists(trainedModel)"
+    /**
+    */
+    @py(env='gordon_1_0_0')
+    getTarget: member function(): Dataset
 }
