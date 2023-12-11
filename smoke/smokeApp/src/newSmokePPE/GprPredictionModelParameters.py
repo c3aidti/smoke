@@ -22,7 +22,7 @@ def createTechnique(
     # Try to retrive a GprPredictionModelParameters object with the same parameters
     existing = c3.GprPredictionModelParameters.fetch(
         spec={
-            "filter": c3.Filter.eq("model.id", model.id).and_(
+            "filter": c3.Filter.inst().eq("model.id", model.id).and_(
             ).eq("kernelName", kernelName).and_(
             ).eq("serializedKernel", serializedKernel).and_(
             ).eq("serializedFeatureList", serializedFeatureList).and_(
