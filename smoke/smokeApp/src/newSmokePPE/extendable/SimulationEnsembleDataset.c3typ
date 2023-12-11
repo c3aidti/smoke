@@ -81,12 +81,12 @@ extendable entity type SimulationEnsembleDataset  schema name "SIM_ENS_DST" {
     /**
     */
     @py(env='gordon_1_0_0')
-    getFeaturesForTechnique: member function(technique: GprPredictionModelParameters): Dataset
+    getFeaturesForTechnique: member function(technique: !GprPredictionModelParameters): Dataset
     /**
     */
     @py(env='gordon_1_0_0')
-    getTargetForTechnique: member function(technique: GprPredictionModelParameters, geoTimeGridId: string): Dataset
+    getTargetForTechnique: member function(technique: !GprPredictionModelParameters, !geoTimeGridId: string): Dataset
     /**
     */
-    stageTrainedPredictionModelRowsForTechnique member function(geoTimeGridFilter: !string,technique:GprPredictionModelParameters) js server
+    stageTrainedPredictionModelRowsForTechnique member function(geoTimeGridFilter: !string,technique: !GprPredictionModelParameters): long integer js server
 }
