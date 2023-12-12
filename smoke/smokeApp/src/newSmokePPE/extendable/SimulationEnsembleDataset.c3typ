@@ -97,8 +97,8 @@ extendable entity type SimulationEnsembleDataset  schema name "SIM_ENS_DST" {
     */
     startTrainGprPredictionModelJob: member function(
         gprTechnique: !GprPredictionModelParameters,
-        geoTimeGridFetchSpec: !FetchSpec,
+        geoTimeGridFetchSpec: FetchSpec = {'limit':-1},
         batchSize: integer = 50,
         hardwareProfileId: string = 'appc8m642-w'
-    ): SimulationEnsembleRunTrainGprPredictionModelJob js server
+    ): TrainGprPredictionModelJob js server
 }
