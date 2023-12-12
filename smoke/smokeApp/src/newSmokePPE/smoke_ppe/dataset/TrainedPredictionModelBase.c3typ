@@ -2,7 +2,7 @@
 * Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
-type TrainedPredictionModelBase<DT, GT> {
+type TrainedPredictionModelBase<MT, DT, GT> {
     //
     dataset: !DT
     // the {@link GeoSurfaceTimePoint} that this output is associated with
@@ -17,4 +17,8 @@ type TrainedPredictionModelBase<DT, GT> {
     */
     @py(env='gordon_1_0_0')
     getTarget: member function(): Dataset
+
+    @py(env='gordon_1_0_0')
+    train: member function(X: !Dataset): MT
+
 }
