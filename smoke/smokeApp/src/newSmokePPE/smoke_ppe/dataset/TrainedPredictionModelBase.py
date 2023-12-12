@@ -1,3 +1,10 @@
+def getTarget(this):
+    techniqueTypeName = this.technique.toJson()['type']
+    technique = getattr(c3,techniqueTypeName).get(this.technique.id)
+    datasetTypeName = this.dataset.toJson()['type']
+    dataset = getattr(c3,datasetTypeName).get(this.dataset.id)
+    return dataset.getTargetForTechnique(technique,this.geoTimeGridPoint)
+
 def train(this,X):
     from sklearn.gaussian_process import GaussianProcessRegressor
     typeName = this.toJson()['type']
@@ -27,7 +34,11 @@ def train(this,X):
     
     # build and train GPR
     gp = GaussianProcessRegressor(kernel=kernel)
-    gp.fit(X_np, y_np)
+    try:
+        gp.fit(X_np, y_np)
+    except:
+        print("Error in training")
+        return False
     
     updateThis = getattr(c3,typeName)(
         id = this.id,
@@ -39,4 +50,4 @@ def train(this,X):
     
     updateThis.merge()
     
-    return getattr(c3,typeName).get(this.id)
+    return True
