@@ -132,7 +132,7 @@ function stageTrainedPredictionModelRowsForTechnique(geoTimeGridFetchSpec,techni
     });
     batch.push(row);
     if (batch.length >= batchSize || !gridPoints.hasNext()) {
-      uplist = modelType.mergeBatch(batch);
+      var uplist = modelType.mergeBatch(batch);
       upcount += uplist.count();
       batch = [];
     }
