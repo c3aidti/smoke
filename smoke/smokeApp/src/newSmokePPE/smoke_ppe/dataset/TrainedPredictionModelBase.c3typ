@@ -12,7 +12,7 @@ type TrainedPredictionModelBase<MT, DT, GT> {
     // the serialized prediction model
     trainedModel: clob
     //
-    isTrained: boolean post default "exists(trainedModel)"
+    isTrained: boolean stored calc "exists(trainedModel)"
     /**
     */
     @py(env='gordon_1_0_0')
