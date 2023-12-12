@@ -123,9 +123,14 @@ function stageTrainedPredictionModelRowsForTechnique(geoTimeGridFetchSpec,techni
 
   var batch = [];
   var upcount = 0;
+  // Create a composite key for the upsert
+  var compositeKey = this.id + "_" + technique.id + "_" + gridPoint.id + "_";
+
   while(gridPoints.hasNext()) {
     var gridPoint = gridPoints.next();
+    var compositeKey = StringUtil.safeId(this.id + "_" + technique.id + "_" + gridPoint.id + "_");
     var row = modelType.make({
+      "id": compositeKey,
       "dataset": this,
       "geoTimeGridPoint": gridPoint,
       "technique": technique
