@@ -19,7 +19,7 @@ function doStart(job, options) {
     // Stage rows for training
     dsetObj.stageTrainedPredictionModelRowsForTechnique(
         options.geoTimeGridFetchSpec,
-        options.technique 
+        options.gprTechnique 
     );
 
     job.setHardwareProfile(options.hardwareProfileId);
