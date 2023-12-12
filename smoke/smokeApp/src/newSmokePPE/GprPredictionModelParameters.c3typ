@@ -66,5 +66,11 @@ entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_
     */
     @py(env='gordon_1_0_0')
     getKernel: inline member function(): any
+
+
+    /**
+    * Callback dec. to delete child file records.
+    */
+    afterRemove: ~ js server
    
 }
