@@ -30,6 +30,7 @@ function doStart(job, options) {
     // var updateJob = TrainGprPredictionModelJob.make({"id":job.id,"options":newOptions.toJson()});
     // updateJob.merge();
 
+    var specj = options.geoTimeGridFetchSpec.toJson();
     specj.type = 'FetchStreamSpec'
     var streamSpec = FetchStreamSpec.make(specj)
     var rows = predictionModelType.fetchObjStream(streamSpec);
