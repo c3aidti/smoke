@@ -21,4 +21,5 @@ type SimulationDatasetBase<DT,GT,OT,MT> {
     traindModelPercent: float stored calc "100*(trainedModelCount / geoGridTimeSeriesCount)"
     //
     simulationOutput: [OT](dataset,id)
-}
+    //
+    trainedTechniques: [GprPredictionModelParameters] stored calc "unique(trainedModels.technique).map(technique)"
