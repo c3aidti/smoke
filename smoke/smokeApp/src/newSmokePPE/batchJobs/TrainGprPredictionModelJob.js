@@ -9,7 +9,7 @@
 
 function doStart(job, options) {
     var dsetObj = SimulationEnsembleDataset.fetch({
-        "filter": Filter.eq('id',dsetId),
+        "filter": Filter.eq('id',options.datasetId),
         "include":"id"
     }).objs[0];
     var dsetTypeName = dsetObj.type().typeName();
