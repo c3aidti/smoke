@@ -39,7 +39,7 @@ function doStart(job, options) {
     while(rows.hasNext()) {
         batch.push(rows.next().id);
 
-        if (batch.length >= options.batchSize || !gstps.hasNext()) {
+        if (batch.length >= options.batchSize || !rows.hasNext()) {
             var batchSpec = TrainGprPredictionModelJobBatch.make({values: batch});
             job.scheduleBatch(batchSpec);
             
