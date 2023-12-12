@@ -19,6 +19,6 @@ type TrainedPredictionModelBase<MT, DT, GT> {
     getTarget: member function(): Dataset
 
     @py(env='gordon_1_0_0')
-    train: member function(X: !Dataset): MT
+    train: inline member function(X: !Dataset): MT
 
 }
