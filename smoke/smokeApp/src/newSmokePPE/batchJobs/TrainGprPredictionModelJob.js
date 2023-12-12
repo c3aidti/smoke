@@ -8,13 +8,14 @@
 **/
 
 function doStart(job, options) {
-    var dsetObj = SimulationEnsembleDataset.fetch({
-        "filter": Filter.eq('id',options.datasetId),
-        "include":"id"
-    }).objs[0];
-    var dsetTypeName = dsetObj.type().typeName();
-    var dsetType = TypeRef.make({"typeName": dsetTypeName}).toType();
-    dsetObj = dsetType.get(options.datasetId);
+    // var dsetObj = SimulationEnsembleDataset.fetch({
+    //     "filter": Filter.eq('id',options.datasetId),
+    //     "include":"id"
+    // }).objs[0];
+    // var dsetTypeName = dsetObj.type().typeName();
+    // var dsetType = TypeRef.make({"typeName": dsetTypeName}).toType();
+    // dsetObj = dsetType.get(options.datasetId);
+    var dsetObj = options.dataset;
 
     // Stage rows for training
     dsetObj.stageTrainedPredictionModelRowsForTechnique(
@@ -52,8 +53,11 @@ function doStart(job, options) {
 }
 
 function processBatch(batch, job, options) {
+    var dsetObj = options.dataset;
+    var predictionModelTypeName = dsetObj.getTrainedPredictionModelTypeName();
+    var predictionModelType = TypeRef.make({"typeName": predictionModelTypeName}).toType();
     batch.values.forEach(function(rowId) {
-        var row = options.predictionModelType.get(rowId);
+        var row = predictionModelType.get(rowId);
         row.train(options.X);
     });
 }
