@@ -14,9 +14,10 @@ function doStart(job, options) {
     }).objs[0];
     var dsetTypeName = dsetObj.type().typeName();
     var dsetType = TypeRef.make({"typeName": dsetTypeName}).toType();
+    dsetObj = dsetType.get(options.datasetId);
 
     // Stage rows for training
-    dsetType.stageTrainedPredictionModelRowsForTechnique(
+    dsetObj.stageTrainedPredictionModelRowsForTechnique(
         options.geoTimeGridFetchSpec,
         options.technique 
     );
