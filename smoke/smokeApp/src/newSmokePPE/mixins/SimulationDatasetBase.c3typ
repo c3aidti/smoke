@@ -22,5 +22,5 @@ type SimulationDatasetBase<DT,GT,OT,MT> {
     //
     simulationOutput: [OT](dataset,id)
     //
-    trainedTechniques: [GprPredictionModelParameters] stored calc "unique(trainedModels.technique.id).map({type:''technique.id})" schema suffix 'UT'
+    trainedTechniques: [GprPredictionModelParameters] stored calc "unique(trainedModels.technique.id).map({type:'GprPredictionModelParameters',id:technique.id})" schema suffix 'UT'
 }
