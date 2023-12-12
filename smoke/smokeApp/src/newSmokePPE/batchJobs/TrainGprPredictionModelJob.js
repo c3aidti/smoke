@@ -29,10 +29,10 @@ function doStart(job, options) {
     var predictionModelType = TypeRef.make({"typeName": predictionModelTypeName}).toType();
 
     // update options with predictionModelType
-    var newOptions = TrainGprPredictionModelJobOptions.make(options.toJson());
-    newOptions.predictionModelType = predictionModelType;
-    var updateJob = TrainGprPredictionModelJob.make({"id":job.id,"options":newOptions.toJson()});
-    updateJob.merge();
+    // var newOptions = TrainGprPredictionModelJobOptions.make(options.toJson());
+    // newOptions.predictionModelType = predictionModelType;
+    // var updateJob = TrainGprPredictionModelJob.make({"id":job.id,"options":newOptions.toJson()});
+    // updateJob.merge();
 
     specj.type = 'FetchStreamSpec'
     var streamSpec = FetchStreamSpec.make(specj)
