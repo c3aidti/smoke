@@ -4,5 +4,5 @@
 **/
 type TrainGprPredictionModelJobBatch {
     //
-    values [string]
+    values: [string]
 }
