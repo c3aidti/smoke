@@ -22,4 +22,4 @@ type SimulationDatasetBase<DT,GT,OT,MT> {
     //
     simulationOutput: [OT](dataset,id)
     //
-    trainedTechniques: [GprPredictionModelParameters] stored calc "unique(trainedModels.technique).map(technique)"
+    trainedTechniques: [GprPredictionModelParameters] stored calc "unique(trainedModels.technique.id)"
