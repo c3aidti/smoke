@@ -10,7 +10,7 @@ type TrainedPredictionModelBase<DT, GT> {
     // technique used to generate the prediction model
     technique: !GprPredictionModelParameters
     // the serialized prediction model
-    trainedModel: MLTrainedModelArtifact
+    trainedModel: clob
     //
     isTrained: boolean post default "exists(trainedModel)"
     /**
