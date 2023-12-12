@@ -22,4 +22,4 @@ type SimulationDatasetBase<DT,GT,OT,MT> {
     //
     simulationOutput: [OT](dataset,id)
     //
-    trainedTechniques: [any] stored calc "unique(trainedModels.technique.id)"
+    trainedTechniques: [GprPredictionModelParameters] stored calc "unique(trainedModels.technique)" schema suffix 'UT'
