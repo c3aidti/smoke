@@ -99,6 +99,6 @@ extendable entity type SimulationEnsembleDataset  schema name "SIM_ENS_DST" {
         gprTechnique: !GprPredictionModelParameters,
         geoTimeGridFetchSpec: !FetchSpec,
         batchSize: integer = 50,
-        hardwareProfileId: string = 'appc8m642-w',
+        hardwareProfileId: string = 'appc8m642-w'
     ): SimulationEnsembleRunTrainGprPredictionModelJob js server
 }
