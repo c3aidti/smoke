@@ -7,4 +7,5 @@
 */
 @db(index=['simulationRun', 'geoTimeGridPoint', 'dataset'],compactType=true)
 entity type SppeTatzCoarseSimulationOutput 
-mixes DatasetSimulationOutputBase<SppeTatzCoarseSimulationEnsembleDataset,SppeSimulationEnsembleRun,SppeTatzCoarseGeoTimeGrid>, SppeSimulationOutputParameters schema name 'SPPE_TATZC_OTP'
+mixes DatasetSimulationOutputBase<SppeTatzCoarseSimulationEnsembleDataset,SppeSimulationEnsembleRun,SppeTatzCoarseGeoTimeGrid>, SppeSimulationOutputParameters 
+schema name 'SPPE_TATZC_OTP'

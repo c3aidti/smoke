@@ -4,10 +4,6 @@
 **/
 entity type SppeTatzFullSimulationEnsembleDataset
     extends SimulationEnsembleDataset
-    mixes SimulationDatasetBase<SppeTatzFullSimulationEnsembleDataset, SppeTatzFullGeoTimeGrid, SppeTatzFullSimulationOutput, SppeTatzFullPredictionModel>  type key "TATZF" {
-        //
-        geoTimeGrid: [SppeTatzFullGeoTimeGrid](dataset,id)
-        //
-        geoGridTimeSeriesCount: long integer stored calc "count(geoTimeGrid)"
-    }
+    mixes SimulationDatasetBase<SppeTatzFullSimulationEnsembleDataset, SppeTatzFullGeoTimeGrid, SppeTatzFullSimulationOutput, SppeTatzFullPredictionModel>  type key "TATZF"
+    
     
