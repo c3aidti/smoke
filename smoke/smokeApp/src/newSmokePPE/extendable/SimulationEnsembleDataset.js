@@ -109,6 +109,22 @@ function startLoadOutputDataJob(pseudoLevelIndex, hardwareProfileId, parallelStr
   return job;
 }
 
+function startTrainGprPredictionModelJob(gprTechnique, geoTimeGridFetchSpec, hardwareProfileId, batchSize) {
+  var options = TrainGprPredictionModelJobOptions.make({
+    dataset: this,
+    gprTechnique: gprTechnique,
+    geoTimeGridFetchSpec: geoTimeGridFetchSpec,
+    hardwareProfileId: hardwareProfileId,
+    batchSize: batchSize,
+    X: this.getFeaturesForTechnique(gprTechnique)
+  });
+  var job = TrainGprPredictionModelJob.make({
+    options: options
+  }).upsert();
+  job.start();
+  return job;
+}
+
 function stageTrainedPredictionModelRowsForTechnique(geoTimeGridFetchSpec,technique, batchSize) {
   var geoGridTypeName = this.getGeoTimeGridTypeName();
   var geoGridType = TypeRef.make({"typeName": geoGridTypeName}).toType()
