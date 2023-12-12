@@ -4,6 +4,6 @@
 **/
 entity type SppeTatzFullSimulationEnsembleDataset
     extends SimulationEnsembleDataset
-    mixes SimulationDatasetBase<SppeTatzFullSimulationEnsembleDataset, SppeTatzFullGeoTimeGrid, SppeTatzFullSimulationOutput, SppeTatzFullPredictionModel>  type key "TATZF"
-    
+    mixes SimulationDatasetBase<SppeTatzFullSimulationEnsembleDataset, SppeTatzFullGeoTimeGrid, SppeTatzFullSimulationOutput, SppeTatzFullTrainedPredictionModel>  type key "TATZF"
+
     
