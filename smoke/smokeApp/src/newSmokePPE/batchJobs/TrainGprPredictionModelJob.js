@@ -24,7 +24,7 @@ function doStart(job, options) {
 
     job.setHardwareProfile(options.hardwareProfileId);
 
-    var predictionModelTypeName = dsetType.getTrainedPredictionModelTypeName();
+    var predictionModelTypeName = dsetObj.getTrainedPredictionModelTypeName();
     var predictionModelType = TypeRef.make({"typeName": predictionModelTypeName}).toType();
 
     // update options with predictionModelType
