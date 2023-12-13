@@ -83,6 +83,30 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     df_st["id"] = datasetId + '_' + this.id + '_' + round(df_st["latitude"],3).astype(str) + "_" + round(df_st["longitude"],3).astype(str) + "_" + df_st["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
 
     df_st = df_st.drop(columns=["time", "latitude", "longitude"])
+
+    def interp_targ_data(targ_data, lats_step, lons_step):
+        """
+        targ_data: iterable
+        Must be a two dimensional array of the data being regridded in the dimensions of (lats,lons)
+        lats_step: int
+        The number of points to be included in an average.
+        lons_step: int
+        The number of points to be included in an average.
+        """
+        lats_dim, lons_dim = np.shape(targ_data)
+        
+        lats_inds = list(range(0, lats_dim, lats_step))
+        lons_inds = list(range(0, lons_dim, lons_step))
+        
+        rg_targ_data = np.zeros((len(lats_inds), len(lons_inds)))
+        m = 0
+        for i in lats_inds:
+            n = 0
+            for j in lons_inds:
+                rg_targ_data[m,n] = np.mean(targ_data[i:i+lats_step,j:j+lons_step])
+                n +=1
+            m += 1
+        return rg_targ_data
     
     for file in files:
         var_name = file.file.url.split('glm_')[-1].split('_m01')[0]
@@ -97,28 +121,33 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
         tensor_3d = np.array(tensor[:, pseudoLevelIndex, :, :])  # shape: (time, lat, lon)
 
         if coarseGrainOptions:
-            # Define new grid points for coarse interpolation
-            new_lat_points = DimCoord(lat, standard_name='latitude', units='degrees')
-            new_lon_points = DimCoord(lon, standard_name='longitude', units='degrees')
-
-            # Initialize an empty list to store interpolated data
             interpolated_data = []
-
-            # Iterate over the time dimension and interpolate each time slice
-            cnt=0
             for time_slice in tensor_3d:
-                # Create DimCoords for the time slice's lat-lon grid
-                slice_lat_coord = DimCoord(original_lat, standard_name='latitude', units='degrees')
-                slice_lon_coord = DimCoord(original_lon, standard_name='longitude', units='degrees')
+                time_slice
+                interp_data_time_slice = interp_targ_data(time_slice,coarseGrainOptions.coarseFactor,coarseGrainOptions.coarseFactor)
+                interpolated_data.append(interp_data_time_slice)
+            # # Define new grid points for coarse interpolation
+            # new_lat_points = DimCoord(lat, standard_name='latitude', units='degrees')
+            # new_lon_points = DimCoord(lon, standard_name='longitude', units='degrees')
 
-                # Create the Iris cube for the time slice
-                cube = Cube(time_slice, dim_coords_and_dims=[(slice_lat_coord, 0), (slice_lon_coord, 1)])
+            # # Initialize an empty list to store interpolated data
+            # interpolated_data = []
 
-                # Perform interpolation
-                sample_points = [('latitude', new_lat_points.points), ('longitude', new_lon_points.points)]
-                interpolated_cube = cube.interpolate(sample_points, Linear())
-                interpolated_data.append(interpolated_cube.data)
-                cnt = cnt + 1
+            # # Iterate over the time dimension and interpolate each time slice
+            # cnt=0
+            # for time_slice in tensor_3d:
+            #     # Create DimCoords for the time slice's lat-lon grid
+            #     slice_lat_coord = DimCoord(original_lat, standard_name='latitude', units='degrees')
+            #     slice_lon_coord = DimCoord(original_lon, standard_name='longitude', units='degrees')
+
+            #     # Create the Iris cube for the time slice
+            #     cube = Cube(time_slice, dim_coords_and_dims=[(slice_lat_coord, 0), (slice_lon_coord, 1)])
+
+            #     # Perform interpolation
+            #     sample_points = [('latitude', new_lat_points.points), ('longitude', new_lon_points.points)]
+            #     interpolated_cube = cube.interpolate(sample_points, Linear())
+            #     interpolated_data.append(interpolated_cube.data)
+            #     cnt = cnt + 1
 
             # Convert the list of interpolated slices into a 3D numpy array
             tensor_3d = np.array(interpolated_data)
