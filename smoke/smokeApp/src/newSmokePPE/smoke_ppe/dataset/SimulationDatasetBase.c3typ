@@ -1,12 +1,17 @@
 /**
 * Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
 * All rights reserved. License: https://github.com/c3aidti/.github
-**/
-/**
- * @var DT - Dataset type
- * @var GT - Grid type
- * @var OT - Output type
- * @var MT - Models type
+*
+* @var DT - Dataset type
+* @var GT - Grid type
+* @var OT - Output type
+* @var MT - Models type
+*
+* Base parameterized type for simulation datasets
+* 
+* TODO:
+* - Possibly rename to: EnsembleDataset
+*
 */
 type SimulationDatasetBase<DT,GT,OT,MT> {
     //
