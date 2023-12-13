@@ -11,6 +11,23 @@ def upsertGridData(this,datasetType,geoTimeGridType,datasetId,coarseGrainOptions
         Create a GeoPoint object from long, lat.
         """
         return c3.GeoPoint(long=long, lat=lat)
+    
+    def interp_coord(data_arr, step):
+        """
+        data_arr: iterable
+        Must be a 1 dimensional iterable.
+        step: int
+        The number of points to be included in one average.
+        """
+        rg_list = []
+        
+        ind_list = list(range(0, len(data_arr), step))
+        for ind in ind_list:
+            rg_list.append(
+                np.mean(data_arr[ind:ind+step])
+            )
+        return rg_list
+
 
     dataset = getattr(c3,datasetType).get(datasetId)
 
@@ -28,8 +45,10 @@ def upsertGridData(this,datasetType,geoTimeGridType,datasetId,coarseGrainOptions
     
     if coarseGrainOptions:
         # Coarse-graining: Reduce the resolution of the lat-lon grid
-        lat = lat[::coarseGrainOptions.coarseFactor]
-        lon = lon[::coarseGrainOptions.coarseFactor]
+        # lat = lat[::coarseGrainOptions.coarseFactor]
+        # lon = lon[::coarseGrainOptions.coarseFactor]
+        lat = interp_coord(lat,coarseGrainOptions.coarseFactor)
+        lon = interp_coord(lon,coarseGrainOptions.coarseFactor)
 
     # Create space-time dataframe
     df_st = pd.DataFrame()
