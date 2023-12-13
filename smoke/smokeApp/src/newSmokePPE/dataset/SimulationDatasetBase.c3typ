@@ -15,7 +15,7 @@
 */
 type SimulationDatasetBase<DT,GT,OT,MT> {
     //
-    trainedModels: [MT](dataset,id)
+    trainedModelRecords: [MT](dataset,id)
     //
     trainedModelCount: long integer stored calc "count(trainedModels)"
     //

@@ -2,7 +2,8 @@
 * Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
-@db(unique=["model,kernelName,serializedKernel,serializedFeatureList,serializedSimulationList,randomSeed,centerTarget,validation,splitFraction"])
+@db(unique=["model,kernelName,serializedKernel,serializedFeatureList,serializedSimulationList,randomSeed,centerTarget,validation,splitFraction"],
+shortId=true,shortIdPrefix="TECH")
 entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_MDL_PRMS" {
     //
     model: !SimulationModel
