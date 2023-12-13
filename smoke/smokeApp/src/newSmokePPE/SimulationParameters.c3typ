@@ -5,7 +5,7 @@
 * Full parameter schema for the simulation parameters
 
 **/
-entity type SimulationParameters mixes SimParamsBase schema name "SIM_PRMS" {
+entity type SimulationParameters schema name "SIM_PRMS" {
     // Reference to the {@link SimulationModel}
     simulationModel: !SimulationModel
     // The name of the parameter

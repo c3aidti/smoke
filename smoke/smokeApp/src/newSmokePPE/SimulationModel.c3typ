@@ -11,7 +11,7 @@
 *
 *
 **/
-entity type SimulationModel mixes SimModelBase schema name "SIM_MDL" {
+entity type SimulationModel schema name "SIM_MDL" {
      //
     name: string
     //
