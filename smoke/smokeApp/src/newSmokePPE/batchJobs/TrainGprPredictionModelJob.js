@@ -24,11 +24,15 @@ function doStart(job, options) {
     var predictionModelTypeName = dsetObj.getTrainedPredictionModelTypeName();
     var predictionModelType = TypeRef.make({"typeName": predictionModelTypeName}).toType();
 
-    // update options with predictionModelType
-    // var newOptions = TrainGprPredictionModelJobOptions.make(options.toJson());
-    // newOptions.predictionModelType = predictionModelType;
-    // var updateJob = TrainGprPredictionModelJob.make({"id":job.id,"options":newOptions.toJson()});
-    // updateJob.merge();
+    // See if the options.geoTimeGridFetchSpec contianes a filter
+    // If it does append an and() clause to filter on, if not, create new filter
+    var filter = options.geoTimeGridFetchSpec.filter;
+    if (filter === undefined) {
+        filter = Filter.eq('isTrained', false);
+    }
+    else {
+        filter = filter.and().eq('isTrained', false);
+    }
 
     var specj = options.geoTimeGridFetchSpec.toJson();
     specj.type = 'FetchStreamSpec'
