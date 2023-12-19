@@ -9,6 +9,4 @@
 type SppeSimulationClwpOutputParameters {
     // Cloud Liquid Water Path
     clwp: float
-    //
-    sumAll: float stored calc "sum(dust, solubleAitkenMode, solubleAccumulationMode, solubleCoarseMode, insolubleAitkenMode)"
 }
