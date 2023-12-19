@@ -1,0 +1,17 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+entity type SppeSimulationClwpEnsembleRun
+    extends SimulationRun<SppeSimulationEnsembleRun,SppeSimulationEnsembleOutputFile> 
+    mixes SppeSimulationRunParameters type key "SPPE" {
+    /**
+    */    
+    upsertFileTable: ~ js server
+    /**
+    */
+    @py(env='gordon-interpolation_1_0_0')
+    upsertSimulationOutput: member function(datasetId: !string, pseudoLevelIndex: !int, batchSize: int=80276): boolean
+    
+
+}
