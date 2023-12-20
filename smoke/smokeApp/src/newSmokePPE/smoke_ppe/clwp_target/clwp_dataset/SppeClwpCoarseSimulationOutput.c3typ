@@ -1,0 +1,11 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* A single Smoke PPE output taken from a single [SimulationSample](type:SimulationSample)
+*/
+@db(index=['simulationRun', 'geoTimeGridPoint', 'dataset'],compactType=true)
+entity type SppeClwpCoarseSimulationOutput 
+mixes DatasetSimulationOutputBase<SppeClwpCoarseSimulationEnsembleDataset,SppeSimulationEnsembleRun,SppeClwpCoarseGeoTimeGrid>, SppeSimulationOutputParameters 
+schema name 'SPPE_CLWPC_OTP'
