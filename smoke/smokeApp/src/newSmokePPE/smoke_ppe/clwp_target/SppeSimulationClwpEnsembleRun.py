@@ -4,37 +4,30 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     import numpy as np
     
     thisType = this.toJson()['type']
-    outputFileType = getattr(c3,thisType).mixins[1].genericVarBindings[1].name
+    outputFileType = getattr(c3,thisType).mixins[1].genericVarBindings[1].name #SppeSimulationOutputFile
     datasetObj = c3.SimulationEnsembleDataset.fetch(
         spec = {
             "filter":c3.Filter.inst().eq('id',datasetId),
             "include": "id"
         }
     ).objs[0]
-    datasetType = datasetObj.toJson()['type']
-    geoTimeGridType = getattr(c3,datasetType).mixins[2].genericVarBindings[1].name
-    simulationOutputType = getattr(c3,datasetType).mixins[2].genericVarBindings[2].name
-    thisDataset = getattr(c3,datasetType).get(datasetId)
+    datasetType = datasetObj.toJson()['type'] #SppeTatzCoarseSimulationEnsembleDataset
+    geoTimeGridType = getattr(c3,datasetType).mixins[2].genericVarBindings[1].name #SppeTatzCoarseGeoTimeGrid
+    simulationOutputType = getattr(c3,datasetType).mixins[2].genericVarBindings[2].name #SppeTatzCoarseSimulationOutput
+    thisDataset = getattr(c3,datasetType).get(datasetId) #
     coarseGrainOptions = thisDataset.coarseGrainOptions
 
     def make_gstp(objId):
         return getattr(c3,geoTimeGridType)(id=objId)
 
-    var_names_ppe_inv = [
-        'level_height',
-        'mass_fraction_of_cloud_liquid_water_in_air',
-        'air_potential_temperature',
-        'air_pressure'
-    ]
-
-    # var_names_ppe = {
-    #         "dust" : "atmosphere_optical_thickness_due_to_dust_ambient_aerosol",
-    #         "solubleAitkenMode" : "atmosphere_optical_thickness_due_to_soluble_aitken_mode_sulphate_aerosol",
-    #         "solubleAccumulationMode" : "atmosphere_optical_thickness_due_to_soluble_accumulation_mode_sulphate_aerosol",
-    #         "solubleCoarseMode" : "atmosphere_optical_thickness_due_to_soluble_coarse_mode_sulphate_aerosol",
-    #         "insolubleAitkenMode" : "atmosphere_optical_thickness_due_to_insoluble_aitken_mode_sulphate_aerosol"
-    # }
-    # var_names_ppe_inv = {v: k for k, v in var_names_ppe.items()}
+    # variables necessary to calculate clwp
+    var_names_ppe = {
+            "pressure" : "air_pressure",
+            "level_height" : "level_height",
+            "potential_temp" : "air_potential_temperature",
+            "mass_frac_water" : "mass_fraction_of_cloud_liquid_water_in_air"
+    }
+    var_names_ppe_inv = {v: k for k, v in var_names_ppe.items()}
 
     # grab the relevant files
     files = getattr(c3,outputFileType).fetch({
@@ -55,22 +48,6 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     for t in tim:
         target_time = zero_time + dt.timedelta(hours=t)
         times.append(target_time)
-    
-    def interp_coord(data_arr, step):
-        """
-        data_arr: iterable
-        Must be a 1 dimensional iterable.
-        step: int
-        The number of points to be included in one average.
-        """
-        rg_list = []
-        
-        ind_list = list(range(0, len(data_arr), step))
-        for ind in ind_list:
-            rg_list.append(
-                np.mean(data_arr[ind:ind+step])
-            )
-        return rg_list
 
     if coarseGrainOptions:
         # Coarse-graining: Reduce the resolution of the lat-lon grid
@@ -103,30 +80,6 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     df_st["id"] = datasetId + '_' + this.id + '_' + round(df_st["latitude"],3).astype(str) + "_" + round(df_st["longitude"],3).astype(str) + "_" + df_st["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
 
     df_st = df_st.drop(columns=["time", "latitude", "longitude"])
-
-    def interp_targ_data(targ_data, lats_step, lons_step):
-        """
-        targ_data: iterable
-        Must be a two dimensional array of the data being regridded in the dimensions of (lats,lons)
-        lats_step: int
-        The number of points to be included in an average.
-        lons_step: int
-        The number of points to be included in an average.
-        """
-        lats_dim, lons_dim = np.shape(targ_data)
-        
-        lats_inds = list(range(0, lats_dim, lats_step))
-        lons_inds = list(range(0, lons_dim, lons_step))
-        
-        rg_targ_data = np.zeros((len(lats_inds), len(lons_inds)))
-        m = 0
-        for i in lats_inds:
-            n = 0
-            for j in lons_inds:
-                rg_targ_data[m,n] = np.mean(targ_data[i:i+lats_step,j:j+lons_step])
-                n +=1
-            m += 1
-        return rg_targ_data
     
     for file in files:
         var_name = file.file.url.split('glm_')[-1].split('_m01')[0]
@@ -146,29 +99,7 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
                 time_slice
                 interp_data_time_slice = interp_targ_data(time_slice,coarseGrainOptions.coarseFactor,coarseGrainOptions.coarseFactor)
                 interpolated_data.append(interp_data_time_slice)
-            # # Define new grid points for coarse interpolation
-            # new_lat_points = DimCoord(lat, standard_name='latitude', units='degrees')
-            # new_lon_points = DimCoord(lon, standard_name='longitude', units='degrees')
-
-            # # Initialize an empty list to store interpolated data
-            # interpolated_data = []
-
-            # # Iterate over the time dimension and interpolate each time slice
-            # cnt=0
-            # for time_slice in tensor_3d:
-            #     # Create DimCoords for the time slice's lat-lon grid
-            #     slice_lat_coord = DimCoord(original_lat, standard_name='latitude', units='degrees')
-            #     slice_lon_coord = DimCoord(original_lon, standard_name='longitude', units='degrees')
-
-            #     # Create the Iris cube for the time slice
-            #     cube = Cube(time_slice, dim_coords_and_dims=[(slice_lat_coord, 0), (slice_lon_coord, 1)])
-
-            #     # Perform interpolation
-            #     sample_points = [('latitude', new_lat_points.points), ('longitude', new_lon_points.points)]
-            #     interpolated_cube = cube.interpolate(sample_points, Linear())
-            #     interpolated_data.append(interpolated_cube.data)
-            #     cnt = cnt + 1
-
+            
             # Convert the list of interpolated slices into a 3D numpy array
             tensor_3d = np.array(interpolated_data)
 
@@ -201,3 +132,115 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
         end_index = min(end_index + batchSize, total_records)
         
     return True
+
+
+#------------------------------Helper Functions------------------------------------
+def get_clwp(ens_num):
+    
+    # constants
+    P_0 = 100000 #Pa
+    exp_term = 0.286
+    MW_air = 28.96 #g/mol
+    R = 8.314472 #m3 Pa / K mol
+    
+    for url in mass_frac_water_urls:
+        if 'ens_' + str(ens_num) in url:
+            mf_url = url
+            
+    for url in pressure_urls:
+        if 'ens_' + str(ens_num) in url:
+            press_url = url
+            
+    for url in pot_temp_urls:
+        if 'ens_' + str(ens_num) in url:
+            pt_url = url
+    
+    # read files
+    mass_frac_file = c3.NetCDFUtil.openFile(mf_url)
+    press_file = c3.NetCDFUtil.openFile(press_url)
+    pot_temp_file = c3.NetCDFUtil.openFile(pt_url)
+    
+    mass_frac_data = mass_frac_file['mass_fraction_of_cloud_liquid_water_in_air'][:,:,:,:]
+    press_data = press_file['air_pressure'][:,:,:,:]
+    pot_temp_data = pot_temp_file['air_potential_temperature'][:,:,:,:]
+    
+    lats = mass_frac_file['latitude'][:]
+    lons = mass_frac_file['longitude'][:]
+    
+    lats_df = [lat for lon in lons for lat in lats]
+    lons_df = [lon for lon in lons for lat in lats]
+    
+    # for regridding
+    lats_global = np.array(range(-90,90,4))
+    lons_global = np.array(range(-180,180,4))
+
+    lats_global = lats_global[(lats_global > np.min(lats)) & (lats_global < np.max(lats))]
+    lons_global = lons_global[(lons_global > np.min(lons)) & (lons_global < np.max(lons))]
+
+    lats_rg = [lat for lon in lons_global for lat in lats_global]
+    lons_rg = [lon for lon in lons_global for lat in lats_global]
+    
+    ens_num = mf_url.split('_')[1]
+    
+    # finding temperature
+    denominator = ((press_data**-1)*P_0)**exp_term
+    temp_data = pot_temp_data / denominator
+    
+    #finding air density
+    rho_air = press_data * MW_air / (R * temp_data)
+    
+    lwc_data = mass_frac_data * rho_air / 1000
+    level_heights = mass_frac_file['level_height'][:]
+    
+    times = mass_frac_file['time'][:]
+    time_dfs = []
+    clwp_all_times = []
+    
+    for i in range(len(times)):
+        lwc_this_time = lwc_data[i,:,:,:]
+        clwp_data = np.zeros([len(lats),len(lons)])
+        for level in range(len(level_heights)):
+            clwp_data += lwc_this_time[level,:,:] * level_heights[level]
+        clwp_all_times.append(clwp_data)
+    clwp_all_times = np.array(clwp_all_times)
+    return lats, lons, clwp_all_times
+
+def interp_targ_data(targ_data, lats_step, lons_step):
+        """
+        targ_data: iterable
+        Must be a two dimensional array of the data being regridded in the dimensions of (lats,lons)
+        lats_step: int
+        The number of points to be included in an average.
+        lons_step: int
+        The number of points to be included in an average.
+        """
+        lats_dim, lons_dim = np.shape(targ_data)
+        
+        lats_inds = list(range(0, lats_dim, lats_step))
+        lons_inds = list(range(0, lons_dim, lons_step))
+        
+        rg_targ_data = np.zeros((len(lats_inds), len(lons_inds)))
+        m = 0
+        for i in lats_inds:
+            n = 0
+            for j in lons_inds:
+                rg_targ_data[m,n] = np.mean(targ_data[i:i+lats_step,j:j+lons_step])
+                n +=1
+            m += 1
+        return rg_targ_data
+
+def interp_coord(data_arr, step):
+        """
+        data_arr: iterable
+        Must be a 1 dimensional iterable.
+        step: int
+        The number of points to be included in one average.
+        """
+        rg_list = []
+        
+        ind_list = list(range(0, len(data_arr), step))
+        for ind in ind_list:
+            rg_list.append(
+                np.mean(data_arr[ind:ind+step])
+            )
+        return rg_list
