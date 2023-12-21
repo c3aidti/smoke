@@ -4,7 +4,7 @@
 **/
 entity type SppeSimulationClwpEnsembleRun
     extends SimulationRun<SppeSimulationEnsembleRun,SppeSimulationEnsembleOutputFile> 
-    mixes SppeSimulationRunParameters type key "SPPECLWP" {
+    mixes SppeSimulationRunParameters type key "SPPE_CLWP" {
     /**
     */    
     upsertFileTable: ~ js server
