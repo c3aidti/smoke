@@ -1,7 +1,0 @@
-/**
-* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
-* All rights reserved. License: https://github.com/c3aidti/.github
-**/
-@db(index=['geoTimeGridPoint', 'dataset','technique'],compactType=true)
-entity type SppeClwpCoarseTrainedPredictionModel 
-mixes TrainedPredictionModelBase<SppeClwpCoarseTrainedPredictionModel,SppeClwpCoarseSimulationEnsembleDataset, SppeClwpCoarseGeoTimeGrid> schema name 'SPPE_CLWPC_GPR'
