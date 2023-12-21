@@ -4,7 +4,7 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     import numpy as np
     
     thisType = this.toJson()['type']
-    outputFileType = getattr(c3,thisType).mixins[1].genericVarBindings[1].name #SppeSimulationOutputFile
+    outputFileType = getattr(c3,thisType).mixins[1].genericVarBindings[1].name #SppeSimulationEnsembleOutputFile
     datasetObj = c3.SimulationEnsembleDataset.fetch(
         spec = {
             "filter":c3.Filter.inst().eq('id',datasetId),
@@ -55,8 +55,6 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
         original_lon = lon.copy()
         lat = interp_coord(lat,coarseGrainOptions.coarseFactor)
         lon = interp_coord(lon,coarseGrainOptions.coarseFactor)
-        # lat = lat[::coarseGrainOptions.coarseFactor]
-        # lon = lon[::coarseGrainOptions.coarseFactor]
 
     df_st = pd.DataFrame()
         
@@ -80,34 +78,62 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     df_st["id"] = datasetId + '_' + this.id + '_' + round(df_st["latitude"],3).astype(str) + "_" + round(df_st["longitude"],3).astype(str) + "_" + df_st["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
 
     df_st = df_st.drop(columns=["time", "latitude", "longitude"])
-    
+
     for file in files:
         var_name = file.file.url.split('glm_')[-1].split('_m01')[0]
         
         if var_name not in var_names_ppe_inv.keys():
             continue
+
+        file_url_dict = {var_name: file.file.url}
             
-        data = c3.NetCDFUtil.openFile(file.file.url)
-        tensor = data[var_name]
+        # data = c3.NetCDFUtil.openFile(file.file.url)
+        # tensor = data[var_name]
 
-        # Extracting the 3D tensor for the pseudoLevelIndex
-        tensor_3d = np.array(tensor[:, pseudoLevelIndex, :, :])  # shape: (time, lat, lon)
+        # # Extracting the 3D tensor for the pseudoLevelIndex
+        # tensor_3d = np.array(tensor[:, pseudoLevelIndex, :, :])  # shape: (time, lat, lon)
 
-        if coarseGrainOptions:
-            interpolated_data = []
-            for time_slice in tensor_3d:
-                time_slice
-                interp_data_time_slice = interp_targ_data(time_slice,coarseGrainOptions.coarseFactor,coarseGrainOptions.coarseFactor)
-                interpolated_data.append(interp_data_time_slice)
+        # if coarseGrainOptions:
+        #     interpolated_data = []
+        #     for time_slice in tensor_3d:
+        #         time_slice
+        #         interp_data_time_slice = interp_targ_data(time_slice,coarseGrainOptions.coarseFactor,coarseGrainOptions.coarseFactor)
+        #         interpolated_data.append(interp_data_time_slice)
             
-            # Convert the list of interpolated slices into a 3D numpy array
-            tensor_3d = np.array(interpolated_data)
+        #     # Convert the list of interpolated slices into a 3D numpy array
+        #     tensor_3d = np.array(interpolated_data)
 
-        # Flatten the tensor for adding to DataFrame
-        df_st[var_names_ppe_inv[var_name]] = tensor_3d.reshape(-1)
+        # # Flatten the tensor for adding to DataFrame
+        # df_st[var_names_ppe_inv[var_name]] = tensor_3d.reshape(-1)
 
-        c3.NetCDFUtil.closeFile(data, file.file.url)
-      
+        # c3.NetCDFUtil.closeFile(data, file.file.url)
+
+    # get air pressure data
+    data = c3.NetCDFUtil.openFile(file_url_dict['air_pressure'])
+    air_press = data['air_pressure'] #dimensions (time,model_level_number,latitude,longitude)
+    c3.NetCDFUtil.closeFile(data, file_url_dict['air_pressure'])
+    # get pot temp data
+    data = c3.NetCDFUtil.openFile(file_url_dict['air_potential_temperature'])
+    pot_temp = data['air_potential_temperature']
+    c3.NetCDFUtil.closeFile(data, file_url_dict['air_potential_temperature'])
+    # get mass frac data
+    data = c3.NetCDFUtil.openFile(file_url_dict['mass_fraction_of_cloud_liquid_water_in_air'])
+    mass_frac = data['mass_fraction_of_cloud_liquid_water_in_air']
+    c3.NetCDFUtil.closeFile(data, file_url_dict['mass_fraction_of_cloud_liquid_water_in_air'])
+
+    # save model level heights
+    level_heights = data['level_height']
+
+    #put data through clwp func together for calculation
+    clwp_data = get_clwp(mass_frac,pot_temp,air_press,level_heights,times)
+
+    # coarse grain clwp data here
+    interp_data = []
+    for time_slice in clwp_data:
+        interp_data.append(interp_targ_data(time_slice,coarseGrainOptions.coarseFactor,coarseGrainOptions.coarseFactor))
+    clwp_coarse = np.array(interp_data)
+
+    df_st['clwp'] = clwp_coarse.reshape(-1)
     # Initialize an index to track batches
     start_index = 0
     end_index = batchSize
@@ -135,7 +161,7 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
 
 
 #------------------------------Helper Functions------------------------------------
-def get_clwp(ens_num):
+def get_clwp(mass_frac_arr,pot_temp_arr,press_arr,level_heights_arr,times):
     
     # constants
     P_0 = 100000 #Pa
@@ -143,44 +169,10 @@ def get_clwp(ens_num):
     MW_air = 28.96 #g/mol
     R = 8.314472 #m3 Pa / K mol
     
-    for url in mass_frac_water_urls:
-        if 'ens_' + str(ens_num) in url:
-            mf_url = url
-            
-    for url in pressure_urls:
-        if 'ens_' + str(ens_num) in url:
-            press_url = url
-            
-    for url in pot_temp_urls:
-        if 'ens_' + str(ens_num) in url:
-            pt_url = url
-    
-    # read files
-    mass_frac_file = c3.NetCDFUtil.openFile(mf_url)
-    press_file = c3.NetCDFUtil.openFile(press_url)
-    pot_temp_file = c3.NetCDFUtil.openFile(pt_url)
-    
-    mass_frac_data = mass_frac_file['mass_fraction_of_cloud_liquid_water_in_air'][:,:,:,:]
-    press_data = press_file['air_pressure'][:,:,:,:]
-    pot_temp_data = pot_temp_file['air_potential_temperature'][:,:,:,:]
-    
-    lats = mass_frac_file['latitude'][:]
-    lons = mass_frac_file['longitude'][:]
-    
-    lats_df = [lat for lon in lons for lat in lats]
-    lons_df = [lon for lon in lons for lat in lats]
-    
-    # for regridding
-    lats_global = np.array(range(-90,90,4))
-    lons_global = np.array(range(-180,180,4))
-
-    lats_global = lats_global[(lats_global > np.min(lats)) & (lats_global < np.max(lats))]
-    lons_global = lons_global[(lons_global > np.min(lons)) & (lons_global < np.max(lons))]
-
-    lats_rg = [lat for lon in lons_global for lat in lats_global]
-    lons_rg = [lon for lon in lons_global for lat in lats_global]
-    
-    ens_num = mf_url.split('_')[1]
+    mass_frac_data = mass_frac_arr[:,:,:,:]
+    press_data = press_arr[:,:,:,:]
+    pot_temp_data = pot_temp_arr[:,:,:,:]
+    spatial_dimensions = list(pot_temp_data.shape)[-2:]
     
     # finding temperature
     denominator = ((press_data**-1)*P_0)**exp_term
@@ -190,20 +182,20 @@ def get_clwp(ens_num):
     rho_air = press_data * MW_air / (R * temp_data)
     
     lwc_data = mass_frac_data * rho_air / 1000
-    level_heights = mass_frac_file['level_height'][:]
+    level_heights = level_heights_arr[:]
     
-    times = mass_frac_file['time'][:]
     time_dfs = []
     clwp_all_times = []
     
     for i in range(len(times)):
         lwc_this_time = lwc_data[i,:,:,:]
-        clwp_data = np.zeros([len(lats),len(lons)])
+
+        clwp_data = np.zeros(spatial_dimensions)
         for level in range(len(level_heights)):
             clwp_data += lwc_this_time[level,:,:] * level_heights[level]
         clwp_all_times.append(clwp_data)
     clwp_all_times = np.array(clwp_all_times)
-    return lats, lons, clwp_all_times
+    return clwp_all_times
 
 def interp_targ_data(targ_data, lats_step, lons_step):
         """
