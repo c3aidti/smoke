@@ -15,9 +15,11 @@ function upsertFileTable() {
     var pathToFiles = containerRoot + "ens_" + String(this.simulationNumber) + "_glm_atmosphere";
     var pathToFiles_air = containerRoot + "ens_" + String(this.simulationNumber) + "_glm_air";
     var pathToFiles_mf = containerRoot + "ens_" + String(this.simulationNumber) + "_glm_mass_fraction_of_cloud_liquid_water_in_air";
+    var pathToFiles_exc = containerRoot + "ens_" + String(this.simulationNumber) + "_glm_m01s02i530_m01s02i530";
     var fileStream = FileSystem.inst().listFilesStream(pathToFiles,-1);
     var fileStream_air = FileSystem.inst().listFilesStream(pathToFiles_air,-1);
     var fileStream_mf = FileSystem.inst().listFilesStream(pathToFiles_mf,-1);
+    var fileStream_exc = FileSystem.inst().listFilesStream(pathToFiles_exc,-1);
     var smokePPEFiles = new Array();
 
     while(fileStream.hasNext()) {
@@ -36,6 +38,13 @@ function upsertFileTable() {
 
     while(fileStream_mf.hasNext()) {
         var file = fileStream_mf.next();
+        if(file.url.endsWith(".nc")) {
+            smokePPEFiles.push(file);
+        };
+    };
+
+    while(fileStream_exc.hasNext()) {
+        var file = fileStream_exc.next();
         if(file.url.endsWith(".nc")) {
             smokePPEFiles.push(file);
         };
