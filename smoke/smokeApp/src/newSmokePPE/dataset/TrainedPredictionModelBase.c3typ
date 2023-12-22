@@ -19,8 +19,14 @@ type TrainedPredictionModelBase<MT, DT, GT> {
     getTarget: inline member function(): Dataset
 
     @py(env='gordon_1_0_0')
-    train: inline member function(X: !Dataset): boolean
+    train: member function(X: !Dataset): boolean
 
+    /**
+    * Predict on the given dataset
+    * @returns: the predicted values in a serialized Pandas dataframe.
+    * Run: `c3.PythonSerialization.deserialize(df)` on result to convert to 
+    * a Pandas dataframe.
+    */
     @py(env='gordon_1_0_0')
     predict: member function(X: !Dataset): any
 }
