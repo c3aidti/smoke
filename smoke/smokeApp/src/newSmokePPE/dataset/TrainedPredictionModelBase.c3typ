@@ -21,4 +21,6 @@ type TrainedPredictionModelBase<MT, DT, GT> {
     @py(env='gordon_1_0_0')
     train: inline member function(X: !Dataset): boolean
 
+    @py(env='gordon_1_0_0')
+    predict: inline member function(X: !Dataset): Dataset
 }

@@ -51,3 +51,29 @@ def train(this,X):
     updateThis.merge()
     
     return True
+
+def predict(this, X):
+    import numpy as np
+    import pandas as pd
+    
+    model = c3.PythonSerialization.deserialize(
+        serialized=this.trainedModel
+    )
+    # Not-implmented:
+#     tech = c3.GprPredictionModelParameters.get(this.technique.id)
+#     if tech.centerTarget:
+        
+    center = 0.0
+    mean, sd = model.predict(
+        c3.Dataset.toPandas(X),
+        return_std=True
+    )
+    tpl = (mean, sd, center)
+
+    df = pd.DataFrame()
+    df["meanResponse"] = np.array(tpl[0]).flatten()
+    df["meanResponse"] += tpl[2]
+    df["sdResponse"] = tpl[1]
+    df["variant"] = list(range(df.shape[0]))
+    
+    return c3.Dataset.fromPython(df)
