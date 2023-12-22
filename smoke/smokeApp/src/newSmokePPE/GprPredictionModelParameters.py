@@ -51,6 +51,19 @@ def createTechnique(
     ).upsert()
     return c3.GprPredictionModelParameters.get(obj.id)
 
+def getFeatureList(this):
+    """
+    Get the list of features for this technique.
+    """
+    serializedFeatureList = this.serializedFeatureList
+    featureList = c3.PythonSerialization.deserialize(serialized=serializedFeatureList)
+    return featureList
 
-
+def getSimulationList(this):
+    """
+    Get the list of simulations for this technique.
+    """
+    serializedSimulationList = this.serializedSimulationList
+    simulationList = c3.PythonSerialization.deserialize(serialized=serializedSimulationList)
+    return simulationList
     
