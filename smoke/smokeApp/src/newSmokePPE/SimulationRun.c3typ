@@ -9,6 +9,12 @@
 * 
 * This Type is extendable mostly to support separate implementations for `upsertFileTable` and `upsertSimulationOutput`
 * for different simulation models.
+* When extending this type should be mixed in with a type that defines the parameter fields for the associated
+* {@link SimulationModel}.
+* Ex.
+*```
+*
+*```
 *
 * TODO: 
 * - Add more documentation

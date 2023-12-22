@@ -12,6 +12,5 @@ entity type SppeSimulationEnsembleRun
     */
     @py(env='gordon-interpolation_1_0_0')
     upsertSimulationOutput: member function(datasetId: !string, pseudoLevelIndex: !int, batchSize: int=80276): boolean
-    
 
 }
