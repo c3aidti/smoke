@@ -76,5 +76,5 @@ def predict(this, X):
     df["sdResponse"] = tpl[1]
     df["variant"] = list(range(df.shape[0]))
     
-    return df
+    return c3.PythonSerialization.serialize(obj=df)
     # return c3.Dataset.fromPython(df)
