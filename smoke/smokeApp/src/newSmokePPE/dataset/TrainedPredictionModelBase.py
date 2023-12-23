@@ -52,7 +52,7 @@ def train(this,X):
     
     return True
 
-def predict(this, X):
+def doPredict(this, X):
     import numpy as np
     import pandas as pd
     
@@ -77,4 +77,30 @@ def predict(this, X):
     df["variant"] = list(range(df.shape[0]))
     
     return c3.PythonSerialization.serialize(obj=df)
-    # return c3.Dataset.fromPython(df)
+
+def predict(this, X):
+    import numpy as np
+    import pandas as pd
+
+    return this.doPredict(X)
+
+def predictAsync(this, X):
+    import numpy as np
+    import pandas as pd
+    import time
+    
+    spec = {
+        "typeName": this.dataset.getTrainedPredictionModelTypeName(),
+        "action": 'doPredict',
+        "args": {"this": this, "X": X}
+    }
+    action = c3.AsyncAction.submit(spec)
+    
+    # Poll for completion
+    while not action.hasCompleted():
+        time.sleep(1)
+    action = action.get()
+    result = action.result
+    action.remove()
+    return result
+    
