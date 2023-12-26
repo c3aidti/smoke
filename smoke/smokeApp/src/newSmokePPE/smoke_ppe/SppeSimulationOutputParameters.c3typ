@@ -20,5 +20,5 @@ type SppeSimulationOutputParameters {
     // insoluble aitken mode
     insolubleAitkenMode: float
     //
-    sumAll: float stored calc "sum(dust, solubleAitkenMode, solubleAccumulationMode, solubleCoarseMode, insolubleAitkenMode)"
+    AOD: float stored calc "sum(dust, solubleAitkenMode, solubleAccumulationMode, solubleCoarseMode, insolubleAitkenMode)"
 }
