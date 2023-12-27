@@ -53,6 +53,12 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     # store urls
     aod_urls = []
     urls_dict = {'AOD':[]}
+
+    # grab the relevant files
+    files = getattr(c3,outputFileType).fetch({
+        "filter": c3.Filter().eq("simulationRun.id", this.id)
+    }).objs
+    
     for file in files:
         url = file.file.url
         if 'atmosphere' in url:
@@ -66,12 +72,6 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
         else:
             urls_dict['ex_coeff'] = url
     urls_dict['AOD'] = aod_urls
-
-    # grab the relevant files
-    files = getattr(c3,outputFileType).fetch({
-        "filter": c3.Filter().eq("simulationRun.id", this.id)
-    }).objs
-    
     #------------------------------AOD Calcs------------------------------------
     # create GSTP objects
     gstpFile = urls_dict['AOD'][0]
