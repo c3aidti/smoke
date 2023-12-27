@@ -64,11 +64,11 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
         if 'atmosphere' in url:
             aod_urls.append(url)
         elif 'air_pressure' in url:
-            urls_dict['air_press'] = url
+            urls_dict['pressure'] = url
         elif 'air_potential' in url:
-            urls_dict['air_pot'] = url
+            urls_dict['potential_temp'] = url
         elif 'mass_fraction' in url:
-            urls_dict['mfrac'] = url
+            urls_dict['mass_frac_water'] = url
         else:
             urls_dict['ex_coeff'] = url
     urls_dict['AOD'] = aod_urls
@@ -148,7 +148,7 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
 
     #------------------------------CLWP Calcs------------------------------------
     # create GSTP objects
-    gstpFile = urls_dict['air_pressure'][0]
+    gstpFile = urls_dict['pressure']
     sample = c3.NetCDFUtil.openFile(gstpFile)
     lat = sample["latitude"][:]
     lon = [x*(x < 180) + (x - 360)*(x >= 180) for x in sample["longitude"][:]]
@@ -190,20 +190,20 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     df_st2 = df_st2.drop(columns=["time", "latitude", "longitude"])
 
     # get air pressure data
-    data = c3.NetCDFUtil.openFile(urls_dict['air_press'])
+    data = c3.NetCDFUtil.openFile(urls_dict['pressure'])
     air_press = data['air_pressure'] #dimensions (time,model_level_number,latitude,longitude)
-    c3.NetCDFUtil.closeFile(data, urls_dict['air_press'])
+    c3.NetCDFUtil.closeFile(data, urls_dict['pressure'])
     # get pot temp data
-    data = c3.NetCDFUtil.openFile(urls_dict['air_pot'])
+    data = c3.NetCDFUtil.openFile(urls_dict['potential_temp'])
     pot_temp = data['air_potential_temperature']
-    c3.NetCDFUtil.closeFile(data, urls_dict['air_pot'])
+    c3.NetCDFUtil.closeFile(data, urls_dict['potential_temp'])
     # get mass frac data
-    data = c3.NetCDFUtil.openFile(urls_dict['mfrac'])
+    data = c3.NetCDFUtil.openFile(urls_dict['mass_frac_water'])
     mass_frac = data['mass_fraction_of_cloud_liquid_water_in_air']
     # save model level heights
     level_heights = data['level_height']
 
-    c3.NetCDFUtil.closeFile(data, urls_dict['mfrac'])
+    c3.NetCDFUtil.closeFile(data, urls_dict['mass_frac_water'])
 
     #put data through clwp func together for calculation
     clwp_data = get_clwp(mass_frac,pot_temp,air_press,level_heights,times)
