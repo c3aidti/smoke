@@ -30,7 +30,8 @@ def upsertGridData(this,datasetType,geoTimeGridType,datasetId,coarseGrainOptions
 
 
     dataset = getattr(c3,datasetType).get(datasetId)
-
+    if not ('atmosphere_optical_thickness' in this.file.url):
+        raise Exception("Use an AOT url")
     sample = c3.NetCDFUtil.openFile(this.file.url)
     lat = sample["latitude"][:]
     lon = [x*(x < 180) + (x - 360)*(x >= 180) for x in sample["longitude"][:]]
