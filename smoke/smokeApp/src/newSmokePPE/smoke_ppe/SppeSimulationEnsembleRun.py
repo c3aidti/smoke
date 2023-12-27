@@ -75,11 +75,11 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     #------------------------------AOD Calcs------------------------------------
     # create GSTP objects
     gstpFile = urls_dict['AOD'][0]
-    sample = c3.NetCDFUtil.openFile(gstpFile.file.url)
+    sample = c3.NetCDFUtil.openFile(gstpFile)
     lat = sample["latitude"][:]
     lon = [x*(x < 180) + (x - 360)*(x >= 180) for x in sample["longitude"][:]]
     tim = sample["time"][:]
-    c3.NetCDFUtil.closeFile(sample,gstpFile.file.url)
+    c3.NetCDFUtil.closeFile(sample,gstpFile)
     
     # construct correct times array
     zero_time = dt.datetime(1970,1,1,0,0)
@@ -149,11 +149,11 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     #------------------------------CLWP Calcs------------------------------------
     # create GSTP objects
     gstpFile = urls_dict['CLWP'][0]
-    sample = c3.NetCDFUtil.openFile(gstpFile.file.url)
+    sample = c3.NetCDFUtil.openFile(gstpFile)
     lat = sample["latitude"][:]
     lon = [x*(x < 180) + (x - 360)*(x >= 180) for x in sample["longitude"][:]]
     tim = sample["time"][:]
-    c3.NetCDFUtil.closeFile(sample,gstpFile.file.url)
+    c3.NetCDFUtil.closeFile(sample,gstpFile)
     
     # construct correct times array
     zero_time = dt.datetime(1970,1,1,0,0)
