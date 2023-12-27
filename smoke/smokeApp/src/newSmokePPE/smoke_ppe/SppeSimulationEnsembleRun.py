@@ -148,7 +148,7 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
 
     #------------------------------CLWP Calcs------------------------------------
     # create GSTP objects
-    gstpFile = urls_dict['CLWP'][0]
+    gstpFile = urls_dict['air_pressure'][0]
     sample = c3.NetCDFUtil.openFile(gstpFile)
     lat = sample["latitude"][:]
     lon = [x*(x < 180) + (x - 360)*(x >= 180) for x in sample["longitude"][:]]
