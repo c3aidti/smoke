@@ -23,7 +23,7 @@ function initializeGrid(coarseGrainOptions) {
     var outputFileType = TypeRef.make({"typeName": outputFileTypeName}).toType()
     
     // Get first file and call upsertGridData
-    var file = outputFileType.fetch({"limit":1}).objs[0]
+    var file = outputFileType.fetch({"limit":1,"filter":Filter.contains('id','atmosphere')}).objs[0]
     file.upsertGridData(
       typeName,
       geoTimeGridType,
