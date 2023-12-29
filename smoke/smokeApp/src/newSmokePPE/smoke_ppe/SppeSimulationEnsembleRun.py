@@ -191,17 +191,17 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
 
     # get air pressure data
     data = c3.NetCDFUtil.openFile(urls_dict['pressure'])
-    air_press = data['air_pressure'] #dimensions (time,model_level_number,latitude,longitude)
+    air_press = data['air_pressure'][:,:,:,:] #dimensions (time,model_level_number,latitude,longitude)
     c3.NetCDFUtil.closeFile(data, urls_dict['pressure'])
     # get pot temp data
     data = c3.NetCDFUtil.openFile(urls_dict['potential_temp'])
-    pot_temp = data['air_potential_temperature']
+    pot_temp = data['air_potential_temperature'][:,:,:,:]
     c3.NetCDFUtil.closeFile(data, urls_dict['potential_temp'])
     # get mass frac data
     data = c3.NetCDFUtil.openFile(urls_dict['mass_frac_water'])
-    mass_frac = data['mass_fraction_of_cloud_liquid_water_in_air']
+    mass_frac = data['mass_fraction_of_cloud_liquid_water_in_air'][:,:,:,:]
     # save model level heights
-    level_heights = data['level_height']
+    level_heights = data['level_height'][:]
 
     c3.NetCDFUtil.closeFile(data, urls_dict['mass_frac_water'])
 
@@ -246,7 +246,7 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     return True
 
 #------------------------------Helper Functions------------------------------------
-def get_clwp(mass_frac_arr,pot_temp_arr,press_arr,level_heights_arr,times):
+def get_clwp(mass_frac_data,pot_temp_data,press_data,level_heights,times):
     
     # constants
     P_0 = 100000 #Pa
@@ -254,10 +254,10 @@ def get_clwp(mass_frac_arr,pot_temp_arr,press_arr,level_heights_arr,times):
     MW_air = 28.96 #g/mol
     R = 8.314472 #m3 Pa / K mol
     
-    mass_frac_data = mass_frac_arr[:,:,:,:]
-    press_data = press_arr[:,:,:,:]
-    pot_temp_data = pot_temp_arr[:,:,:,:]
-    spatial_dimensions = list(pot_temp_data.shape)[-2:]
+    # mass_frac_data = mass_frac_arr[:,:,:,:]
+    # press_data = press_arr[:,:,:,:]
+    # pot_temp_data = pot_temp_arr[:,:,:,:]
+    # spatial_dimensions = list(pot_temp_data.shape)[-2:]
     
     # finding temperature
     temp_data = pot_temp_data * (press_data / P_0)**exp_term #K
@@ -266,7 +266,7 @@ def get_clwp(mass_frac_arr,pot_temp_arr,press_arr,level_heights_arr,times):
     rho_air = press_data * MW_air / (R * temp_data) #g/m3
     
     lwc_data = mass_frac_data * rho_air #g/m3
-    level_heights = level_heights_arr[:] #m
+    # level_heights = level_heights_arr[:] #m
     
     time_dfs = []
     clwp_all_times = []
