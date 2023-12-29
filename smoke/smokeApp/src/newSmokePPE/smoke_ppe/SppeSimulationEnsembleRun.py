@@ -257,7 +257,7 @@ def get_clwp(mass_frac_data,pot_temp_data,press_data,level_heights,times):
     # mass_frac_data = mass_frac_arr[:,:,:,:]
     # press_data = press_arr[:,:,:,:]
     # pot_temp_data = pot_temp_arr[:,:,:,:]
-    # spatial_dimensions = list(pot_temp_data.shape)[-2:]
+    spatial_dimensions = list(pot_temp_data.shape)[-2:]
     
     # finding temperature
     temp_data = pot_temp_data * (press_data / P_0)**exp_term #K
