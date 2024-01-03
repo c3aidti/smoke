@@ -254,9 +254,6 @@ def get_clwp(mass_frac_data,pot_temp_data,press_data,level_heights,times):
     MW_air = 28.96 #g/mol
     R = 8.314472 #m3 Pa / K mol
     
-    # mass_frac_data = mass_frac_arr[:,:,:,:]
-    # press_data = press_arr[:,:,:,:]
-    # pot_temp_data = pot_temp_arr[:,:,:,:]
     spatial_dimensions = list(pot_temp_data.shape)[-2:]
     
     # finding temperature
@@ -266,16 +263,17 @@ def get_clwp(mass_frac_data,pot_temp_data,press_data,level_heights,times):
     rho_air = press_data * MW_air / (R * temp_data) #g/m3
     
     lwc_data = mass_frac_data * rho_air #g/m3
-    # level_heights = level_heights_arr[:] #m
+    heights_diff_arr = [level_heights[0]] #m
+    for i in range(len(level_heights)-1):
+        heights_diff_arr.append(level_heights[i+1]-level_heights[i])
     
-    time_dfs = []
     clwp_all_times = []
     
     for i in range(len(times)):
         lwc_this_time = lwc_data[i,:,:,:]
         clwp_data = np.zeros(spatial_dimensions)
         for level in range(len(level_heights)):
-            clwp_data += lwc_this_time[level,:,:] * level_heights[level]
+            clwp_data += lwc_this_time[level,:,:] * heights_diff_arr[level]
         clwp_all_times.append(clwp_data)
     clwp_all_times = np.array(clwp_all_times)
     return clwp_all_times
