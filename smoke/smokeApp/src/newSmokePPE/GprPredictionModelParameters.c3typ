@@ -27,6 +27,9 @@ entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_
     // center target data before fitting
     @ML(hyperParameter=true)
     centerTarget: boolean=false
+    // standardize target data before fitting
+    @ML(hyperParameter=true)
+    standardizeTarget: boolean=false
     // leave fraction of rows for post-validation
     @ML(hyperParameter=true)
     validation: boolean=false

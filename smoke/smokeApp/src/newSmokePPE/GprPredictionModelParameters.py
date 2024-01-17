@@ -7,6 +7,7 @@ def createTechnique(
         targetName,
         randomSeed,
         centerTarget,
+        standardizeTarget,
         validation,
         splitFraction
 ):
@@ -30,6 +31,7 @@ def createTechnique(
             ).eq("targetName", targetName).and_(
             ).eq("randomSeed", randomSeed).and_(
             ).eq("centerTarget", centerTarget).and_(
+            ).eq("standardizeTarget", standardizeTarget).and_(
             ).eq("validation", validation).and_(
             ).eq("splitFraction", splitFraction)
         }
@@ -46,6 +48,7 @@ def createTechnique(
         targetName = targetName,
         randomSeed = randomSeed,
         centerTarget = centerTarget,
+        standardizeTarget = standardizeTarget,
         validation = validation,
         splitFraction = splitFraction
     ).upsert()

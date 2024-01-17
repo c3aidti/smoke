@@ -12,6 +12,12 @@ def train(this,X):
     technique = getattr(c3,techniqueTypeName).get(this.technique.id)
     datasetTypeName = this.dataset.toJson()['type']
     dataset = getattr(c3,datasetTypeName).get(this.dataset.id)
+
+    updateThis = getattr(c3,typeName)(
+        id = this.id,
+        dataset = this.dataset,
+        technique = this.technique
+    )
     
     y = dataset.getTargetForTechnique(technique,this.geoTimeGridPoint)
     
@@ -20,8 +26,21 @@ def train(this,X):
     
     if (technique.centerTarget):
         targetMean = float(y_np.mean())
-        y_np = y_np - y_np.mean()
-        
+        updateThis.targetMean = targetMean
+
+    
+    if (technique.standardizeTarget):
+        targetStd = float(y_np.std())
+        updateThis.targetStd = targetStd
+
+
+    if (technique.centerTarget and technique.standardizeTarget):
+        y_np = (y_np - targetMean) / targetStd
+    elif (technique.centerTarget):
+        y_np = y_np - targetMean
+    elif (technique.standardizeTarget):
+        y_np = y_np / targetStd
+
     if (technique.validation):
         rng = np.random.RandomState(technique.randomSeed)
         rng.shuffle(X_np)
@@ -40,12 +59,6 @@ def train(this,X):
         print("Error in training")
         return False
     
-    updateThis = getattr(c3,typeName)(
-        id = this.id,
-        dataset = this.dataset,
-        technique = this.technique
-    )
-    
     updateThis.trainedModel = c3.PythonSerialization.serialize(obj=gp),
     
     updateThis.merge()
@@ -59,21 +72,30 @@ def doPredict(this, X):
     model = c3.PythonSerialization.deserialize(
         serialized=this.trainedModel
     )
-    # Not-implmented:
-#     tech = c3.GprPredictionModelParameters.get(this.technique.id)
-#     if tech.centerTarget:
+    # 
+    technique = c3.GprPredictionModelParameters.get(this.technique.id)
+    if technique.centerTarget:
+        targetMean = this.targetMean
+    if technique.standardizeTarget:
+        targetStd = this.targetStd
         
-    center = 0.0
     mean, sd = model.predict(
         c3.Dataset.toPandas(X),
         return_std=True
     )
-    tpl = (mean, sd, center)
+
+    if technique.centerTarget and technique.standardizeTarget:
+        mean = mean * targetStd + targetMean
+        sd = sd * targetStd
+    elif technique.centerTarget:
+        mean = mean + targetMean
+    elif technique.standardizeTarget:
+        mean = mean * targetStd
+        sd = sd * targetStd
 
     df = pd.DataFrame()
-    df["meanResponse"] = np.array(tpl[0]).flatten()
-    df["meanResponse"] += tpl[2]
-    df["sdResponse"] = tpl[1]
+    df["meanResponse"] = np.array(mean).flatten()
+    df["sdResponse"] = sd
     df["variant"] = list(range(df.shape[0]))
     
     return c3.PythonSerialization.serialize(obj=df)

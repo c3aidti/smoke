@@ -13,6 +13,11 @@ type TrainedPredictionModelBase<MT, DT, GT> {
     trainedModel: clob
     //
     isTrained: boolean stored calc "exists(trainedModel)"
+    //
+    targetMean: double
+    //
+    targetStd: double
+
     /**
     */
     @py(env='gordon_1_0_0')
