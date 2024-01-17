@@ -8,7 +8,8 @@ def createTrainingTechnique(
         simulationIncludeList=None,
         targetName='sumAll',
         randomSeed=42, 
-        centerTarget=False, 
+        centerTarget=False,
+        standardizeTarget=False,
         validation=False, 
         splitFraction=0.2
         ):
@@ -59,6 +60,7 @@ def createTrainingTechnique(
         targetName=targetName,
         randomSeed=randomSeed,
         centerTarget=centerTarget,
+        standardizeTarget=standardizeTarget,
         validation=validation,
         splitFraction=splitFraction
     )

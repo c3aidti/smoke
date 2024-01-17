@@ -36,7 +36,8 @@ entity type SimulationModel schema name "SIM_MDL" {
         simulationIncludeList: [integer],
         targetName: string = 'sumAll',
         randomSeed: integer = 42, 
-        centerTarget: boolean = false, 
+        centerTarget: boolean = false,
+        standardizeTarget: boolean = false,
         validation: boolean = false, 
         splitFraction: float = 0.2
         ): GprPredictionModelParameters
