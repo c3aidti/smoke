@@ -49,6 +49,7 @@ entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_
         targetName: string,
         randomSeed: integer = 42,
         centerTarget: boolean = false,
+        standardizeTarget: boolean = false,
         validation: boolean = false,
         splitFraction: float = 0.2
         ): GprPredictionModelParameters
