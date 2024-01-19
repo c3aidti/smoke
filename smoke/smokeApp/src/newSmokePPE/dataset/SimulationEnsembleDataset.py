@@ -44,5 +44,8 @@ def getTargetForTechnique(this,technique,geoTimeGridId):
         "limit": -1
     })
     df = pd.DataFrame(res.objs.toJson())
-    df.drop(["type","id","meta","version","simulationRun"],axis=1, inplace=True)
+    df['sim_num'] = df.get('simulationRun').apply(lambda x: int(x['id'].split('_')[-1]))
+    df.sort_values('sim_num',inplace=True)
+    df.reset_index(drop=True,inplace=True)
+    df.drop(["type","id","meta","version","simulationRun","sim_num"],axis=1, inplace=True)
     return c3.Dataset.fromPython(df)
