@@ -1,0 +1,16 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Set of parameters to be mixed into the `SimulationOutput` types for datasets that are
+* associated with smoke_ppe {@link SimulationModel}
+*/
+type ExCoeffSimulationOutputParameters {
+    // the pseudoLevel index (starts at 0)
+    exCoeff_550: float
+    // altitude of data measurement
+    altitude: float
+    // number label for individual flight
+    flight_num: int
+}
