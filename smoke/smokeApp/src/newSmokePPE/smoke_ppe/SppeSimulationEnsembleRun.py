@@ -207,12 +207,14 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
 
     #put data through clwp func together for calculation
     clwp_data = get_clwp(mass_frac,pot_temp,air_press,level_heights,times)
-
-    # coarse grain clwp data here
-    interp_data = []
-    for time_slice in clwp_data:
-        interp_data.append(interp_targ_data(time_slice,coarseGrainOptions.coarseFactor,coarseGrainOptions.coarseFactor))
-    clwp_coarse = np.array(interp_data)
+    if coarseGrainOptions:
+        # coarse grain clwp data here
+        interp_data = []
+        for time_slice in clwp_data:
+            interp_data.append(interp_targ_data(time_slice,coarseGrainOptions.coarseFactor,coarseGrainOptions.coarseFactor))
+        clwp_coarse = np.array(interp_data)
+    else:
+        clwp_coarse = clwp_data
 
     df_st2['clwp'] = clwp_coarse.reshape(-1)
     df_st2 = df_st2.drop(columns=['geoTimeGridPoint'])
