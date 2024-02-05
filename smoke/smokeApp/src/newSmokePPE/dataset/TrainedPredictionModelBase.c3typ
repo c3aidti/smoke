@@ -17,6 +17,8 @@ type TrainedPredictionModelBase<MT, DT, GT> {
     targetMean: double
     //
     targetStd: double
+    //
+    serializedLengthScales: private !string
 
     /**
     */

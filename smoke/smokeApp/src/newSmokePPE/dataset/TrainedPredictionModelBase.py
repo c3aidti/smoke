@@ -60,7 +60,8 @@ def train(this,X):
         return False
     
     updateThis.trainedModel = c3.PythonSerialization.serialize(obj=gp),
-    
+    gp_lengthscales = list(gp.kernel_.get_params()['k2__length_scale'])
+    updateThis.serializedLengthScales = c3.PythonSerialization.serialize(obj=gp_lengthscales)
     updateThis.merge()
     
     return True
