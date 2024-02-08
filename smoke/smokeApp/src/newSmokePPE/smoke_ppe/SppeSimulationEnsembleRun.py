@@ -249,7 +249,7 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
 
 #------------------------------Helper Functions------------------------------------
 def get_clwp(mass_frac_data,pot_temp_data,press_data,level_heights,times):
-    
+    import numpy as np
     # constants
     P_0 = 100000 #Pa
     exp_term = 0.286
@@ -289,6 +289,7 @@ def interp_targ_data(targ_data, lats_step, lons_step):
         lons_step: int
         The number of points to be included in an average.
         """
+        import numpy as np
         lats_dim, lons_dim = np.shape(targ_data)
         
         lats_inds = list(range(0, lats_dim, lats_step))
@@ -311,6 +312,7 @@ def interp_coord(data_arr, step):
         step: int
         The number of points to be included in one average.
         """
+        import numpy as np
         rg_list = []
         
         ind_list = list(range(0, len(data_arr), step))
