@@ -20,11 +20,14 @@ def getFeaturesForTechnique(this,technique):
     # fetch the simulation output fields
     simulationOutputFields = getattr(c3,simulationRunTypeName).fetch({
         "filter":filter,
-        "include":include
+        "include":include + ',simulationNumber'
     }).objs.toJson()
 
     df = pd.DataFrame(simulationOutputFields)
     df.drop(["type","id","typeIdent","meta","version"],axis=1, inplace=True)
+    df.sort_values(['simulationNumber'],inplace=True)
+    df.reset_index(drop=True,inplace=True)
+    df.drop(['simulationNumber'],axis=1,inplace=True)
     return c3.Dataset.fromPython(df)
 
 def getTargetForTechnique(this,technique,geoTimeGridId):
