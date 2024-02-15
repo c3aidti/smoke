@@ -26,7 +26,8 @@ function doStart(job, options) {
 
     // See if the options.geoTimeGridFetchSpec contianes a filter
     // If it does append an and() clause to filter on, if not, create new filter
-    var filter = options.geoTimeGridFetchSpec.filter;
+    var filterStr = options.geoTimeGridFetchSpec.filter;
+    var filter = Filter.fromString(filterStr)
     if (filter === undefined) {
         filter = Filter.eq('isTrained', false);
     }
@@ -34,7 +35,7 @@ function doStart(job, options) {
         filter = filter.and().eq('isTrained', false);
     }
 
-    var specj = options.geoTimeGridFetchSpec.toJson();
+    var specj = filter.toJson();
     specj.type = 'FetchStreamSpec'
     var streamSpec = FetchStreamSpec.make(specj)
     var rows = predictionModelType.fetchObjStream(streamSpec);
