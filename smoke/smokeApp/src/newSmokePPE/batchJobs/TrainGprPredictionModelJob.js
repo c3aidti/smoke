@@ -26,12 +26,13 @@ function doStart(job, options) {
 
     // See if the options.geoTimeGridFetchSpec contianes a filter
     // If it does append an and() clause to filter on, if not, create new filter
-    var filterStr = options.geoTimeGridFetchSpec.filter;
-    var filter = Filter.fromString(filterStr)
-    if (filter === undefined) {
+    var filter = null
+    if (options.geoTimeGridFetchSpec.filter === undefined) {
         filter = Filter.eq('isTrained', false);
     }
     else {
+        var filterStr = options.geoTimeGridFetchSpec.filter;
+        filter = Filter.fromString(filterStr)
         filter = filter.and().eq('isTrained', false);
     }
     options.geoTimeGridFetchSpec.filter = filter.toString()
