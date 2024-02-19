@@ -34,8 +34,8 @@ function doStart(job, options) {
     else {
         filter = filter.and().eq('isTrained', false);
     }
-
-    var specj = filter.toJson();
+    options.geoTimeGridFetchSpec.filter = filter.toString()
+    var specj = options.geoTimeGridFetchSpec.toJson();
     specj.type = 'FetchStreamSpec'
     var streamSpec = FetchStreamSpec.make(specj)
     var rows = predictionModelType.fetchObjStream(streamSpec);
