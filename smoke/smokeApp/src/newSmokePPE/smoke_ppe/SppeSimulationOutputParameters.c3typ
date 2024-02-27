@@ -23,4 +23,6 @@ type SppeSimulationOutputParameters {
     aod: float stored calc "sum(dust, solubleAitkenMode, solubleAccumulationMode, solubleCoarseMode, insolubleAitkenMode)"
     // Cloud Liquid Water Path
     clwp: float
+    // Cloud Droplet Number Concentration
+    cdnc: float
 }
