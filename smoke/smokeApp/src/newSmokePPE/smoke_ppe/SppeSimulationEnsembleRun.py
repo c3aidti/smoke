@@ -69,6 +69,10 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
             urls_dict['potential_temp'] = url
         elif 'mass_fraction' in url:
             urls_dict['mass_frac_water'] = url
+        elif 'm01s01i298' in url:
+            urls_dict['cdnc_ctw'] = url
+        elif 'm01s01i299' in url:
+            urls_dict['cdnc_wghts'] = url
         else:
             urls_dict['ex_coeff'] = url
     urls_dict['AOD'] = aod_urls
@@ -220,6 +224,67 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     df_st2 = df_st2.drop(columns=['geoTimeGridPoint'])
 
     df_st_mrg = pd.merge(df_st,df_st2,how="outer",on="id")
+
+    #------------------------------CDNC Calcs-------------------------------------
+    gstpFile = urls_dict['cdnc_ctw']
+    sample = c3.NetCDFUtil.openFile(gstpFile)
+    lat = sample["latitude"][:]
+    lon = [x*(x < 180) + (x - 360)*(x >= 180) for x in sample["longitude"][:]]
+    tim = sample["time"][:]
+    c3.NetCDFUtil.closeFile(sample,gstpFile)
+    
+    # construct correct times array
+    zero_time = dt.datetime(1970,1,1,0,0)
+    times = []
+    for t in tim:
+        target_time = zero_time + dt.timedelta(hours=t,minutes=20)
+        times.append(target_time)
+
+    if coarseGrainOptions:
+        # Coarse-graining: Reduce the resolution of the lat-lon grid
+        original_lat = lat.copy()
+        original_lon = lon.copy()
+        lat = interp_coord(lat,coarseGrainOptions.coarseFactor)
+        lon = interp_coord(lon,coarseGrainOptions.coarseFactor)
+
+    df_st3 = pd.DataFrame()
+        
+    df_st3["time"] = [t for t in times for n in range(0, len(lat)*len(lon))]
+    df_st3["latitude"] = [l for l in lat for n in range(0, len(lon))]*len(times)
+    df_st3["longitude"] = [l for l in lon]*len(times)*len(lat)
+    df_st3["id"] = datasetId + '_' + round(df_st3["latitude"],3).astype(str) + "_" + round(df_st3["longitude"],3).astype(str) + "_" + df_st3["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
+    df_st3["geoTimeGridPoint"] = df_st3["id"].apply(make_gstp)
+    df_st3 = df_st3.drop(columns=["id"])
+    
+    # add unique id
+    df_st3["id"] = datasetId + '_' + this.id + '_' + round(df_st3["latitude"],3).astype(str) + "_" + round(df_st3["longitude"],3).astype(str) + "_" + df_st3["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
+
+    df_st3 = df_st3.drop(columns=["time", "latitude", "longitude"])
+
+    # get cdnc_ctw data
+    data = c3.NetCDFUtil.openFile(urls_dict['cdnc_ctw'])
+    cdnc_ctw = data['m01s01i298']
+    c3.NetCDFUtil.closeFile(data, urls_dict['cdnc_ctw'])
+    # get cdnc_ctw data
+    data = c3.NetCDFUtil.openFile(urls_dict['cdnc_wghts'])
+    cdnc_wghts = data['m01s01i299']
+    c3.NetCDFUtil.closeFile(data, urls_dict['cdnc_wghts'])
+
+    # divide two weighted cdnc by the weights to retrieve raw values
+    cdnc_raw = cdnc_ctw / cdnc_wghts
+    if coarseGrainOptions:
+        # coarse grain clwp data here
+        interp_data = []
+        for time_slice in cdnc_raw:
+            interp_data.append(interp_targ_data(time_slice,coarseGrainOptions.coarseFactor,coarseGrainOptions.coarseFactor))
+        cdnc_final = np.array(interp_data)
+    else:
+        cdnc_final = cdnc_raw
+
+    df_st3['cdnc'] = cdnc_final.reshape(-1)
+    df_st3 = df_st3.drop(columns=['geoTimeGridPoint'])
+
+    df_st_mrg = pd.merge(df_st_mrg,df_st3,how="outer",on="id")
 
     #------------------------------Batch Funcs------------------------------------
     # Initialize an index to track batches
