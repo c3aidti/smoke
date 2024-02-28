@@ -263,15 +263,16 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
 
     # get cdnc_ctw data
     data = c3.NetCDFUtil.openFile(urls_dict['cdnc_ctw'])
-    cdnc_ctw = data['m01s01i298']
+    cdnc_ctw = data['m01s01i298'][:,:,:]
     c3.NetCDFUtil.closeFile(data, urls_dict['cdnc_ctw'])
     # get cdnc_ctw data
     data = c3.NetCDFUtil.openFile(urls_dict['cdnc_wghts'])
-    cdnc_wghts = data['m01s01i299']
+    cdnc_wghts = data['m01s01i299'][:,:,:]
     c3.NetCDFUtil.closeFile(data, urls_dict['cdnc_wghts'])
 
     # divide two weighted cdnc by the weights to retrieve raw values
     cdnc_raw = cdnc_ctw / cdnc_wghts
+    cdnc_raw[cdnc_raw.mask] = 0
     if coarseGrainOptions:
         # coarse grain clwp data here
         interp_data = []
