@@ -237,7 +237,7 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     zero_time = dt.datetime(1970,1,1,0,0)
     times = []
     for t in tim:
-        target_time = zero_time + dt.timedelta(hours=t,minutes=20)
+        target_time = zero_time + dt.timedelta(hours=t)
         times.append(target_time)
 
     if coarseGrainOptions:
