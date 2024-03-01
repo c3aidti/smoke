@@ -18,7 +18,7 @@ function upsertFileTable() {
     var pathToFiles_exc = containerRoot + "ens_" + String(this.simulationNumber) + "_glm_m01s02i530_m01s02i530";
     var pathToFiles_cdnc_ctw = containerRoot + "ens_" + String(this.simulationNumber) + "_glm_m01s01i298_m01s01i298";
     var pathToFiles_cdnc_wghts = containerRoot + "ens_" + String(this.simulationNumber) + "_glm_m01s01i299_m01s01i299";
-    var pathToFiles_swrf = containerRoot + "ens_" + String(this.simulationNumber) + "_glm_m01s01i205_m01s01i205";
+    var pathToFiles_swrf = containerRoot + "ens_" + String(this.simulationNumber) + "_glm_toa_outgoing_shortwave_flux";
     var fileStream = FileSystem.inst().listFilesStream(pathToFiles,-1);
     var fileStream_air = FileSystem.inst().listFilesStream(pathToFiles_air,-1);
     var fileStream_mf = FileSystem.inst().listFilesStream(pathToFiles_mf,-1);
