@@ -3,4 +3,4 @@
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
 entity type SppeSimulationEnsembleSwrfFile 
-    mixes SppeSimulationEnsembleRun type key "SWRF_F"
+    extends SimulationEnsembleOutputFile<SppeSimulationEnsembleRun> type key "SWRF"
