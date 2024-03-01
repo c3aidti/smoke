@@ -1,0 +1,12 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Set of parameters to be mixed into the `SwrfSimulationOutput` types for datasets that are
+* associated with smoke_ppe {@link SimulationModel}
+*/
+type SwrfOutputParameters {
+    //short wave radiation flux Outward
+    swrfOut: float
+}
