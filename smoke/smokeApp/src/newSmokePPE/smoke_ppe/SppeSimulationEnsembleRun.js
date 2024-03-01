@@ -107,7 +107,7 @@ function upsertFileTable() {
             var filename = file.url.split("azure://smoke-ppe/")[1];
             return SppeSimulationEnsembleSwrfFile.make({
                 "id": filename,
-                "simulationRun": simSample,
+                // "simulationRun": simSample,
                 "file": File.make({
                     "url": file.url
                 }),
