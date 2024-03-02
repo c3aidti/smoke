@@ -85,7 +85,7 @@ function upsertFileTable() {
     function createSimOutFile(file) {
         if (file.url.includes("azure://smoke-ppe/")) {
             var container = "smoke-ppe";
-            var filename = file.url.split("azure://smoke-ppe/")[1];
+            var filename = file.url.split("azure://smoke-ppe/")[1] + 'mod';
             return SppeSimulationEnsembleOutputFile.make({
                 "id": filename,
                 "simulationRun": simSample,
