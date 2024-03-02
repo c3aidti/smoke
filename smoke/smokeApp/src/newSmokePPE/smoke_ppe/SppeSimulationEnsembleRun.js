@@ -27,7 +27,6 @@ function upsertFileTable() {
     var fileStream_cdnc_wghts = FileSystem.inst().listFilesStream(pathToFiles_cdnc_wghts,-1);
     var fileStream_swrf = FileSystem.inst().listFilesStream(pathToFiles_swrf,-1);
     var smokePPEFiles = new Array();
-    var swrfFiles = new Array();
 
     while(fileStream.hasNext()) {
         var file = fileStream.next();
@@ -74,15 +73,12 @@ function upsertFileTable() {
     while(fileStream_swrf.hasNext()) {
         var file = fileStream_swrf.next();
         if(file.url.endsWith(".nc")) {
-            swrfFiles.push(file);
+            smokePPEFiles.push(file);
         };
     };
 
     var fileObjects = smokePPEFiles.map(createSimOutFile);
     SppeSimulationEnsembleOutputFile.upsertBatch(fileObjects);
-
-    var fileSwrfObjects = swrfFiles.map(createSwrfOutFile);
-    SppeSimulationEnsembleSwrfFile.upsertBatch(fileSwrfObjects)
 
     return 0;
  
@@ -91,21 +87,6 @@ function upsertFileTable() {
             var container = "smoke-ppe";
             var filename = file.url.split("azure://smoke-ppe/")[1];
             return SppeSimulationEnsembleOutputFile.make({
-                "id": filename,
-                "simulationRun": simSample,
-                "file": File.make({
-                    "url": file.url
-                }),
-                "container": container
-            });
-        };
-    };
-
-    function createSwrfOutFile(file) {
-        if (file.url.includes("azure://smoke-ppe/")) {
-            var container = "smoke-ppe";
-            var filename = file.url.split("azure://smoke-ppe/")[1];
-            return SppeSimulationEnsembleSwrfFile.make({
                 "id": filename,
                 "simulationRun": simSample,
                 "file": File.make({
