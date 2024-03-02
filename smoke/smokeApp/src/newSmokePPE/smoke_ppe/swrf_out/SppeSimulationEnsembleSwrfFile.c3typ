@@ -2,5 +2,11 @@
 * Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
-entity type SppeSimulationEnsembleSwrfFile 
-    extends SimulationEnsembleOutputFile<SppeSimulationEnsembleRun> type key "SWRF"
+extendable entity type SppeSimulationEnsembleSwrfFile<ST> schema name 'SWRF_OTP_FL' {
+    // The {@link SimulationSample} that theses files belong to.
+    simulationRun: !ST
+    // The simulation output file (NetCFD)
+    file: !File
+    // The container this file belongs to (Azure blob container)
+    container: !string enum('smoke-ppe')
+}
