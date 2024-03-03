@@ -330,9 +330,30 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
         swrf_out_final = swrf_out_raw
 
     df_st4['swrfOut'] = swrf_out_final.reshape(-1)
-    df_st4 = df_st4.drop(columns=['geoTimeGridPoint'])
+#     df_st4 = df_st4.drop(columns=['geoTimeGridPoint'])
 
-    df_st_mrg = pd.merge(df_st_mrg,df_st4,how="outer",on="id")
+    df_st_mrg_hold = pd.merge(df_st_mrg,df_st4,how="outer",on="id")
+    df_st_mrg_hold.drop(columns=['simulationRun','dataset','pseudoLevelIndex'],inplace=True)
+    
+    aod_hold = df_st_mrg_hold[~np.isnan(df_st_mrg_hold['dust'])].copy()
+    swrf_hold  = df_st_mrg_hold[np.isnan(df_st_mrg_hold['dust'])].copy()
+    
+    swrf_hold['geoTimeGridPoint'] = swrf_hold['geoTimeGridPoint_y']
+    swrf_hold.drop(columns = ['geoTimeGridPoint_x','geoTimeGridPoint_y'],inplace = True)
+    
+    aod_hold['geoTimeGridPoint'] = aod_hold['geoTimeGridPoint_x']
+    aod_hold.drop(columns = ['geoTimeGridPoint_x','geoTimeGridPoint_y'],inplace = True)
+    
+    df_st_final = pd.concat([aod_hold,swrf_hold],axis=0)
+    
+    # add dataset
+    df_st_final["dataset"] = getattr(c3,datasetType)(id=datasetId)
+    
+    # add simulation
+    df_st_final["simulationRun"] = getattr(c3,thisType)(id=this.id)
+    
+    # add p level
+    df_st_final['pseudoLevelIndex'] = pseudoLevelIndex
 
     #------------------------------Batch Funcs------------------------------------
     # Initialize an index to track batches
@@ -340,13 +361,13 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     end_index = batchSize
 
     # Number of records
-    total_records = len(df_st_mrg)
+    total_records = len(df_st_final)
     
     # upsert data
     while start_index < total_records:
 #         print(f"Upserting Batch {start_index}")
         # Create a smaller DataFrame for the current batch
-        batch_df = df_st_mrg.iloc[start_index:end_index]
+        batch_df = df_st_final.iloc[start_index:end_index]
 
         # Convert the batch DataFrame to a list of dictionaries
         batch_records = batch_df.to_dict(orient="records")
