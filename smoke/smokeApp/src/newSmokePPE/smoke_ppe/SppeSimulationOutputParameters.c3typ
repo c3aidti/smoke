@@ -25,4 +25,6 @@ type SppeSimulationOutputParameters {
     clwp: float
     // Cloud Droplet Number Concentration
     cdnc: float
+    // Short Wave Radiation Flux Outward
+    swrfOut: float
 }

@@ -2,11 +2,6 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     import pandas as pd
     import datetime as dt
     import numpy as np
-    import iris
-    import iris.analysis
-    from iris.coords import DimCoord
-    from iris.cube import Cube
-    from iris.analysis import Linear
     
     thisType = this.toJson()['type'] #type of this obj instance
     outputFileType = getattr(c3,thisType).mixins[1].genericVarBindings[1].name #SppeSimulationEnsembleOutputFile
@@ -73,6 +68,8 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
             urls_dict['cdnc_ctw'] = url
         elif 'm01s01i299' in url:
             urls_dict['cdnc_wghts'] = url
+        elif 'm01s01i205' in url:
+            urls_dict['swrf_out'] = url
         else:
             urls_dict['ex_coeff'] = url
     urls_dict['AOD'] = aod_urls
@@ -181,12 +178,6 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     df_st2["id"] = datasetId + '_' + round(df_st2["latitude"],3).astype(str) + "_" + round(df_st2["longitude"],3).astype(str) + "_" + df_st2["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
     df_st2["geoTimeGridPoint"] = df_st2["id"].apply(make_gstp)
     df_st2 = df_st2.drop(columns=["id"])
-
-    # add dataset
-    # df_st2["dataset"] = getattr(c3,datasetType)(id=datasetId)
-    
-    # add simulation
-    # df_st2["simulationRun"] = getattr(c3,thisType)(id=this.id)
     
     # add unique id
     df_st2["id"] = datasetId + '_' + this.id + '_' + round(df_st2["latitude"],3).astype(str) + "_" + round(df_st2["longitude"],3).astype(str) + "_" + df_st2["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
@@ -286,6 +277,62 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     df_st3 = df_st3.drop(columns=['geoTimeGridPoint'])
 
     df_st_mrg = pd.merge(df_st_mrg,df_st3,how="outer",on="id")
+
+    #------------------------------SWRF Calcs------------------------------------
+    gstpFile = urls_dict['swrf_out']
+    sample = c3.NetCDFUtil.openFile(gstpFile)
+    lat = sample["latitude"][:]
+    lon = [x*(x < 180) + (x - 360)*(x >= 180) for x in sample["longitude"][:]]
+    tim = sample["time"][:]
+    c3.NetCDFUtil.closeFile(sample,gstpFile)
+    
+    # construct correct times array
+    zero_time = dt.datetime(1970,1,1,0,0)
+    times = []
+    for t in tim:
+        target_time = zero_time + dt.timedelta(hours=t,minutes=20)
+        times.append(target_time)
+
+    if coarseGrainOptions:
+        # Coarse-graining: Reduce the resolution of the lat-lon grid
+        original_lat = lat.copy()
+        original_lon = lon.copy()
+        lat = interp_coord(lat,coarseGrainOptions.coarseFactor)
+        lon = interp_coord(lon,coarseGrainOptions.coarseFactor)
+
+    df_st4 = pd.DataFrame()
+        
+    df_st4["time"] = [t for t in times for n in range(0, len(lat)*len(lon))]
+    df_st4["latitude"] = [l for l in lat for n in range(0, len(lon))]*len(times)
+    df_st4["longitude"] = [l for l in lon]*len(times)*len(lat)
+    df_st4["id"] = datasetId + '_' + round(df_st4["latitude"],3).astype(str) + "_" + round(df_st4["longitude"],3).astype(str) + "_" + df_st4["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
+    df_st4["geoTimeGridPoint"] = df_st4["id"].apply(make_gstp)
+    df_st4 = df_st4.drop(columns=["id"])
+    
+    # add unique id
+    df_st4["id"] = datasetId + '_' + this.id + '_' + round(df_st4["latitude"],3).astype(str) + "_" + round(df_st4["longitude"],3).astype(str) + "_" + df_st4["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
+
+    df_st4 = df_st4.drop(columns=["time", "latitude", "longitude"])
+
+    # get swrf data
+    data = c3.NetCDFUtil.openFile(urls_dict['swrf_out'])
+    swrf_out_raw = data['toa_outgoing_shortwave_flux'][:,:,:]
+    c3.NetCDFUtil.closeFile(data, urls_dict['swrf_out'])
+
+    # divide two weighted cdnc by the weights to retrieve raw values
+    if coarseGrainOptions:
+        # coarse grain clwp data here
+        interp_data = []
+        for time_slice in swrf_out_raw:
+            interp_data.append(interp_targ_data(time_slice,coarseGrainOptions.coarseFactor,coarseGrainOptions.coarseFactor))
+        swrf_out_final = np.array(interp_data)
+    else:
+        swrf_out_final = swrf_out_raw
+
+    df_st4['swrfOut'] = swrf_out_final.reshape(-1)
+    df_st4 = df_st4.drop(columns=['geoTimeGridPoint'])
+
+    df_st_mrg = pd.merge(df_st_mrg,df_st4,how="outer",on="id")
 
     #------------------------------Batch Funcs------------------------------------
     # Initialize an index to track batches
