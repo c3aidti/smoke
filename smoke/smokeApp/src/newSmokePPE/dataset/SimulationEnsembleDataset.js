@@ -132,6 +132,18 @@ function stageTrainedPredictionModelRowsForTechnique(geoTimeGridFetchSpec,techni
   var modelTypeName = this.getTrainedPredictionModelTypeName();
   var modelType = TypeRef.make({"typeName": modelTypeName}).toType()
 
+  // add dataset component to the filter
+  var filter = null
+  if (geoTimeGridFetchSpec.filter === undefined) {
+      filter = Filter.eq('dataset.id',this.id);
+  }
+  else {
+      var filterStr = geoTimeGridFetchSpec.filter;
+      filter = Filter.fromString(filterStr)
+      filter = filter.and().eq('dataset.id',this.id);
+  }
+  geoTimeGridFetchSpec.filter = filter.toString()
+
   var specj = geoTimeGridFetchSpec.toJson();
   specj.type = 'FetchStreamSpec'
   var streamSpec = FetchStreamSpec.make(specj)
