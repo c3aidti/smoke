@@ -1,0 +1,9 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+entity type InterpFlightSimulationDataset
+    extends SimulationEnsembleDataset
+    mixes SimulationDatasetBase<InterpFlightSimulationDataset, InterpFlightGeoTimeGrid, InterpFlightSimulationOutput, InterpFlightTrainedPredictionModel>  type key "INTRPF"
+
+    

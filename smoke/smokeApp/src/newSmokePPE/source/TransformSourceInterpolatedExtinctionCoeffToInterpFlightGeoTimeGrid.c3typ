@@ -1,0 +1,8 @@
+type TransformSourceInterpolatedExtinctionCoeffToInterpFlightGeoTimeGrid mixes InterpFlightGeoTimeGrid transforms SourceInterpolatedExtinctionCoeff {
+    id: ~ expression ""
+    time: ~ expression "time"
+    latitude: ~ expression "latitude"
+    longitude: ~ expression "longitude"
+
+
+}
