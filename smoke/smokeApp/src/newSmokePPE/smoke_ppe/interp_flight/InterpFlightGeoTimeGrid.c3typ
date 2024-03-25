@@ -15,5 +15,5 @@ entity type InterpFlightGeoTimeGrid schema name 'INTRP_FLT_GTG' {
     // the timestamp
     time: !datetime
     // The PostGIS enabled geo point (long,lat) of this output
-    geo: !GeoPoint
+    geo: GeoPoint
 }
