@@ -7,7 +7,7 @@
 @db(index=['latitude,longitude', 'time','dataset'],compactType=true)
 entity type InterpFlightGeoTimeGrid schema name 'INTRP_FLT_GTG' {
     //
-    dataset: !InterpFlightSimulationEnsembleDataset
+    dataset: !InterpFlightSimulationDataset
     // the latitude
     latitude: !double
     // the longitude
