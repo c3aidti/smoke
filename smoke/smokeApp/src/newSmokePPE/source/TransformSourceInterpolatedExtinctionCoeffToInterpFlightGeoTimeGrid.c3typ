@@ -1,6 +1,7 @@
 type TransformSourceInterpolatedExtinctionCoeffToInterpFlightGeoTimeGrid mixes InterpFlightGeoTimeGrid transforms SourceInterpolatedExtinctionCoeff {
     id: ~ expression "concat(string(latitude),'_',string(longitude),'_',string(time))"
-    time: ~ expression "time"
+    dataset: "smoke_ppe_tatz_flight"
+    time: ~ expression "dateTime(time)"
     latitude: ~ expression "latitude"
     longitude: ~ expression "longitude"
 }
