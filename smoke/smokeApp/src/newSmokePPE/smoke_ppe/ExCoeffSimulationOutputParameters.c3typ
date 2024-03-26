@@ -8,9 +8,9 @@
 */
 type ExCoeffSimulationOutputParameters {
     // the pseudoLevel index (starts at 0)
-    exCoeff_550: float
+    exCoeff550: double
     // altitude of data measurement
     altitude: float
     // number label for individual flight
-    flight_num: int
+    flightNum: int
 }

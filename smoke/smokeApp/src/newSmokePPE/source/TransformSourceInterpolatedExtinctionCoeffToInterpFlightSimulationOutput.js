@@ -5,12 +5,13 @@ function transform(source) {
     for (var i = 0; i <= 120; i++) {
         var field = "ens_" + i + "_m01s02i530_550nm";
         types.push(
-            InterpolatedFlightSimulationOutput.make({
-                simulationRun: {id: "smoke_ppe_tatz_" + i},
-                dataset: {id: "smoke_ppe_tatz_flight"},
-                geoTimeGridPoint: {id: source.latitude + "_" + source.longitude + "_" + source.time},
+            {
+                type: "InterpolatedFlightSimulationOutput",
+                simulationRun: {type: "SppeSimulationEnsembleRun", id: "smoke_ppe_tatz_" + i},
+                dataset: {type: "InterpFlightSimulationDataset", id: "smoke_ppe_tatz_flight"},
+                geoTimeGridPoint: {type: "InterpFlightGeoTimeGrid",id: source.latitude + "_" + source.longitude + "_" + source.time},
                 exCoeff550: source[field]
-            })
+            }
         );
 
     }
