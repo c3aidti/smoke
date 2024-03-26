@@ -1,0 +1,5 @@
+type TransformSourceInterpolatedExtinctionCoeffToInterpFlightSimulationOutput mixes InterpFlightSimulationOutput transforms SourceInterpolatedExtinctionCoeff{
+/**
+*/
+transform: function(source: SourceInterpolatedExtinctionCoeff): [InterpFlightSimulationOutput] js server
+}
