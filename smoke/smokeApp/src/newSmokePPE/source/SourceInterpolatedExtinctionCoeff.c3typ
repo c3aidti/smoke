@@ -14,6 +14,7 @@ type SourceInterpolatedExtinctionCoeff mixes Source {
     //
     observations_m01s02i530_550nm: double
     //
+    ens_0_m01s02i530_550nm: double
     ens_1_m01s02i530_550nm: double
     ens_2_m01s02i530_550nm: double
     ens_3_m01s02i530_550nm: double
