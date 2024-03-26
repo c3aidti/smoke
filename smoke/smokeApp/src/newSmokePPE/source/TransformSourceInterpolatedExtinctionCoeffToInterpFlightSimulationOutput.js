@@ -6,9 +6,9 @@ function transform(source) {
         var field = "ens_" + i + "_m01s02i530_550nm";
         types.push(
             InterpolatedFlightSimulationOutput.make({
-                simulationRun: "smoke_ppe_tatz_" + i,
-                dataset: "smoke_ppe_tatz_flight",
-                geoTimeGridPoint: source.latitude + "_" + source.longitude + "_" + source.time,
+                simulationRun: {id: "smoke_ppe_tatz_" + i},
+                dataset: {id: "smoke_ppe_tatz_flight"},
+                geoTimeGridPoint: {id: source.latitude + "_" + source.longitude + "_" + source.time},
                 exCoeff550: source[field]
             })
         );
