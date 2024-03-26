@@ -7,13 +7,13 @@
 @db(index=['latitude,longitude', 'time','dataset'],compactType=true)
 entity type InterpFlightGeoTimeGrid schema name 'INTRP_FLT_GTG' {
     //
-    dataset: !InterpFlightSimulationDataset
+    dataset: InterpFlightSimulationDataset
     // the latitude
     latitude: !double
     // the longitude
     longitude: !double
     // the timestamp
-    time: !datetime
+    time: datetime
     // The PostGIS enabled geo point (long,lat) of this output
     geo: GeoPoint
 }
