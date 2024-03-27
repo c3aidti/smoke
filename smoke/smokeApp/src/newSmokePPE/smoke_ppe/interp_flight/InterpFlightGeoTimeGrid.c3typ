@@ -8,6 +8,8 @@
 entity type InterpFlightGeoTimeGrid schema name 'INTRP_FLT_GTG' {
     //
     dataset: InterpFlightSimulationDataset
+    //
+    filghtTrack: FlightTrack
     // the latitude
     latitude: !double
     // the longitude
