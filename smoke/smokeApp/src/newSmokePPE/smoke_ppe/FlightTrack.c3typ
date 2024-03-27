@@ -1,4 +1,4 @@
-entity Type FlightTrack schema name 'FLT_TRK' {
+entity type FlightTrack schema name 'FLT_TRK' {
     //
     campaign: string
     //
