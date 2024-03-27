@@ -1,0 +1,30 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Set of parameters to be mixed into the `SimulationOutput` types for datasets that are
+* associated with smoke_ppe {@link SimulationModel}
+*/
+type SppeSimulationOutputParameters {
+    // the pseudoLevel index (starts at 0)
+    pseudoLevelIndex: int
+    // dust
+    dust: float
+    // soluble aitken mode
+    solubleAitkenMode: float
+    // soluble accumulation mode
+    solubleAccumulationMode: float
+    // soluble coarse mode
+    solubleCoarseMode: float
+    // insoluble aitken mode
+    insolubleAitkenMode: float
+    // Aerosol Optical Depth
+    aod: float stored calc "sum(dust, solubleAitkenMode, solubleAccumulationMode, solubleCoarseMode, insolubleAitkenMode)"
+    // Cloud Liquid Water Path
+    clwp: float
+    // Cloud Droplet Number Concentration
+    cdnc: float
+    // Short Wave Radiation Flux Outward
+    swrfOut: float
+}

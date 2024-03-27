@@ -1,0 +1,39 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+*
+* @var ST - Simulation Type
+* @var FT - Output file Type
+*
+* Extend this type to define a `[ModelName]SimulationRun` table for a particular {@link SimulationModel}.
+* 
+* This Type is extendable mostly to support separate implementations for `upsertFileTable` and `upsertSimulationOutput`
+* for different simulation models.
+* When extending this type should be mixed in with a type that defines the parameter fields for the associated
+* {@link SimulationModel}.
+* Ex.
+*```
+*
+*```
+*
+* TODO: 
+* - Add more documentation
+* - Try to implement generic versions of `upsertFileTable` and `upsertSimulationOutput` to avoid the need to 
+* - extend this type.
+*/
+extendable entity type SimulationRun<ST,FT> schema name "SIM_RUN" {
+    //
+    ensemble: SimulationEnsemble
+    //
+    simulationNumber: integer
+    /**
+    * Implement this function to populate the {@link SimulationEnsembleOutputFiles} table for a particular 
+    * {@link SimulationModel}.
+    */
+    upsertFileTable: abstract member function(): any
+    /**
+    *
+    */
+    upsertSimulationOutput: abstract member function(datasetId: !string, pseudoLevelIndex: !int, batchSize: int): boolean
+
+}

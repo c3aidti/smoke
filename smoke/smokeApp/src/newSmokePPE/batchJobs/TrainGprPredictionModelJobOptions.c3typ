@@ -1,0 +1,18 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+type TrainGprPredictionModelJobOptions {
+    // The `SimulationEnsembelDataset` on which to train
+    dataset: SimulationEnsembleDataset
+    // hardware profile ID to run the batches
+    hardwareProfileId: string = "appc8m642-w"
+    // How many models will be trained in each batch
+    batchSize: int = 50
+    // the {@link GaussianProcessRegressionTechnique} to train the models
+    gprTechnique: !GprPredictionModelParameters
+    // Filter that defines the total number of models to train
+    geoTimeGridFetchSpec: FetchSpec = {"limit": -1}
+    // Features to use for training
+    X: Dataset
+}

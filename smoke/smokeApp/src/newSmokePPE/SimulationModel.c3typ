@@ -1,0 +1,45 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+*
+* Each SimulationModel may have:
+* - A distinct set of `SimulationRunParameters` that define the input space for the simulation.
+* - A distinct set of `SimulationOutputParameters` that define the output space for the simulation.
+* - One or more {@link SimulationEnsemble}s that reperesent a set of simulations that have the same 
+*   geographical and temporal coverage. 
+* - multiple GprTrainingTechniques.
+*
+*
+**/
+entity type SimulationModel schema name "SIM_MDL" {
+     //
+    name: string
+    //
+    source: long string
+    //
+    um_version: string
+    //
+    conventions: string
+    //
+    ensembles: [SimulationEnsemble](model,id)
+    //
+    GprTrainingTechniques: [GprPredictionModelParameters](model,id)
+    /**
+    */
+    @py(env='gordon_1_0_0')
+    createTrainingTechnique: inline member function(
+        kernelName: !string, 
+        serializedKernel: !string, 
+        featureExcludeList: [string], 
+        featureIncludeList: [string], 
+        simulationExcludeList: [integer],
+        simulationIncludeList: [integer],
+        targetName: string = 'sumAll',
+        randomSeed: integer = 42, 
+        centerTarget: boolean = false,
+        standardizeTarget: boolean = false,
+        validation: boolean = false, 
+        splitFraction: float = 0.2
+        ): GprPredictionModelParameters
+    
+}

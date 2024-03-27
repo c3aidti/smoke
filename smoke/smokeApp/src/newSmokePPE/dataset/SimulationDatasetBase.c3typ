@@ -1,0 +1,31 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+*
+* @var DT - Dataset type
+* @var GT - Grid type
+* @var OT - Output type
+* @var MT - Models type
+*
+* Base parameterized type for simulation datasets
+* 
+* TODO:
+* - Possibly rename to: EnsembleDataset
+*
+*/
+type SimulationDatasetBase<DT,GT,OT,MT> {
+    //
+    trainedModelRecords: [MT](dataset,id)
+    //
+    trainedModelCount: long integer stored calc "count(trainedModels)"
+    //
+    geoTimeGrid: [GT](dataset,id)
+    //
+    geoGridTimeSeriesCount: long integer stored calc "count(geoTimeGrid)"
+    //
+    traindModelPercent: float stored calc "100*(trainedModelCount / geoGridTimeSeriesCount)"
+    //
+    simulationOutput: [OT](dataset,id)
+    //
+    trainedTechniques: [GprPredictionModelParameters] stored calc "unique(trainedModels.technique.id).map({type:'GprPredictionModelParameters',id:technique.id})" schema suffix 'UT'
+}

@@ -1,0 +1,19 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+
+* Full parameter schema for the simulation parameters
+
+**/
+entity type SimulationParameters schema name "SIM_PRMS" {
+    // Reference to the {@link SimulationModel}
+    simulationModel: !SimulationModel
+    // The name of the parameter
+    name: string
+    // The long name of the parameter used in NetCDF file names
+    longName: string
+    // The description of the parameter
+    description: long string
+    // The unit of measure for the parameter
+    uom: Unit
+}
