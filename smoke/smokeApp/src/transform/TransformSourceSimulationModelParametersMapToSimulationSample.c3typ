@@ -1,5 +1,9 @@
 /**
-TransformSourceSimulationModelParametersMapToSimulationSample.c3typ
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Transforms the {@link SourceSimulationModelParametersMap} to {@link SimulationSample}
 */
 type TransformSourceSimulationModelParametersMapToSimulationSample mixes SimulationSample transforms SourceSimulationModelParametersMap {
   // The id of this simulation (unique over all simulations, all ensembles)

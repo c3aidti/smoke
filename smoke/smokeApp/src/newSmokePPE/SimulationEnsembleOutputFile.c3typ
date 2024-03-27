@@ -1,0 +1,30 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Files containing output from {@link SimulationSample}s.  These are the simulation data from large scale 
+* simulations and are stored in NetCDF format
+*/
+extendable entity type SimulationEnsembleOutputFile<ST> schema name 'SIM_OTP_FL' {
+    // The {@link SimulationSample} that theses files belong to.
+    simulationRun: !ST
+    // The simulation output file (NetCFD)
+    file: !File
+    // The container this file belongs to (Azure blob container)
+    container: !string enum('smoke-ppe')
+    /**
+    * Gerneric function to populate a geoTimeGrid for a given dataset type.  This fucntion is called from
+    * the {@link SimulationEnsembleDataset#initializeGrid} and should not be called directly.
+    @param datasetType
+    *        The type name of the dataset to which the grid data belongs
+    */
+    @py(env='gordon_1_0_0')
+    upsertGridData: private member function(
+        datasetType: !string,
+        geoTimeGridType: !string,
+        datasetId: !string,
+        coarseGrainOptions: CoarseGrainOptions,
+        batchSize: integer=160552
+    ): boolean
+}
