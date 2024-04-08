@@ -79,12 +79,12 @@ function upsertFileTable() {
         };
     };
 
-    while(fileStream_extCoeff.hasNext()) {
-        var file = fileStream_swrf.next();
-        if(file.url.endsWith(".nc")) {
-            smokePPEFiles.push(file);
-        };
-    };
+    // while(fileStream_extCoeff.hasNext()) {
+    //     var file = fileStream_swrf.next();
+    //     if(file.url.endsWith(".nc")) {
+    //         smokePPEFiles.push(file);
+    //     };
+    // };
 
     var fileObjects = smokePPEFiles.map(createSimOutFile);
     SppeSimulationEnsembleOutputFile.upsertBatch(fileObjects);
