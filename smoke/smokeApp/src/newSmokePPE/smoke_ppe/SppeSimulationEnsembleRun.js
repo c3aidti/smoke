@@ -27,6 +27,7 @@ function upsertFileTable() {
     var fileStream_cdnc_ctw = FileSystem.inst().listFilesStream(pathToFiles_cdnc_ctw,-1);
     var fileStream_cdnc_wghts = FileSystem.inst().listFilesStream(pathToFiles_cdnc_wghts,-1);
     var fileStream_swrf = FileSystem.inst().listFilesStream(pathToFiles_swrf,-1);
+    var fileStream_extCoeff = FileSystem.inst().listFilesStream(pathToFiles_extCoeff,-1);
     var smokePPEFiles = new Array();
 
     while(fileStream.hasNext()) {
