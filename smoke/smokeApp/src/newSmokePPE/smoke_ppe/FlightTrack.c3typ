@@ -2,9 +2,9 @@ entity type FlightTrack schema name 'FLT_TRK' {
     //
     campaign: string
     //
-    flight: string
+    flightDate: string
     //
-    prePathToLocationFiles: string
+    locationFile: File
     //
-    prepathToObservationFiles: string
+    observationFile: File
 }
