@@ -13,6 +13,8 @@ extendable entity type SimulationEnsembleOutputFile<ST> schema name 'SIM_OTP_FL'
     file: !File
     // The container this file belongs to (Azure blob container)
     container: !string enum('smoke-ppe')
+    // Stash code for the file
+    stashCode: string
     /**
     * Gerneric function to populate a geoTimeGrid for a given dataset type.  This fucntion is called from
     * the {@link SimulationEnsembleDataset#initializeGrid} and should not be called directly.
