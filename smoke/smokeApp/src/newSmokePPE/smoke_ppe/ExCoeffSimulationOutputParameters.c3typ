@@ -12,5 +12,5 @@ type ExCoeffSimulationOutputParameters {
     // altitude of data measurement
     altitude: float
     // number label for individual flight
-    flightNum: int
+    modelLevelNumber: int
 }
