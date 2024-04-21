@@ -9,7 +9,7 @@ type SimulationEnsembleRunLoadOutputDataJobOptions {
     limit: int = -1
     // offset in the fetch to SmokePPESimulationSample
     offset: int = 0
-    // any additional filters
+    // Filter on SimulationEnembleRunType
     filter: Filter
     // Number of parallel batches to run
     parallelStreams: int = 8
