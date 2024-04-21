@@ -15,5 +15,6 @@ entity type SppeSimulationEnsembleRun
 
     /**
     */
+    @py(env='gordon-interpolation_1_0_0')
     upsertInterpOutputToFlightTracks: member function(datasetId: string, stashId: string, flightDate: string, campaign: string): boolean
 }
