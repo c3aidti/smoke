@@ -4,7 +4,7 @@
 **/
 entity type SimulationEnsembleRunInterpToFlightTracksJob 
 extends BatchJob<SimulationEnsembleRunInterpToFlightTracksJob,SimulationEnsembleRunInterpToFlightTracksJobOptions,SimulationEnsembleRunInterpToFlightTracksJobBatch>
-type key "SM_ENS_RN_LOD" {
+type key "SM_ENS_RN_ITFTJ" {
     doStart:        ~ js server
     processBatch:   ~ js server
 }
