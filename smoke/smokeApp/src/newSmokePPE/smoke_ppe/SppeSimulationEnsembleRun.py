@@ -465,7 +465,7 @@ def interp_coord(data_arr, step):
 ###################################################################################
 ###################################################################################
 
-def upsertInterpOutputToFlightTracks(this,stashId,flightDate,campaign,datasetType,datasetId):
+def upsertInterpOutputToFlightTracks(this,datasetId,stashId,flightDate,campaign):
     import pandas as pd
     import datetime as dt
     import hashlib
@@ -732,6 +732,13 @@ def upsertInterpOutputToFlightTracks(this,stashId,flightDate,campaign,datasetTyp
         return df
     
     thisType = this.toJson()['type'] #type of this obj instance
+    datasetObj = c3.SimulationEnsembleDataset.fetch(
+        spec = {
+            "filter":c3.Filter.inst().eq('id',datasetId),
+            "include": "id"
+        }
+    ).objs[0]
+    datasetType = datasetObj.toJson()['type']
     dataset = getattr(c3,datasetType).get(datasetId)
     geoTimeGridType = getattr(c3,datasetType).mixins[2].genericVarBindings[1].name #SppeTatzCoarseGeoTimeGrid
     simulationOutputType = getattr(c3,datasetType).mixins[2].genericVarBindings[2].name #SppeTatzCoarseSimulationOutput
