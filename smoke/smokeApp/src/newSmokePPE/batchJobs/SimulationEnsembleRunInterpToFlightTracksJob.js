@@ -32,6 +32,7 @@ function doStart(job, options) {
     var batch = [];
     var batchCtr = 0;
     var stashIndex = 0;
+    var flightTrackId;
     var stashId;
     var simId;
     var batchSpec;
