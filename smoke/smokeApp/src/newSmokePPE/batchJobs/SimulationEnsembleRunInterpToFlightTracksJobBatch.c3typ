@@ -3,5 +3,5 @@
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
 type SimulationEnsembleRunInterpToFlightTracksJobBatch {
-    values: [string]
+    values: [SimulationEnsembleRunInterpToFlightTracksJobBatchValue]
 }

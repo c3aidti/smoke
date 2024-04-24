@@ -16,6 +16,8 @@ type SimulationEnsembleRunInterpToFlightTracksJobOptions {
     //
     datasetId: !string
     //
+    stashIds: [string]
+    //
     batchSize: int = 4
 
 }
