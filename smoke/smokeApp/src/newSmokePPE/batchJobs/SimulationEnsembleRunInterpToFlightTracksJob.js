@@ -29,7 +29,7 @@ function doStart(job, options) {
     });
 
     // Batch scheduling loop
-    batch = [];
+    var batch = [];
     var batchCtr = 0;
     var stashIndex = 0;
     var stashId;
