@@ -36,6 +36,7 @@ function doStart(job, options) {
     var stashId;
     var simId;
     var batchSpec;
+    var batchValue;
     while(stashIndex < options.stashIds.length) {
         stashId = options.stashIds[stashIndex];
 
