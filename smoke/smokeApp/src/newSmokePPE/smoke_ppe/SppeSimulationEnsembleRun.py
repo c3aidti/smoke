@@ -769,11 +769,12 @@ def upsertInterpOutputToFlightTracks(this,datasetId,stashId,flightDate,campaign)
     df_grid['time'] = times
     
     # Add flight track and dataset
-    df_grid['flightTrack'] = flightTrack
+#     df_grid['flightTrack'] = flightTrack
     df_grid['dataset'] = dataset
     
     # Contruct unique id
-    df_grid['id'] = dataset.id +"_"+"_"+flightTrack.id+round(df_grid["latitude"],3).astype(str) + "_" + round(df_grid["longitude"],3).astype(str) + "_" + df_grid["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
+#     df_grid['id'] = dataset.id +"_"+"_"+flightTrack.id+round(df_grid["latitude"],3).astype(str) + "_" + round(df_grid["longitude"],3).astype(str) + "_" + df_grid["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
+    df_grid['id'] = dataset.id +"_"+round(df_grid["latitude"],3).astype(str) + "_" + round(df_grid["longitude"],3).astype(str) + "_" + df_grid["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
     df_grid["id"] = df_grid["id"].apply(hash_string)
     
     df_grid.drop(columns = ['m01s02i530_550nm','altitude','model_level_number'],inplace = True)
@@ -785,7 +786,12 @@ def upsertInterpOutputToFlightTracks(this,datasetId,stashId,flightDate,campaign)
     df_output = iris_cubelist_to_dataframe(cubelist)
     
     df_output['time'] = df_grid['time']
-    df_output['id'] = df_grid['id']
+    # Contruct unique id
+    df_output['id'] = dataset.id +"_"+"_"+flightTrack.id+round(df_output["latitude"],3).astype(str) + "_" + round(df_output["longitude"],3).astype(str) + "_" + df_output["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
+    df_output["id"] = df_output["id"].apply(hash_string)
+#     df_output['id'] = df_grid['id']
+    
+    df_output['flightTrack'] = flightTrack
     df_output['dataset'] = dataset
     df_output["simulationRun"] = getattr(c3,thisType)(id=this.id)
     df_output = df_output.rename(columns={'m01s02i530_550nm': 'exCoeff550'})
