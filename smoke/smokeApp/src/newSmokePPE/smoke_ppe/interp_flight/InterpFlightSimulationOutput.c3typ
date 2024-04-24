@@ -8,4 +8,7 @@
 @db(index=['simulationRun', 'geoTimeGridPoint', 'dataset'],compactType=true)
 entity type InterpFlightSimulationOutput
 mixes DatasetSimulationOutputBase<InterpFlightSimulationDataset,SppeSimulationEnsembleRun,InterpFlightGeoTimeGrid>, ExCoeffSimulationOutputParameters 
-schema name 'INTRP_FLT_OTP' 
+schema name 'INTRP_FLT_OTP' {
+    //
+    flightTrack: FlightTrack
+}
