@@ -36,7 +36,6 @@ function doStart(job, options) {
     var batchSpec;
     while(stashIndex < options.stashIds.length) {
         stashId = options.stashIds[stashIndex];
-        stashBatch.push(stashId);
 
         while(sims.hasNext()) {
             simId = sims.next().id
