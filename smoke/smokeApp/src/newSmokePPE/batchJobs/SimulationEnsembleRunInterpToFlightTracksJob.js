@@ -50,7 +50,7 @@ function doStart(job, options) {
                 batch.push(batchValue);
 
                 if (batchCtr >= options.batchSize || (!sims.hasNext() && !flightTracks.hasNext() && stashIndex === options.stashIds.length - 1)) {
-                    batchSpec = SimulationEnsembleRunLoadOutputDataJobBatch.make({values: batch});
+                    batchSpec = SimulationEnsembleRunInterpToFlightTracksJobBatch.make({values: batch});
                     job.scheduleBatch(batchSpec);
                     batchCtr = 0;
                     batch = [];
@@ -63,7 +63,7 @@ function doStart(job, options) {
 
     // Schedule any remaining items that didn't reach the batch size
     if (batchCtr > 0) {
-        batchSpec = SimulationEnsembleRunLoadOutputDataJobBatch.make({values: batch});
+        batchSpec = SimulationEnsembleRunInterpToFlightTracksJobBatch.make({values: batch});
         job.scheduleBatch(batchSpec);
     }
 }
