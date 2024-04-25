@@ -20,13 +20,26 @@ function doStart(job, options) {
     job.setHardwareProfile(options.hardwareProfileId);
 
     // Lookup sims and flightTracks based on filters
-    var sims = simulationRunType.fetchObjStream({
-        "filter": options.simulationFilter
-    });
-
-    var flightTracks = FlightTrack.fetchObjStream({
-        "filter": options.flightTrackFilter
-    });
+    var sims;
+    if (options.simulationFilter === undefined) {
+        sims = simulationRunType.fetchObjStream({"limit":-1});
+    }
+    else {
+        sims = simulationRunType.fetchObjStream({
+            "filter": options.simulationFilter,
+            "limit":-1
+        });
+    }
+    var flightTracks;
+    if (options.flightTrackFilter === undefined) {
+        flightTracks = FlightTrack.fetchObjStream({"limit":-1});
+    }
+    else {
+        flightTracks = FlightTrack.fetchObjStream({
+            "filter": options.flightTrackFilter,
+            "limit":-1
+        });
+    }
 
     // Batch scheduling loop
     var batch = [];
