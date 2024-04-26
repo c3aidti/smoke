@@ -21,25 +21,25 @@ function doStart(job, options) {
 
     // Lookup sims and flightTracks based on filters
     var sims;
-    if (options.simulationFilter === undefined) {
-        sims = simulationRunType.fetchObjStream({"limit":-1});
-    }
-    else {
+    // if (options.simulationFilter === undefined) {
+        // sims = simulationRunType.fetchObjStream({"limit":-1});
+    // }
+    // else {
         sims = simulationRunType.fetchObjStream({
             "filter": options.simulationFilter,
             "limit":-1
         });
-    }
+    // }
     var flightTracks;
-    if (options.flightTrackFilter === undefined) {
-        flightTracks = FlightTrack.fetchObjStream({"limit":-1});
-    }
-    else {
+    // if (options.flightTrackFilter === undefined) {
+        // flightTracks = FlightTrack.fetchObjStream({"limit":-1});
+    // }
+    // else {
         flightTracks = FlightTrack.fetchObjStream({
             "filter": options.flightTrackFilter,
             "limit":-1
         });
-    }
+    // }
 
     // Batch scheduling loop
     var batch = [];
@@ -69,16 +69,16 @@ function doStart(job, options) {
                     batch = [];
                 }
             }
+            // Schedule any remaining items that didn't reach the batch size
+            if (batchCtr > 0) {
+                batchSpec = SimulationEnsembleRunInterpToFlightTracksJobBatch.make({values: batch});
+                job.scheduleBatch(batchSpec);
+            }
         }
 
         stashIndex++;
     }
 
-    // Schedule any remaining items that didn't reach the batch size
-    if (batchCtr > 0) {
-        batchSpec = SimulationEnsembleRunInterpToFlightTracksJobBatch.make({values: batch});
-        job.scheduleBatch(batchSpec);
-    }
 }
 
 function processBatch(batch, job, options) {

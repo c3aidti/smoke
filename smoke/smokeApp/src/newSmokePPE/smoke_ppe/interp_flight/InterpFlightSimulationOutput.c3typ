@@ -5,7 +5,7 @@
 /**
 * A single Smoke PPE output taken from a single [SimulationSample](type:SimulationSample)
 */
-@db(index=['simulationRun', 'geoTimeGridPoint', 'dataset'],compactType=true)
+@db(index=['simulationRun', 'geoTimeGridPoint', 'dataset','flightTrack'],compactType=true)
 entity type InterpFlightSimulationOutput
 mixes DatasetSimulationOutputBase<InterpFlightSimulationDataset,SppeSimulationEnsembleRun,InterpFlightGeoTimeGrid>, ExCoeffSimulationOutputParameters 
 schema name 'INTRP_FLT_OTP' {
