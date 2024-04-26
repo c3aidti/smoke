@@ -518,7 +518,7 @@ def upsertInterpOutputToFlightTracks(this,datasetId,stashId,flightDate,campaign)
             self.date = date
             self.campaign = campaign
             self.level_ = pseudo_level
-            self.local_path = local_path
+            self.local_path = local_path + '/' + str(self.ensemble) + self.stash + self.date + self.campaign
             self.output_root = local_path
 
             start_time = time.time()
@@ -684,6 +684,7 @@ def upsertInterpOutputToFlightTracks(this,datasetId,stashId,flightDate,campaign)
         def copy_file_to_local(self,file_url):
             filename = os.path.basename(file_url)
             tmp_path = os.path.join(self.local_path, filename)
+            os.makedirs(self.local_path, exist_ok=True)
             c3.Client.copyFilesToLocalClient(file_url, self.local_path)
             return tmp_path
 
@@ -692,6 +693,8 @@ def upsertInterpOutputToFlightTracks(this,datasetId,stashId,flightDate,campaign)
                 os.remove(self.aircraft_track_path)
             if os.path.exists(self.model_data_path):
                 os.remove(self.model_data_path)
+            if os.path.exists(self.local_path):
+                os.rmdir(self.local_path)
 
     ###################################################################################
     #
