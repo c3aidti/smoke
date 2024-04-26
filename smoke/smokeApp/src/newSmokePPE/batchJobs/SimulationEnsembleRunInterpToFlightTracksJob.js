@@ -59,10 +59,18 @@ function doStart(job, options) {
                     batch = [];
                 }
             }
-            flightTracks = flightTracks.offset(0);
+            // flightTracks = flightTracks.offset(0);
+            flightTracks = FlightTrack.fetchObjStream({
+                "filter": options.flightTrackFilter,
+                "limit":-1
+            });
             
         }
-        sims = sims.offset(0);
+        // sims = sims.offset(0);
+        sims = simulationRunType.fetchObjStream({
+            "filter": options.simulationFilter,
+            "limit":-1
+        });
 
         stashIndex++;
     }
