@@ -798,8 +798,10 @@ def upsertInterpOutputToFlightTracks(this,datasetId,stashId,flightDate,campaign)
     df_output["id"] = df_output["id"].apply(hash_string)
     df_output = df_output.rename(columns={'m01s02i530_550nm': 'exCoeff550'})
     df_output['modelLevelNumber'] = df_output['model_level_number'].astype(int)
-    df_output["geoTimeGridPoint"] = df_output["id"].apply(make_gstp)
-    df_output.drop(columns = ['time','latitude','longitude','model_level_number'],inplace = True)
+    df_output['gridId'] = dataset.id +"_"+round(df_output["latitude"],3).astype(str) + "_" + round(df_output["longitude"],3).astype(str) + "_" + df_output["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
+    df_output["gridId"] = df_output["gridId"].apply(hash_string)
+    df_output["geoTimeGridPoint"] = df_output["gridId"].apply(make_gstp)
+    df_output.drop(columns = ['time','latitude','longitude','model_level_number','gridId'],inplace = True)
     
     # upsert Interpolated Output
     batch_records = df_output.to_dict(orient="records")
