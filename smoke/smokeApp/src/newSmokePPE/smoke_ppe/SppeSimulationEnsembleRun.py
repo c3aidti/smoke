@@ -792,10 +792,9 @@ def upsertInterpOutputToFlightTracks(this,datasetId,stashId,flightDate,campaign)
     
     df_output['flightTrack'] = flightTrack
     df_output['dataset'] = dataset
-    simulationId = getattr(c3,thisType)(id=this.id)
-    df_output["simulationRun"] =simulationId
+    df_output["simulationRun"] = getattr(c3,thisType)(id=this.id)
     # Contruct unique id
-    df_output['id'] = dataset.id +"_"+"_"+flightTrack.id+"_"+simulationId+round(df_output["latitude"],3).astype(str) + "_" + round(df_output["longitude"],3).astype(str) + "_" + df_output["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
+    df_output['id'] = dataset.id +"_"+"_"+flightTrack.id+"_"+this.id+"_"+round(df_output["latitude"],3).astype(str) + "_" + round(df_output["longitude"],3).astype(str) + "_" + df_output["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
     df_output["id"] = df_output["id"].apply(hash_string)
     df_output = df_output.rename(columns={'m01s02i530_550nm': 'exCoeff550'})
     df_output['modelLevelNumber'] = df_output['model_level_number'].astype(int)
