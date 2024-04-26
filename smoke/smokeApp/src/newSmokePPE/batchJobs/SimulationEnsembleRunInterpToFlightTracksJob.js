@@ -69,7 +69,7 @@ function doStart(job, options) {
                     batch = [];
                 }
             }
-            flightTracks = FlightTracks.offset(0);
+            flightTracks = flightTracks.offset(0);
             
         }
 
