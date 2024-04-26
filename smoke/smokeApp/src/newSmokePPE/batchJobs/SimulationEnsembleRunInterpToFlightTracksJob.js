@@ -21,25 +21,15 @@ function doStart(job, options) {
 
     // Lookup sims and flightTracks based on filters
     var sims;
-    // if (options.simulationFilter === undefined) {
-        // sims = simulationRunType.fetchObjStream({"limit":-1});
-    // }
-    // else {
-        sims = simulationRunType.fetchObjStream({
-            "filter": options.simulationFilter,
-            "limit":-1
-        });
-    // }
+    sims = simulationRunType.fetchObjStream({
+        "filter": options.simulationFilter,
+        "limit":-1
+    });
     var flightTracks;
-    // if (options.flightTrackFilter === undefined) {
-        // flightTracks = FlightTrack.fetchObjStream({"limit":-1});
-    // }
-    // else {
-        flightTracks = FlightTrack.fetchObjStream({
-            "filter": options.flightTrackFilter,
-            "limit":-1
-        });
-    // }
+    flightTracks = FlightTrack.fetchObjStream({
+        "filter": options.flightTrackFilter,
+        "limit":-1
+    });
 
     // Batch scheduling loop
     var batch = [];
@@ -72,6 +62,7 @@ function doStart(job, options) {
             flightTracks = flightTracks.offset(0);
             
         }
+        sims = sims.offset(0);
 
         stashIndex++;
     }
