@@ -673,7 +673,8 @@ def upsertInterpOutputToFlightTracks(this,datasetId,stashId,flightDate,campaign)
             try:
                 da = xr.open_mfdataset(tmp_path)[self.stash]
                 model_cube = xr.DataArray.to_iris(da)
-                os.remove(tmp_path)
+                if os.path.exists(tmp_path):
+                    os.remove(tmp_path)
                 return model_cube
             finally:
                 if os.path.exists(tmp_path):
