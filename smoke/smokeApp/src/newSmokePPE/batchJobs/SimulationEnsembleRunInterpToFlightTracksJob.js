@@ -69,16 +69,16 @@ function doStart(job, options) {
                     batch = [];
                 }
             }
-            // Schedule any remaining items that didn't reach the batch size
-            if (batchCtr > 0) {
-                batchSpec = SimulationEnsembleRunInterpToFlightTracksJobBatch.make({values: batch});
-                job.scheduleBatch(batchSpec);
-            }
+            
         }
 
         stashIndex++;
     }
-
+    // Schedule any remaining items that didn't reach the batch size
+    if (batchCtr > 0) {
+        batchSpec = SimulationEnsembleRunInterpToFlightTracksJobBatch.make({values: batch});
+        job.scheduleBatch(batchSpec);
+    }
 }
 
 function processBatch(batch, job, options) {
