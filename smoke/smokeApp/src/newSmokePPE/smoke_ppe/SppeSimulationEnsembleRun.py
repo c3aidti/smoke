@@ -785,7 +785,7 @@ def upsertInterpOutputToFlightTracks(this,datasetId,stashId,flightDate,campaign)
     
     # Upsert Grid locations
     batch_records = df_grid.to_dict(orient="records")
-    getattr(c3, geoTimeGridType).upsertBatch(objs=batch_records)
+    getattr(c3, geoTimeGridType).mergeBatch(objs=batch_records)
     
     df_output = iris_cubelist_to_dataframe(cubelist)
     
@@ -808,7 +808,7 @@ def upsertInterpOutputToFlightTracks(this,datasetId,stashId,flightDate,campaign)
     
     # upsert Interpolated Output
     batch_records = df_output.to_dict(orient="records")
-    getattr(c3,simulationOutputType).upsertBatch(objs=batch_records)
+    getattr(c3,simulationOutputType).mergeBatch(objs=batch_records)
     
 #     return df_output
     return True
