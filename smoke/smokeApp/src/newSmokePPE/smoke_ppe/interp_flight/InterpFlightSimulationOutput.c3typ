@@ -11,4 +11,10 @@ mixes DatasetSimulationOutputBase<InterpFlightSimulationDataset,SppeSimulationEn
 schema name 'INTRP_FLT_OTP' {
     //
     flightTrack: FlightTrack
+    // Add latitude to reconstruct GeoTimeGridPoint
+    latitude: double
+    // Add longitude to reconstruct GeoTimeGridPoint
+    longitude: double
+    // Add time to reconstruct GeoTimeGridPoint
+    time: datetime
 }
