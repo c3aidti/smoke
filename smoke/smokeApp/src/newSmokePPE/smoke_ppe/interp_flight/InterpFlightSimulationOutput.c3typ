@@ -17,4 +17,10 @@ schema name 'INTRP_FLT_OTP' {
     longitude: double
     // Add time to reconstruct GeoTimeGridPoint
     time: datetime
+    /**
+    Method specific to Interpolated datasets to extract unique grid points from output
+    */
+    @py(env='gordon-interpolation_1_0_0')
+    upsertGridPointsfromOutput: function(datasetId: !string): boolean
+
 }
