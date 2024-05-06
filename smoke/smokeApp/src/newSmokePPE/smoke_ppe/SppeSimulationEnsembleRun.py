@@ -539,6 +539,15 @@ def upsertInterpOutputToFlightTracks(this,datasetId,stashId,flightDate,campaign)
             self.lon = np.asarray(self.flight_track['longitude'])
             self.mlevel_obs = np.asarray(self.flight_track['model_level_number'])
 
+            # Check for NAN values in the flight track data and truncate all arrays is nessaary
+            nan_indices = np.argwhere(np.isnan(self.obs_time))
+            if len(nan_indices) > 0:
+                self.obs_time = np.delete(self.obs_time, nan_indices)
+                self.alt = np.delete(self.alt, nan_indices)
+                self.lat = np.delete(self.lat, nan_indices)
+                self.lon = np.delete(self.lon, nan_indices)
+                self.mlevel_obs = np.delete(self.mlevel_obs, nan_indices)
+
         def interpolate(self):
             print('~~~Starting the interpolation of PPE simulations~~~')
             if self.level_:
