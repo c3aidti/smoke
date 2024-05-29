@@ -37,7 +37,7 @@ function upsertFileTable() {
             var id = filename;
             // parse the stashCode out of the filename, where the name is of the form "ens_#_..._<m01...>.nc"
             var stashCode = "all_aod";
-            return SppeSimulationEnsembleOutputFile.make({
+            return Aod3SimulationEnsembleOutputFile.make({
                 "id": id,
                 "simulationRun": simSample,
                 "stashCode": stashCode,
