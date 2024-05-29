@@ -3,6 +3,6 @@
 * All rights reserved. License: https://github.com/c3aidti/.github
 **/
 @db(index=['geoTimeGridPoint','dataset','technique'],compactType=true)
-entity type Aod3TrainedPredictionModel 
+entity type Aod3FullTrainedPredictionModel 
 mixes TrainedPredictionModelBase<Aod3TrainedPredictionModel,Aod3SimulationEnsembleDataset, Aod3GeoTimeGrid>
 schema name 'AOD3F_GPR'
