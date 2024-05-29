@@ -1,0 +1,20 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+entity type Aod3SimulationEnsembleRun
+    extends SimulationRun<Aod3SimulationEnsembleRun,Aod3SimulationEnsembleOutputFile> 
+    mixes Aod3SimulationRunParameters type key "AOD3" {
+    /**
+    */    
+    upsertFileTable: ~ js server
+    /**
+    */
+    @py(env='gordon-interpolation_1_0_0')
+    upsertSimulationOutput: member function(datasetId: !string, pseudoLevelIndex: !int, batchSize: int=80276): boolean
+
+    /**
+    */
+    @py(env='gordon-interpolation_1_0_0')
+    upsertInterpOutputToFlightTracks: member function(datasetId: string, stashId: string, flightDate: string, campaign: string): boolean
+}
