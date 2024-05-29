@@ -16,7 +16,7 @@ function upsertFileTable() {
     var fileStream = FileSystem.inst().listFilesStream(pathToFiles,-1);
     var aod3Files = new Array();
 
-    var paddedSimNumber = String(this.simulationNumber).padStart(3, '0');
+    var paddedSimNumber = padNumber(this.simulationNumber, 3);
 
     while(fileStream.hasNext()) {
         var file = fileStream.next();
@@ -48,4 +48,12 @@ function upsertFileTable() {
             });
         };
     };
+
+    function padNumber(num, length) {
+        var str = String(num);
+        while (str.length < length) {
+            str = '0' + str;
+        }
+        return str;
+    }
 }
