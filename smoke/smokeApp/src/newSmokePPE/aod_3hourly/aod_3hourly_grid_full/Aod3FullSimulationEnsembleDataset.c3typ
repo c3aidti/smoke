@@ -1,0 +1,9 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+entity type Aod3SimulationEnsembleDataset
+    extends SimulationEnsembleDataset
+    mixes SimulationDatasetBase<Aod3FullSimulationEnsembleDataset, Aod3FullGeoTimeGrid, Aod3FullSimulationOutput, Aod3FullTrainedPredictionModel>  type key "AOD3F"
+
+    
