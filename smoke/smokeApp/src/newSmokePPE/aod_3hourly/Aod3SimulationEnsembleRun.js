@@ -16,9 +16,11 @@ function upsertFileTable() {
     var fileStream = FileSystem.inst().listFilesStream(pathToFiles,-1);
     var aod3Files = new Array();
 
+    var paddedSimNumber = String(this.simulationNumber).padStart(3, '0');
+
     while(fileStream.hasNext()) {
         var file = fileStream.next();
-        if(file.url.endsWith(String(this.simulationNumber).padStart(3,'0') + ".nc")) {
+        if(file.url.endsWith(paddedSimNumber + ".nc")) {
             aod3Files.push(file);
         };
     };
