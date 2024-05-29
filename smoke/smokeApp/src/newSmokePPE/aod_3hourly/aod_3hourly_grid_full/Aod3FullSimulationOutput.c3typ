@@ -7,5 +7,5 @@
 */
 @db(index=['simulationRun', 'geoTimeGridPoint', 'dataset'],compactType=true)
 entity type Aod3FullSimulationOutput
-mixes DatasetSimulationOutputBase<Aod3SimulationEnsembleDataset,Aod3SimulationEnsembleRun,Aod3GeoTimeGrid>, Aod3SimulationOutputParameters 
+mixes DatasetSimulationOutputBase<Aod3FullSimulationEnsembleDataset,Aod3SimulationEnsembleRun,Aod3FullGeoTimeGrid>, Aod3SimulationOutputParameters 
 schema name 'SPPE_TATZF_OTP' 
