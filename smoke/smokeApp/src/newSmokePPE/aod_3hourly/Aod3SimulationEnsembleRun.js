@@ -11,8 +11,8 @@ function upsertFileTable() {
     var simSample = this;
  
    // SMOKE-PPE CONTAINER
-    var containerRoot = "azure://aod-3hourly/jul/";
-    var pathToFiles = containerRoot;
+    var containerRoot = FileSystem.urlFromMountAndRelativeEncodedPath("AOD_3HRLY");
+    var pathToFiles = containerRoot + "jul/";
     var fileStream = FileSystem.inst().listFilesStream(pathToFiles,-1);
     var aod3Files = new Array();
 

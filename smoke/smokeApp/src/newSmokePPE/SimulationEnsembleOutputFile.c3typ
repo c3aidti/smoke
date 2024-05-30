@@ -12,7 +12,7 @@ extendable entity type SimulationEnsembleOutputFile<ST> schema name 'SIM_OTP_FL'
     // The simulation output file (NetCFD)
     file: !File
     // The container this file belongs to (Azure blob container)
-    container: !string enum('smoke-ppe')
+    container: !string enum('smoke-ppe','aod-3hourly')
     // Stash code for the file
     stashCode: string
     /**
