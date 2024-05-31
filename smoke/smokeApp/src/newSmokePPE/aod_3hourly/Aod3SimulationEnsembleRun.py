@@ -74,6 +74,7 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
         df_st["time"] = [t for t in times for n in range(0, len(lat)*len(lon))]
         df_st["latitude"] = [l for l in lat for n in range(0, len(lon))]*len(times)
         df_st["longitude"] = [l for l in lon]*len(times)*len(lat)
+        df_st["hour"] = df_st.get('time').apply(lambda x: x.hour)
         df_st["id"] = datasetId + '_' + round(df_st["latitude"],3).astype(str) + "_" + round(df_st["longitude"],3).astype(str) + "_" + df_st["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
         df_st["geoTimeGridPoint"] = df_st["id"].apply(make_gstp)
         df_st = df_st.drop(columns=["id"])
@@ -91,7 +92,6 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
         # add unique id
         df_st["id"] = datasetId + '_' + this.id + '_' + round(df_st["latitude"],3).astype(str) + "_" + round(df_st["longitude"],3).astype(str) + "_" + df_st["time"].astype(str).apply(lambda x: x.replace(" ", 'T'))
 
-        df_st = df_st.drop(columns=["time", "latitude", "longitude"])
 
         
         for aod_type in aod_vars:
@@ -111,7 +111,11 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
 
             # Flatten the tensor for adding to DataFrame
             df_st[aod_var_names_inv[aod_type]] = tensor_3d.reshape(-1)
-            c3.NetCDFUtil.closeFile(sample)
+        df_st = df_st[(df_st['hour'] == 9) | (df_st['hour'] == 12)]
+        df_st = df_st[(df_st['latitude'] >= -29.375) & (df_st['latitude'] <= 9.375)]
+        df_st = df_st[(df_st['longitude'] >= -44.0625) & (df_st['longitude'] <= 38.4375)]
+        df_st = df_st.drop(columns=["time", "latitude", "longitude"])
+        c3.NetCDFUtil.closeFile(sample,url)
         df_st_final = pd.concat([df_st_final,df_st],axis=0,ignore_index=True)
 
 
