@@ -98,7 +98,7 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
             tensor = sample[aod_type]
 
             # Extracting the 3D tensor for the pseudoLevelIndex
-            tensor_3d = np.array(tensor[:, pseudoLevelIndex, :, :])  # shape: (time, lat, lon)
+            tensor_3d = np.array(tensor[pseudoLevelIndex, :, :, :])  # shape: (time, lat, lon)
 
             if coarseGrainOptions:
                 interpolated_data = []
