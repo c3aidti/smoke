@@ -27,7 +27,8 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
             "solubleCoarseMode" : "atmosphere_optical_thickness_due_to_soluble_coarse_mode_ambient_aerosol",
             "insolubleAitkenMode" : "atmosphere_optical_thickness_due_to_insoluble_aitken_mode_ambient_aerosol",
             "insolubleAccumulationMode" : "atmosphere_optical_thickness_due_to_insoluble_accumulation_mode_ambient_aerosol",
-            "insolubleCoarseMode" : "atmosphere_optical_thickness_due_to_insoluble_coarse_mode_ambient_aerosol"
+            "insolubleCoarseMode" : "atmosphere_optical_thickness_due_to_insoluble_coarse_mode_ambient_aerosol",
+            "dust": "atmosphere_optical_thickness_due_to_dust_ambient_aerosol"
     }
     aod_vars = [
         'atmosphere_optical_thickness_due_to_soluble_aitken_mode_ambient_aerosol',
@@ -35,7 +36,8 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
         'atmosphere_optical_thickness_due_to_soluble_coarse_mode_ambient_aerosol',
         'atmosphere_optical_thickness_due_to_insoluble_aitken_mode_ambient_aerosol',
         'atmosphere_optical_thickness_due_to_insoluble_accumulation_mode_ambient_aerosol',
-        'atmosphere_optical_thickness_due_to_insoluble_coarse_mode_ambient_aerosol'
+        'atmosphere_optical_thickness_due_to_insoluble_coarse_mode_ambient_aerosol',
+        'atmosphere_optical_thickness_due_to_dust_ambient_aerosol'
     ]
     aod_var_names_inv = {v: k for k, v in aod_var_names.items()}
 

@@ -9,6 +9,8 @@
 type Aod3SimulationOutputParameters {
     // the pseudoLevel index (starts at 0)
     pseudoLevelIndex: int
+    // dust
+    dust: float
     // soluble aitken mode
     solubleAitkenMode: float
     // soluble accumulation mode
@@ -22,5 +24,5 @@ type Aod3SimulationOutputParameters {
     // insoluble coarse mode
     insolubleCoarseMode: float
     // Aerosol Optical Depth
-    aod: float stored calc "sum(solubleAitkenMode, solubleAccumulationMode, solubleCoarseMode, insolubleAitkenMode, insolubleAccumulationMode, insolubleCoarseMode)"
+    aod: float stored calc "sum(dust, solubleAitkenMode, solubleAccumulationMode, solubleCoarseMode, insolubleAitkenMode, insolubleAccumulationMode, insolubleCoarseMode)"
 }
