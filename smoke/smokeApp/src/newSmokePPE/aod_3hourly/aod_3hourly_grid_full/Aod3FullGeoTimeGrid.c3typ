@@ -7,7 +7,7 @@
 @db(index=['latitude,longitude', 'time','dataset'],compactType=true)
 entity type Aod3FullGeoTimeGrid schema name 'AOD3F_GTG' {
     //
-    dataset: !SppeTatzFullSimulationEnsembleDataset
+    dataset: !Aod3FullSimulationEnsembleDataset
     // the latitude
     latitude: !double
     // the longitude
