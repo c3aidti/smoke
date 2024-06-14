@@ -50,6 +50,10 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
     #------------------------------AOD Calcs------------------------------------
     df_st_final = pd.DataFrame()
     for url in urls:
+
+        if not 'bs714a' in url:
+            continue
+        
         # create GSTP objects
         sample = c3.NetCDFUtil.openFile(url)
         lat = sample["latitude"][:]
