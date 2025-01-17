@@ -19,7 +19,7 @@ function upsertFileTable() {
     var pathToFiles_cdnc_ctw = containerRoot + "ens_" + String(this.simulationNumber) + "_glm_m01s01i298_m01s01i298";
     var pathToFiles_cdnc_wghts = containerRoot + "ens_" + String(this.simulationNumber) + "_glm_m01s01i299_m01s01i299";
     var pathToFiles_swrf = containerRoot + "ens_" + String(this.simulationNumber) + "_glm_toa_outgoing_shortwave_flux_m01s01i205";
-    // var pathToFiles_extCoeff = containerRoot + "ens_" + String(this.simulationNumber) + "_glm_m01s02i530_m01s02i530";
+    var pathToFiles_totalRE = containerRoot + "total_rad_eff_ens" + String(this.simulationNumber);
     var fileStream = FileSystem.inst().listFilesStream(pathToFiles,-1);
     var fileStream_air = FileSystem.inst().listFilesStream(pathToFiles_air,-1);
     var fileStream_mf = FileSystem.inst().listFilesStream(pathToFiles_mf,-1);
@@ -27,7 +27,7 @@ function upsertFileTable() {
     var fileStream_cdnc_ctw = FileSystem.inst().listFilesStream(pathToFiles_cdnc_ctw,-1);
     var fileStream_cdnc_wghts = FileSystem.inst().listFilesStream(pathToFiles_cdnc_wghts,-1);
     var fileStream_swrf = FileSystem.inst().listFilesStream(pathToFiles_swrf,-1);
-    // var fileStream_extCoeff = FileSystem.inst().listFilesStream(pathToFiles_extCoeff,-1);
+    var fileStream_totalRE = FileSystem.inst().listFilesStream(pathToFiles_totalRE,-1);
     var smokePPEFiles = new Array();
 
     while(fileStream.hasNext()) {
@@ -74,6 +74,13 @@ function upsertFileTable() {
 
     while(fileStream_swrf.hasNext()) {
         var file = fileStream_swrf.next();
+        if(file.url.endsWith(".nc")) {
+            smokePPEFiles.push(file);
+        };
+    };
+
+    while(fileStream_totalRE.hasNext()) {
+        var file = fileStream_totalRE.next();
         if(file.url.endsWith(".nc")) {
             smokePPEFiles.push(file);
         };
