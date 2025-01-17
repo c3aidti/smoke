@@ -58,6 +58,8 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
         url = file.file.url
         if 'atmosphere' in url:
             aod_urls.append(url)
+        elif 'total_rad_eff' in url:
+            urls_dict['total_re'] = url
         elif 'air_pressure' in url:
             urls_dict['pressure'] = url
         elif 'air_potential' in url:
@@ -146,6 +148,24 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
         df_st[aod_var_names_inv[var_name]] = tensor_3d.reshape(-1)
 
         c3.NetCDFUtil.closeFile(data, url)
+
+    # put total RE on table here
+    data = c3.NetCDFUtil.openFile(urls_dict['total_re'])
+    tensor_3d = data['radiative_effect'][:,:,:]
+
+    if coarseGrainOptions:
+        interpolated_data = []
+        for time_slice in tensor_3d:
+            interp_data_time_slice = interp_targ_data(time_slice,coarseGrainOptions.coarseFactor,coarseGrainOptions.coarseFactor)
+            interpolated_data.append(interp_data_time_slice)
+
+        # Convert the list of interpolated slices into a 3D numpy array
+        tensor_3d = np.array(interpolated_data)
+
+    # Flatten the tensor for adding to DataFrame
+    df_st[aod_var_names_inv[var_name]] = tensor_3d.reshape(-1)
+
+    c3.NetCDFUtil.closeFile(data, urls_dict['total_re'])
 
     #------------------------------CLWP Calcs------------------------------------
     # create GSTP objects
