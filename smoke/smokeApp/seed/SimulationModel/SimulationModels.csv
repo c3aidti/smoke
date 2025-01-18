@@ -1,0 +1,3 @@
+id,source,um_version,conventions
+smoke_ppe,Data from Met Office Unified Model,11.2,CF-1.7
+aod,Data from Met Office Unified Model,11.1,CF-1.7

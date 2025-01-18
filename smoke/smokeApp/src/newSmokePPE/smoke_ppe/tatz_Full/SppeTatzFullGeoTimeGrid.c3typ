@@ -1,0 +1,19 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+*/
+@db(index=['latitude,longitude', 'time','dataset'],compactType=true)
+entity type SppeTatzFullGeoTimeGrid schema name 'SPPE_TATZF_GTG' {
+    //
+    dataset: !SppeTatzFullSimulationEnsembleDataset
+    // the latitude
+    latitude: !double
+    // the longitude
+    longitude: !double
+    // the timestamp
+    time: !datetime
+    // The PostGIS enabled geo point (long,lat) of this output
+    geo: !GeoPoint
+}

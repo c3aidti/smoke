@@ -1,0 +1,11 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Batch job to upsert {@link SmokePPESimulationOutput} 
+*/
+type UpsertSmokePPEDataToSmokePPEGeoTime extends BatchJob<UpsertSmokePPEDataToSmokePPEGeoTime, UpsertSmokePPEDataToSmokePPEGeoTimeOptions, UpsertSmokePPEDataToSmokePPEGeoTimeBatch> type key 'PSRT_SMKPPE_TOGEO' {   
+    doStart:        ~ js server
+    processBatch:   ~ js server
+}

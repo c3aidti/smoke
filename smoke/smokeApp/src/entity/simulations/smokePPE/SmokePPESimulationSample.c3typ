@@ -24,4 +24,17 @@ entity type SmokePPESimulationSample mixes MetricEvaluatable schema name "PPE_SM
     // Upsert data associated to this simulation after Cassandra headers are created
     @py(env='gordon_1_0_0')
     upsertDataAfterHeadersCreated: member function(pseudoLevelIndex: !int): boolean
+    /**
+    */
+    // @py(env='gordon_1_0_0')
+    // upsertDataToGisOutputType: member function(pseudoLevelIndex: !int): boolean
+    /**
+    */
+    // @py(env='gordon_1_0_0')
+    // upsertDataToGeoPointPlusTime: member function(pseudoLevelIndex: !int): boolean
+
+    /**
+    */
+    @py(env='gordon_1_0_0')
+    upsertToSmokePPEGstpSimulationOutput: member function(pseudoLevelIndex: !int, batchSize: int=80276): boolean
 }

@@ -1,0 +1,13 @@
+simulationModel,name
+smoke_ppe,smoke_emiss
+smoke_ppe,smoke_diam
+smoke_ppe,sig_w
+smoke_ppe,dry_dep_acc
+smoke_ppe,sea_spray
+smoke_ppe,a_ent_1_rp
+smoke_ppe,bparam
+smoke_ppe,kappa_oc
+smoke_ppe,dms
+smoke_ppe,anth_so2
+smoke_ppe,autoconv_exp_nd
+smoke_ppe,bc_ri

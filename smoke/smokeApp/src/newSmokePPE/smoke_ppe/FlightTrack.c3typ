@@ -1,0 +1,10 @@
+entity type FlightTrack schema name 'FLT_TRK' {
+    //
+    campaign: string
+    //
+    flightDate: string
+    //
+    locationFile: File
+    //
+    observationFile: File
+}

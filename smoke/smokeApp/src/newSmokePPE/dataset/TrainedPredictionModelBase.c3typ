@@ -1,0 +1,54 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+type TrainedPredictionModelBase<MT, DT, GT> {
+    //
+    dataset: !DT
+    // the {@link GeoSurfaceTimePoint} that this output is associated with
+    geoTimeGridPoint: !GT
+    // technique used to generate the prediction model
+    technique: !GprPredictionModelParameters
+    // the serialized prediction model
+    trainedModel: clob
+    //
+    isTrained: boolean stored calc "exists(trainedModel)"
+    //
+    targetMean: double
+    //
+    targetStd: double
+    //
+    serializedLengthScales: clob
+
+    /**
+    */
+    @py(env='gordon_1_0_0')
+    getTarget: inline member function(): Dataset
+
+    @py(env='gordon_1_0_0')
+    train: member function(X: !Dataset): boolean
+
+    /**
+    * Predict on the given dataset
+    * @returns: the predicted values in a serialized Pandas dataframe.
+    * Run: `c3.PythonSerialization.deserialize(df)` on result to convert to 
+    * a Pandas dataframe.
+    */
+    @py(env='gordon_1_0_0')
+    predict: member function(X: !Dataset): any
+
+    /**
+    Private inline function to do prediction
+    */
+    @py(env='gordon_1_0_0')
+    doPredict: private inline member function(X: !Dataset): any
+
+    /**
+    * Issue a prediction to workers via AsyncAction
+    * This will return excatly the same result as `predict` but will be
+    * executed asynchronously on workers.
+    * Note, a delay may be incurred if the runtime needs to install, or if all workers are busy.
+    */
+    @py(env='gordon_1_0_0')
+    predictAsync: member function(X: !Dataset): any
+}

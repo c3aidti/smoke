@@ -1,0 +1,5 @@
+type SimulationEnsembleRunInterpToFlightTracksJobBatchValue {
+    flightTrackId: !string
+    simId: !string
+    stashId: !string
+}
