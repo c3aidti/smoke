@@ -1,0 +1,104 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+ * @var DT - Dataset type
+ * @var GT - Grid type
+ * @var OT - Output type
+ * @var MT - Models type
+*/
+@db(compactType=true)
+extendable entity type SimulationEnsembleDataset  schema name "SIM_ENS_DST" {
+    // The {@link SimulationEnsemble} to which this dataset belongs
+    ensemble: !SimulationEnsemble
+    // A description of this dataset
+    description: long string
+    // Collection of {@link DatasetGeoGrid} points for this dataset
+    geoGrid: [DatasetGeoGrid](dataset,id)
+    // 
+    maxLat: double stored calc "max(geoGrid.geo.lat)"
+    //
+    maxLon: double stored calc "max(geoGrid.geo.long)"
+    //
+    minLat: double stored calc "min(geoGrid.geo.lat)"
+    //
+    minLon: double stored calc "min(geoGrid.geo.long)"
+    //
+    geoGridCount: long integer stored calc "count(geoGrid)"
+    //
+    timeSeries: [DatasetTimeSeries](dataset,id)
+    //
+    minTime: datetime stored calc "min(timeSeries.time)"
+    //
+    maxTime: datetime stored calc "max(timeSeries.time)"
+    //
+    timeSeriesCount: long integer stored calc "count(timeSeries)"
+    //
+    expectedGeoGridTimeSeriesCount: long integer stored calc "count(geoGrid) * count(timeSeries)"
+    //
+    coarseGrainOptions: CoarseGrainOptions
+    /**
+        * Initializes the geoTime grid for this dataset
+        * @param coarseGrainOptions - The options to use when initializing the grid
+        * @returns True if the grid was successfully initialized, false otherwise
+    */
+    initializeGrid: member function(coarseGrainOptions:CoarseGrainOptions): boolean js server
+
+    /**
+    */
+    startLoadOutputDataJob: member function(pseudoLevelIndex: integer = 2, hardwareProfileId: string ='appc72m660-w', parallelStreams: integer = 8, batchSize: integer=160552): SimulationEnsembleRunLoadOutputDataJob js server
+
+    /**
+        * Returns the name of the simulation run type associated with this dataset
+        * @returns The name of the simulation run type
+    */
+    getSimulationRunTypeName: member function(): string js server
+
+    /**
+    */
+    getSimulationOutputTypeName: member function(): string js server
+
+    /**
+    */
+    getGeoTimeGridTypeName: member function(): string js server
+
+    /**
+    */
+    getTrainedPredictionModelTypeName: member function(): string js server
+
+    /**
+    */
+    getSimulationParameterList: member function(): [string] js server
+
+    /**
+    */
+    getSimulationEnsemble: member function(): SimulationEnsemble js server
+
+    /**
+    */
+    getSimulationModel: member function(): SimulationModel js server
+
+    /**
+    */
+    getSimulationList: member function(): [int] js server
+    /**
+    */
+    @py(env='gordon_1_0_0')
+    getFeaturesForTechnique: inline member function(technique: !GprPredictionModelParameters): Dataset
+    /**
+    */
+    @py(env='gordon_1_0_0')
+    getTargetForTechnique: inline member function(technique: !GprPredictionModelParameters, geoTimeGridId: !string): Dataset
+    /**
+    */
+    stageTrainedPredictionModelRowsForTechnique: member function(geoTimeGridFetchSpec: !FetchSpec, technique: !GprPredictionModelParameters, batchSize: integer = 65536): long integer js server
+    /**
+    */
+    startTrainGprPredictionModelJob: member function(
+        gprTechnique: !GprPredictionModelParameters,
+        geoTimeGridFetchSpec: FetchSpec = {'limit':-1},
+        hardwareProfileId: string = 'appc8m642-w',
+        batchSize: integer = 50
+    ): TrainGprPredictionModelJob js server
+}

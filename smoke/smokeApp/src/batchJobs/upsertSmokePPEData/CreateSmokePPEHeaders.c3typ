@@ -1,0 +1,11 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Batch job to create headers {@GeoSurfaceTimePoint} for {@link SmokePPESimulationOutput} 
+*/
+type CreateSmokePPEHeaders extends BatchJob<CreateSmokePPEHeaders, CreateSmokePPEHeadersOptions, CreateSmokePPEHeadersBatch> type key 'CRT_SMKPPE_HDRS' {
+    doStart:        ~ js server
+    processBatch:   ~ js server
+}

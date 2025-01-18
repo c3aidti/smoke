@@ -1,0 +1,24 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+type Aod3SimulationRunParameters {
+    //
+    acure_sea_spray: !double
+    acure_bl_nuc: !double
+    acure_ait_width: !double
+    acure_cloud_ph: !double
+    acure_prim_so4_diam: !double
+    acure_anth_so2_r: !double
+    acure_bvoc_soa: !double
+    acure_dms: !double
+    acure_dry_dep_ait: !double
+    acure_dry_dep_acc: !double
+    acure_dry_dep_so2: !double
+    acure_bc_ri: !double
+    a_ent_1_rp: !double
+    acure_autoconv_exp_nd: !double
+    dbsdtbs_turb_0: !double
+    bparam: !double
+    acure_carb_bb_diam: !double
+}

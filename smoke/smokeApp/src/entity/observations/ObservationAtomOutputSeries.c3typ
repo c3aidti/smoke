@@ -1,0 +1,13 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* A series of observations for ATom data
+*/
+entity type ObservationAtomOutputSeries mixes TimedDataHeader<ObservationAtomOutput> schema name "OBS_ATM_TPT_SRS" {
+    // The [ObservationSet](type:ObservationSet) from which values were taken.
+    observationSet: ObservationSet
+    // The granularity of this timeseries (default is >= QUARTER_HOUR)
+    grain: string = 'SECOND'
+}

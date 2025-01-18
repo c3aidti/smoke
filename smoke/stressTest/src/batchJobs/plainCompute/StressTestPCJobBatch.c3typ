@@ -1,6 +1,0 @@
-/**
-* Represents a unit of work (batch) in a {@link StressTestPCJob} batch job.
-*/
-type StressTestPCJobBatch {
-    values: [int]
-}

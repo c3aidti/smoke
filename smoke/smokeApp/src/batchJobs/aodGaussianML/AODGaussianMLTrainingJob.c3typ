@@ -1,0 +1,12 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/*
+* Training job for AOD data {@link Simulation3HourlyAODOutput} 
+* and {@link GaussianProcessRegressionPipe}s
+*/
+type AODGaussianMLTrainingJob extends BatchJob<AODGaussianMLTrainingJob, AODGaussianMLTrainingJobOptions, AODGaussianMLTrainingJobBatch> type key 'AODGMLJB' {
+    doStart:        ~ js server
+    processBatch:   ~ js server
+}

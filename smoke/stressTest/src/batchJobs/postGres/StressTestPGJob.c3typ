@@ -1,9 +1,0 @@
-/**
-* Batch job to stress-test the {@link BatchQueue} with PostGres
-*/
-type StressTestPGJob extends BatchJob<StressTestPGJob, StressTestPGJobOptions, StressTestPGJobBatch> type key 'STRSS_TST_PGJB' {
-    doStart:        ~ js server
-    processBatch:   ~ js server
-    allComplete:    ~ js server
-    failed:         ~ js server
-}

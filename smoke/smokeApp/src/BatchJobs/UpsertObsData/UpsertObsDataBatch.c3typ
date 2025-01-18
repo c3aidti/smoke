@@ -1,7 +1,0 @@
-/**
-* UpsertObsDatabatch.c3typ
-* Represents a unit of work (batch) in a {@link UpsertData} batch job.
-*/
-type UpsertObsDataBatch {
-    values: [ObservationOutputFile]
-}

@@ -1,0 +1,10 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Represents a unit of work (batch) in a {@link CreateAODHeaders} batch job.
+*/
+type CreateAODHeadersBatch {
+    values: [SimulationOutputFile]
+}

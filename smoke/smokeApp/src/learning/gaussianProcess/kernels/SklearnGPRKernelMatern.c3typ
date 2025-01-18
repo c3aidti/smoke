@@ -1,0 +1,23 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* SklearnGPRKernelMatern.c3typ
+* Scikit-Learn Gaussian Process Matern Kernel.
+* See: https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.kernels.Matern.html#sklearn.gaussian_process.kernels.Matern
+*/
+type SklearnGPRKernelMatern {
+    // Array of constants which define an anisotropic kernel's length scales
+    lengthScale: ![double]
+    // Constant prepended to the kernel function (for the variance K(x,x))
+    coefficient: !double
+    // Gamma and modified Bessel function orders
+    nu: !double
+    // the SklearnGPRKernel for this object
+    kernel: SklearnGPRKernel
+
+    // constructs the SklearnGPRKernel internal object
+    @py(env='gordon-ML_1_0_0')
+    build: member function(): SklearnGPRKernelMatern
+}

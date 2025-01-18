@@ -1,0 +1,11 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Batch job to upsert {@link Simulation3HourlyAODOutput} 
+*/
+type UpsertAODDataAfterHeaders extends BatchJob<UpsertAODDataAfterHeaders, UpsertAODDataAfterHeadersOptions, UpsertAODDataAfterHeadersBatch> type key 'PSRT_AODDT_FTRHDRS' {   
+    doStart:        ~ js server
+    processBatch:   ~ js server
+}

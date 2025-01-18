@@ -1,0 +1,31 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* File table for {@link ObservationSet}s
+*/
+entity type ObservationOutputFile schema name 'OBS_OTPT_FL' {
+    // The {@link ObservationSet} to which this file belongs
+    observationSet: !ObservationSet
+    // The date for this file (comes with the file name)
+    dateTag: datetime
+    // The observation output file
+    file: !File
+    // processed
+    processed: boolean post default "false"
+    // metadata for processing
+    processMeta: MetaFileProcessing
+
+    // Load data from this oracles file into {@link ObservationOraclesOutput}
+    @py(env='gordon_1_0_0')
+    upsertORACLESData: member function(): boolean
+    // Load data from this atom file into {@link ObservationAtomOutput}
+    @py(env='gordon_1_0_0')
+    upsertATOMData: member function(): boolean
+    // Load data from this MODIS file into {@link ObservationModisDailyOutput}
+    @py(env='gordon_1_0_0')
+    upsertMODISDailyData: member function(): boolean
+    @py(env='gordon_1_0_0')
+    upsertMODISDailyGSTPs: member function(): boolean
+}

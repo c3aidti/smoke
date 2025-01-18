@@ -1,0 +1,22 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* This finds {@link GaussianProcessRegressionPipe}s that were trained 
+* with {@link Simulation3HourlyAODOutput} as targets, 
+* {@link SimulationModelParameters} as features, 
+* via a {@link AODGaussianMLTrainingJob}
+*/
+type PredictAODGPR {
+    // Retrieve models based on exluded features, {@link GeoSurfaceTimePoint} instance, target name and training technique
+    getPipe: function(excFeats: [string], gstpId: string, targetName: string, technique: any): any js server
+    // Retrieve all models for a certain {@link GeoSurfaceTimePoint} filter
+    getPipes: function(excFeats: [string], gstpFilter: any, targetName: string, technique: any): any js server
+    // Extract learned parameters from trained {@link GaussianProcessRegressionPipe}s specified by {@link GeoSurfaceTimePoint} filter, target name, excluded features and {@link GaussianProcessRegressionTechnque}
+    @py(env='gordon-ML_1_0_0')
+    makePredictionsJob: function(excFeats: [string], gstpFilter: any, targetName: string, synthDataset: any, technique: any, batchSize: int): any
+    // Build a pandas dataframe with the hyper parameters once job is complete
+    @py(env='gordon-ML_1_0_0')
+    getPredictionsDataframeFromJob: inline function(job: any): any
+}

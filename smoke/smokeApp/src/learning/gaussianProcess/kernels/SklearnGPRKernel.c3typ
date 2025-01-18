@@ -1,0 +1,18 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* SklearnGPRKernel.c3typ
+* Stepping stone for Scikit-Learn Gaussian Process kernels.
+* See: https://scikit-learn.org/stable/modules/classes.html#module-sklearn.gaussian_process
+*/
+@db(shortId=true)
+entity type SklearnGPRKernel schema name 'SKLKRNL' {
+    // the name of the kernel
+    name: string enum('Constant', 'DotProduct', 'ExpSineSquared', 'Matern', 'RBF', 'RationalQuadratic', 'White')
+    // the kernel hyper parameters 
+    hyperParameters: map<string, any> schema suffix "HPRS"
+    // the pickled kernel
+    pickledKernel: string
+}

@@ -1,0 +1,11 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+@db(index=["lat,long","dataset"],compactType=true)
+entity type DatasetGeoGrid schema name "DST_GEO_GRID" {
+    dataset: !SimulationEnsembleDataset
+    lat: !double
+    long: !double
+    geo: !GeoPoint
+}

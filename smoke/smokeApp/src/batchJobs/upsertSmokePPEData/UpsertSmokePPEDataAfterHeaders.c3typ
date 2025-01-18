@@ -1,0 +1,11 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Batch job to upsert {@link SmokePPESimulationOutput} 
+*/
+type UpsertSmokePPEDataAfterHeaders extends BatchJob<UpsertSmokePPEDataAfterHeaders, UpsertSmokePPEDataAfterHeadersOptions, UpsertSmokePPEDataAfterHeadersBatch> type key 'PSRT_SMKPPE_FTRHDRS' {   
+    doStart:        ~ js server
+    processBatch:   ~ js server
+}

@@ -1,0 +1,22 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* Specifies the fields to construct a {@link GaussianProcessRegressionPipe}
+*/
+@db(shortId=true)
+entity type GPRDataSourceSpec schema name 'GPRDTSRCSPC' {
+    // Reference to the type that stores the features
+    featuresType: TypeRef
+    // {@link FetchSpec} to retrieve features
+    featuresSpec: FetchSpec schema suffix "FTSP"
+    // Features to ignore
+    excludeFeatures: [string] schema suffix "FTXC"
+    // Reference to the type that stores the target
+    targetType: TypeRef
+    // {@link FetchSpec} to retrieve target
+    targetSpec: FetchSpec schema suffix "TRSP"
+    // Target name (variable)
+    targetName: string
+} 

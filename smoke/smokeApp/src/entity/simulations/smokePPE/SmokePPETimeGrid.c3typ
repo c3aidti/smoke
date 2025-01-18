@@ -1,0 +1,7 @@
+/**
+
+*/
+@db(index=["time"])
+entity type SmokePPETimeGrid schema name "SPPE_TG" {
+    time: !datetime
+}

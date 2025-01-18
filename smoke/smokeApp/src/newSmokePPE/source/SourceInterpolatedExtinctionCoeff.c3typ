@@ -1,0 +1,139 @@
+/**
+* Enter the Type purposes and use cases with code examples. 
+*/
+
+type SourceInterpolatedExtinctionCoeff mixes Source {
+    //
+    latitude: double
+    //
+    longitude: double
+    //
+    time: string
+    //
+    campaign: string
+    //
+    observations_m01s02i530_550nm: double
+    //
+    ens_0_m01s02i530_550nm: double
+    ens_1_m01s02i530_550nm: double
+    ens_2_m01s02i530_550nm: double
+    ens_3_m01s02i530_550nm: double
+    ens_4_m01s02i530_550nm: double
+    ens_5_m01s02i530_550nm: double
+    ens_6_m01s02i530_550nm: double
+    ens_7_m01s02i530_550nm: double
+    ens_8_m01s02i530_550nm: double
+    ens_9_m01s02i530_550nm: double
+    ens_10_m01s02i530_550nm: double
+    ens_11_m01s02i530_550nm: double
+    ens_12_m01s02i530_550nm: double
+    ens_13_m01s02i530_550nm: double
+    ens_14_m01s02i530_550nm: double
+    ens_15_m01s02i530_550nm: double
+    ens_16_m01s02i530_550nm: double
+    ens_17_m01s02i530_550nm: double
+    ens_18_m01s02i530_550nm: double
+    ens_19_m01s02i530_550nm: double
+    ens_20_m01s02i530_550nm: double
+    ens_21_m01s02i530_550nm: double
+    ens_22_m01s02i530_550nm: double
+    ens_23_m01s02i530_550nm: double
+    ens_24_m01s02i530_550nm: double
+    ens_25_m01s02i530_550nm: double
+    ens_26_m01s02i530_550nm: double
+    ens_27_m01s02i530_550nm: double
+    ens_28_m01s02i530_550nm: double
+    ens_29_m01s02i530_550nm: double
+    ens_30_m01s02i530_550nm: double
+    ens_31_m01s02i530_550nm: double
+    ens_32_m01s02i530_550nm: double
+    ens_33_m01s02i530_550nm: double
+    ens_34_m01s02i530_550nm: double
+    ens_35_m01s02i530_550nm: double
+    ens_36_m01s02i530_550nm: double
+    ens_37_m01s02i530_550nm: double
+    ens_38_m01s02i530_550nm: double
+    ens_39_m01s02i530_550nm: double
+    ens_40_m01s02i530_550nm: double
+    ens_41_m01s02i530_550nm: double
+    ens_42_m01s02i530_550nm: double
+    ens_43_m01s02i530_550nm: double
+    ens_44_m01s02i530_550nm: double
+    ens_45_m01s02i530_550nm: double
+    ens_46_m01s02i530_550nm: double
+    ens_47_m01s02i530_550nm: double
+    ens_48_m01s02i530_550nm: double
+    ens_49_m01s02i530_550nm: double
+    ens_50_m01s02i530_550nm: double
+    ens_51_m01s02i530_550nm: double
+    ens_52_m01s02i530_550nm: double
+    ens_53_m01s02i530_550nm: double
+    ens_54_m01s02i530_550nm: double
+    ens_55_m01s02i530_550nm: double
+    ens_56_m01s02i530_550nm: double
+    ens_57_m01s02i530_550nm: double
+    ens_58_m01s02i530_550nm: double
+    ens_59_m01s02i530_550nm: double
+    ens_60_m01s02i530_550nm: double
+    ens_61_m01s02i530_550nm: double
+    ens_62_m01s02i530_550nm: double
+    ens_63_m01s02i530_550nm: double
+    ens_64_m01s02i530_550nm: double
+    ens_65_m01s02i530_550nm: double
+    ens_66_m01s02i530_550nm: double
+    ens_67_m01s02i530_550nm: double
+    ens_68_m01s02i530_550nm: double
+    ens_69_m01s02i530_550nm: double
+    ens_70_m01s02i530_550nm: double
+    ens_71_m01s02i530_550nm: double
+    ens_72_m01s02i530_550nm: double
+    ens_73_m01s02i530_550nm: double
+    ens_74_m01s02i530_550nm: double
+    ens_75_m01s02i530_550nm: double
+    ens_76_m01s02i530_550nm: double
+    ens_77_m01s02i530_550nm: double
+    ens_78_m01s02i530_550nm: double
+    ens_79_m01s02i530_550nm: double
+    ens_80_m01s02i530_550nm: double
+    ens_81_m01s02i530_550nm: double
+    ens_82_m01s02i530_550nm: double
+    ens_83_m01s02i530_550nm: double
+    ens_84_m01s02i530_550nm: double
+    ens_85_m01s02i530_550nm: double
+    ens_86_m01s02i530_550nm: double
+    ens_87_m01s02i530_550nm: double
+    ens_88_m01s02i530_550nm: double
+    ens_89_m01s02i530_550nm: double
+    ens_90_m01s02i530_550nm: double
+    ens_91_m01s02i530_550nm: double
+    ens_92_m01s02i530_550nm: double
+    ens_93_m01s02i530_550nm: double
+    ens_94_m01s02i530_550nm: double
+    ens_95_m01s02i530_550nm: double
+    ens_96_m01s02i530_550nm: double
+    ens_97_m01s02i530_550nm: double
+    ens_98_m01s02i530_550nm: double
+    ens_99_m01s02i530_550nm: double
+    ens_100_m01s02i530_550nm: double
+    ens_101_m01s02i530_550nm: double
+    ens_102_m01s02i530_550nm: double
+    ens_103_m01s02i530_550nm: double
+    ens_104_m01s02i530_550nm: double
+    ens_105_m01s02i530_550nm: double
+    ens_106_m01s02i530_550nm: double
+    ens_107_m01s02i530_550nm: double
+    ens_108_m01s02i530_550nm: double
+    ens_109_m01s02i530_550nm: double
+    ens_110_m01s02i530_550nm: double
+    ens_111_m01s02i530_550nm: double
+    ens_112_m01s02i530_550nm: double
+    ens_113_m01s02i530_550nm: double
+    ens_114_m01s02i530_550nm: double
+    ens_115_m01s02i530_550nm: double
+    ens_116_m01s02i530_550nm: double
+    ens_117_m01s02i530_550nm: double
+    ens_118_m01s02i530_550nm: double
+    ens_119_m01s02i530_550nm: double
+    ens_120_m01s02i530_550nm: double
+
+}

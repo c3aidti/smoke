@@ -1,0 +1,4 @@
+type TransformSourceInterpolatedExtinctionCoeffToFlightTrack mixes FlightTrack transforms SourceInterpolatedExtinctionCoeff {
+    id: ~ expression "replace(substring(time,0,10),'-','')"
+    campaign: ~ expression "campaign"
+}

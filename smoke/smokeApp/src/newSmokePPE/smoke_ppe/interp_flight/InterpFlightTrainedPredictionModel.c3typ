@@ -1,0 +1,8 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+@db(index=['geoTimeGridPoint','dataset','technique'],compactType=true)
+entity type InterpFlightTrainedPredictionModel 
+mixes TrainedPredictionModelBase<InterpFlightTrainedPredictionModel,InterpFlightSimulationDataset, InterpFlightGeoTimeGrid>
+schema name 'INTRP_FLT_GPR'

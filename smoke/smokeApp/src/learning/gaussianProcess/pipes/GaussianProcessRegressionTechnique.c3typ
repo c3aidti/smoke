@@ -1,0 +1,29 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* GaussianProcessRegressionTechnique.c3typ
+* Defines hyper parameters for GP Regression.
+*/
+@db(shortId=true)
+entity type GaussianProcessRegressionTechnique mixes MLTechnique schema name 'GPRTCHNQ' {
+    // random seed
+    @ML(hyperParameter=true)
+    randomState: integer
+    // the kernel object
+    @ML(hyperParameter=true)
+    kernel: SklearnGPRKernel
+    // center target data before fitting
+    @ML(hyperParameter=true)
+    centerTarget: boolean=false
+    // leave fraction of rows for post-validation
+    @ML(hyperParameter=true)
+    validation: boolean=false
+    // random seed to be used by numpy.shuffle
+    @ML(hyperParameter=true)
+    randomSeed: integer=42
+    // fraction to be left for validation
+    @ML(hyperParameter=true)
+    splitFraction: float=0.2
+}

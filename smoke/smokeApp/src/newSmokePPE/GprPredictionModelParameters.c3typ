@@ -1,0 +1,80 @@
+/**
+* Copyright (c) 2022-2024, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+@db(shortId=true,shortIdPrefix="TECH")
+entity type GprPredictionModelParameters mixes MLTechnique schema name "GPR_PRD_MDL_PRMS" {
+    //
+    model: !SimulationModel
+    // the name of the kernel.  Must correspod t oclass names in sklearn.gaussian_process.kernels module
+    @ML(hyperParameter=true)
+    kernelName: !string enum('ConstantKernel', 'DotProduct', 'ExpSineSquared', 'Matern', 'RBF', 'RationalQuadratic', 'WhiteKernel')
+    //
+    @ML(hyperParameter=true)
+    serializedKernel: private !string
+    //
+    @ML(hyperParameter=true)
+    serializedFeatureList: private !string
+    //
+    @ML(hyperParameter=true)
+    serializedSimulationList: private !string
+    //
+    @ML(hyperParameter=true)
+    targetName: !string
+    // random seed
+    @ML(hyperParameter=true)
+    randomSeed: integer = 42
+    // center target data before fitting
+    @ML(hyperParameter=true)
+    centerTarget: boolean=false
+    // standardize target data before fitting
+    @ML(hyperParameter=true)
+    standardizeTarget: boolean=false
+    // leave fraction of rows for post-validation
+    @ML(hyperParameter=true)
+    validation: boolean=false
+    // fraction to be left for validation
+    @ML(hyperParameter=true)
+    splitFraction: float=0.2
+    /**
+    Method to create a new instance of this type.
+    */
+    @py(env='gordon_1_0_0')
+    createTechnique: function(
+        model: SimulationModel,
+        kernelName: string,
+        serializedKernel: string,
+        serializedFeatureList: string,
+        serializedSimulationList: string,
+        targetName: string,
+        randomSeed: integer = 42,
+        centerTarget: boolean = false,
+        standardizeTarget: boolean = false,
+        validation: boolean = false,
+        splitFraction: float = 0.2
+        ): GprPredictionModelParameters
+     /**
+    Get the serialized kernel Hyperparameters
+    */
+    getSerializedKernel: member function(): string js server
+    /**
+    */
+    @py(env='gordon_1_0_0')
+    getFeatureList: inline member function(): [string]
+    /**
+    */
+    @py(env='gordon_1_0_0')
+    getSimulationList: inline member function(): [integer]
+    /**
+    Get the kernel object
+    */
+    @py(env='gordon_1_0_0')
+    getKernel: inline member function(): any
+
+
+    /**
+    * Callback dec. to delete child file records.
+    */
+    afterRemove: ~ js server
+   
+}

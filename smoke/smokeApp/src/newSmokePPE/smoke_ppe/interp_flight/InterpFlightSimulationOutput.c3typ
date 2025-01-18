@@ -1,0 +1,26 @@
+/**
+* Copyright (c) 2022, C3 AI DTI, Development Operations Team
+* All rights reserved. License: https://github.com/c3aidti/.github
+**/
+/**
+* A single Smoke PPE output taken from a single [SimulationSample](type:SimulationSample)
+*/
+@db(index=['simulationRun', 'geoTimeGridPoint', 'dataset','flightTrack'],compactType=true)
+entity type InterpFlightSimulationOutput
+mixes DatasetSimulationOutputBase<InterpFlightSimulationDataset,SppeSimulationEnsembleRun,InterpFlightGeoTimeGrid>, ExCoeffSimulationOutputParameters 
+schema name 'INTRP_FLT_OTP' {
+    //
+    flightTrack: FlightTrack
+    // Add latitude to reconstruct GeoTimeGridPoint
+    latitude: double
+    // Add longitude to reconstruct GeoTimeGridPoint
+    longitude: double
+    // Add time to reconstruct GeoTimeGridPoint
+    time: datetime
+    /**
+    Method specific to Interpolated datasets to extract unique grid points from output
+    */
+    @py(env='gordon-interpolation_1_0_0')
+    upsertGridPointsfromOutput: function(datasetId: !string): boolean
+
+}
