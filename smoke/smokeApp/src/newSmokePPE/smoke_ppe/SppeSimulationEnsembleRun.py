@@ -163,7 +163,7 @@ def upsertSimulationOutput(this, datasetId, pseudoLevelIndex, batchSize=80276):
         tensor_3d = np.array(interpolated_data)
 
     # Flatten the tensor for adding to DataFrame
-    df_st[aod_var_names_inv[var_name]] = tensor_3d.reshape(-1)
+    df_st['total_re'] = tensor_3d.reshape(-1)
 
     c3.NetCDFUtil.closeFile(data, urls_dict['total_re'])
 

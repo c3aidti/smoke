@@ -27,4 +27,6 @@ type SppeSimulationOutputParameters {
     cdnc: float
     // Short Wave Radiation Flux Outward
     swrfOut: float
+    // Total radiative effect
+    rad_eff: float
 }
